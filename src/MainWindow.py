@@ -341,18 +341,23 @@ class MainWindow:
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            subprocess.run("xfce4-panel --quit; pkill xfconfd; rm -rf ~/.config/xfce4/panel ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml; (xfce4-panel &);", shell=True)
+            subprocess.run("""xfce4-panel --quit; pkill xfconfd; rm -rf ~/.config/xfce4/panel ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+                            cp -R /etc/xdg/pardus/xfce4/panel/* ~/.config/xfce4/panel/; cp /etc/xdg/pardus/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+                            (xfce4-panel &);""", shell=True)
     
     def on_btn_restore_thunar_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            print("yes!")
+            subprocess.run("rm -rf ~/.config/Thunar/*; cp -R /etc/xdg/pardus/Thunar/* ~/.config/Thunar/", shell=True)
     
     def on_btn_restore_allxfce_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            print("yes!")
-            # subprocess.run("xfce4-panel --quit; pkill xfconfd; rm -rf ~/.config/xfce4; (xfce4-panel &);", shell=True)
+            subprocess.run("""xfce4-panel --quit; pkill xfconfd;
+                            rm -rf ~/.config/xfce4/panel/*; rm ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+                            cp -R /etc/xdg/pardus/xfce4/panel/* ~/.config/xfce4/panel/; cp /etc/xdg/pardus/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+                            rm -rf ~/.config/Thunar/*; cp -R /etc/xdg/pardus/Thunar/* ~/.config/Thunar/;
+                            (xfce4-panel &);""", shell=True)
         
