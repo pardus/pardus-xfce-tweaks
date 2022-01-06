@@ -28,67 +28,100 @@
     <property name="step-increment">1</property>
     <property name="page-increment">1</property>
   </object>
+  <object class="GtkMessageDialog" id="dialog_restore_defaults">
+    <property name="can-focus">False</property>
+    <property name="type-hint">dialog</property>
+    <property name="text" translatable="yes">Attention</property>
+    <property name="secondary-text" translatable="yes">All custom configurations will be reverted to defaults. Do you want to continue?</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="dialog_button_no">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="dialog_button_yes">
+                <property name="label" translatable="yes">Restore to Defaults</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-9">dialog_button_no</action-widget>
+      <action-widget response="-8">dialog_button_yes</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkListStore" id="lst_laptop_screen_closed">
     <columns>
       <!-- column-name value -->
-      <column type="gint"/>
+      <column type="gchararray"/>
       <!-- column-name name -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0">0</col>
-        <col id="1" translatable="yes">Nothing</col>
-      </row>
-      <row>
-        <col id="0">1</col>
+        <col id="0" translatable="yes">0</col>
         <col id="1" translatable="yes">Screen Off</col>
       </row>
       <row>
-        <col id="0">2</col>
-        <col id="1" translatable="yes">Sleep</col>
+        <col id="0" translatable="yes">1</col>
+        <col id="1" translatable="yes">Suspend</col>
       </row>
       <row>
-        <col id="0">3</col>
-        <col id="1" translatable="yes">Power Off</col>
+        <col id="0" translatable="yes">2</col>
+        <col id="1" translatable="yes">Hibernate</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">3</col>
+        <col id="1" translatable="yes">Lock Screen</col>
       </row>
     </data>
   </object>
   <object class="GtkListStore" id="lst_screen_off_after">
     <columns>
       <!-- column-name minute -->
-      <column type="guint"/>
+      <column type="gchararray"/>
       <!-- column-name name -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0">0</col>
+        <col id="0">14</col>
         <col id="1" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0">1</col>
-        <col id="1" translatable="yes">1 Minute</col>
-      </row>
-      <row>
-        <col id="0">2</col>
-        <col id="1" translatable="yes">2 Minutes</col>
-      </row>
-      <row>
-        <col id="0">3</col>
-        <col id="1" translatable="yes">3 Minutes</col>
-      </row>
-      <row>
-        <col id="0">4</col>
-        <col id="1" translatable="yes">4 Minutes</col>
-      </row>
-      <row>
-        <col id="0">5</col>
-        <col id="1" translatable="yes">5 Minutes</col>
-      </row>
-      <row>
-        <col id="0">10</col>
-        <col id="1" translatable="yes">10 Minutes</col>
       </row>
       <row>
         <col id="0">15</col>
@@ -165,7 +198,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="icon-name">image-x-generic-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -206,7 +239,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="stock">gtk-dialog-error</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -247,7 +280,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="icon-name">video-display-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -288,7 +321,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="icon-name">input-keyboard-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -329,7 +362,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="icon-name">ac-adapter-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -372,7 +405,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">audio-volume-high-symbolic</property>
+                        <property name="icon-name">edit-undo-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -739,7 +772,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="page_keyboardSettings">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">start</property>
@@ -1203,15 +1236,40 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">7</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="label" translatable="yes">On Battery</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="size" value="16000"/>
-                        </attributes>
+                        <property name="spacing">7</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">On Battery</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="16000"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">battery-level-100-charged-symbolic</property>
+                            <property name="icon_size">3</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1302,6 +1360,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_laptop_screen_closed</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_laptop_screen_closed_bat_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1321,6 +1381,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_screen_off_after</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_screen_off_after_bat_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1340,6 +1402,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_screen_off_after</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_put_to_sleep_after_bat_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1368,16 +1432,41 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="halign">start</property>
                         <property name="margin-top">25</property>
-                        <property name="label" translatable="yes">Plugged In</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="size" value="16000"/>
-                        </attributes>
+                        <property name="spacing">7</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Plugged in</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="size" value="16000"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">ac-adapter-symbolic</property>
+                            <property name="icon_size">3</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1468,6 +1557,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_laptop_screen_closed</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_laptop_screen_closed_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1487,6 +1578,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_screen_off_after</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_screen_off_after_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1506,6 +1599,8 @@
                                 <property name="can-focus">False</property>
                                 <property name="model">lst_screen_off_after</property>
                                 <property name="active">0</property>
+                                <property name="id-column">0</property>
+                                <signal name="changed" handler="on_cmb_put_to_sleep_after_changed" swapped="no"/>
                                 <child>
                                   <object class="GtkCellRendererText"/>
                                   <attributes>
@@ -1640,11 +1735,12 @@
                             <property name="spacing">11</property>
                             <property name="homogeneous">True</property>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="btn_restore_panel">
                                 <property name="label" translatable="yes">Restore to Defaults</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_btn_restore_panel_clicked" swapped="no"/>
                                 <style>
                                   <class name="destructive-action"/>
                                 </style>
@@ -1656,11 +1752,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="btn_restore_thunar">
                                 <property name="label" translatable="yes">Restore to Defaults</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_btn_restore_thunar_clicked" swapped="no"/>
                                 <style>
                                   <class name="destructive-action"/>
                                 </style>
@@ -1672,11 +1769,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="btn_restore_allxfce">
                                 <property name="label" translatable="yes">Restore to Defaults</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_btn_restore_allxfce_clicked" swapped="no"/>
                                 <style>
                                   <class name="destructive-action"/>
                                 </style>

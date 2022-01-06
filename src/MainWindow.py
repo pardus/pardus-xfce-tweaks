@@ -1,4 +1,4 @@
-import os, threading
+import os, threading, subprocess
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -27,6 +27,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.ThemeManager as ThemeManager
     import xfce.ScaleManager as ScaleManager
     import xfce.KeyboardManager as KeyboardManager
+    import xfce.PowerManager as PowerManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -67,6 +68,9 @@ class MainWindow:
         # Keyboard
         self.getKeyboardDefaults()
 
+        # Power Management
+        self.getPowerDefaults()
+
         # Show Screen:
         self.window.show_all()
     
@@ -75,32 +79,41 @@ class MainWindow:
         self.window.get_application().quit()
 
     def defineComponents(self):
-        def getObject(str):
+        def getUI(str):
             return self.builder.get_object(str)
         
-        self.nb_pages = getObject("nb_pages")
-        self.lb_rows = getObject("lb_rows")
+        self.nb_pages = getUI("nb_pages")
+        self.lb_rows = getUI("lb_rows")
 
         # Wallpapers
-        self.flow_wallpapers = getObject("flow_wallpapers")
+        self.flow_wallpapers = getUI("flow_wallpapers")
 
         # Theme
-        self.rb_darkTheme = getObject("rb_darkTheme")
-        self.rb_lightTheme = getObject("rb_lightTheme")
+        self.rb_darkTheme = getUI("rb_darkTheme")
+        self.rb_lightTheme = getUI("rb_lightTheme")
 
         # Display
-        self.sli_scaling = getObject("sli_scaling")
-        self.sli_desktopIcon = getObject("sli_desktopIcon")
-        self.sli_panel = getObject("sli_panel")
+        self.sli_scaling = getUI("sli_scaling")
+        self.sli_desktopIcon = getUI("sli_desktopIcon")
+        self.sli_panel = getUI("sli_panel")
 
-        # - Keyboard Settings:
-        self.stk_trf = getObject("stk_trf")
-        self.stk_trq = getObject("stk_trq")
-        self.stk_en = getObject("stk_en")
-        self.btn_trf_remove = getObject("btn_trf_remove")
-        self.btn_trq_remove = getObject("btn_trq_remove")
-        self.btn_en_remove = getObject("btn_en_remove")
-        self.sw_lang_indicator = getObject("sw_lang_indicator")
+        # Keyboard:
+        self.stk_trf            = getUI("stk_trf")
+        self.stk_trq            = getUI("stk_trq")
+        self.stk_en             = getUI("stk_en")
+        self.btn_trf_remove     = getUI("btn_trf_remove")
+        self.btn_trq_remove     = getUI("btn_trq_remove")
+        self.btn_en_remove      = getUI("btn_en_remove")
+        self.sw_lang_indicator  = getUI("sw_lang_indicator")
+
+        # Power Management
+        self.cmb_laptop_screen_closed_bat = getUI("cmb_laptop_screen_closed_bat")
+        self.cmb_screen_off_after_bat     = getUI("cmb_screen_off_after_bat")
+        self.cmb_put_to_sleep_after_bat   = getUI("cmb_put_to_sleep_after_bat")
+        self.cmb_laptop_screen_closed     = getUI("cmb_laptop_screen_closed")
+        self.cmb_screen_off_after         = getUI("cmb_screen_off_after")
+        self.cmb_put_to_sleep_after       = getUI("cmb_put_to_sleep_after")
+        self.dialog_restore_defaults      = getUI("dialog_restore_defaults")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -181,7 +194,14 @@ class MainWindow:
                 GLib.idle_add(ThemeManager.setWindowTheme, "pardus-dark-default")
             else:
                 GLib.idle_add(ThemeManager.setWindowTheme, "pardus-default")
-
+    
+    def getPowerDefaults(self):
+        self.cmb_laptop_screen_closed_bat.set_active_id(str(PowerManager.getBatteryLaptopScreenClosed()))
+        self.cmb_screen_off_after_bat.set_active_id(str(PowerManager.getBatteryScreenOff()))
+        self.cmb_put_to_sleep_after_bat.set_active_id(str(PowerManager.getBatteryScreenSleep()))
+        self.cmb_laptop_screen_closed.set_active_id(str(PowerManager.getACLaptopScreenClosed()))
+        self.cmb_screen_off_after.set_active_id(str(PowerManager.getACScreenOff()))
+        self.cmb_put_to_sleep_after.set_active_id(str(PowerManager.getACScreenSleep()))
 
 
 
@@ -266,5 +286,73 @@ class MainWindow:
             KeyboardManager.createKeyboardPlugin()
         else:
             KeyboardManager.removeKeyboardPlugin()
-        
+    
+
+    # - Power Management
+    def on_cmb_laptop_screen_closed_bat_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
+            
+            PowerManager.setBatteryLaptopScreenClosed(value)
+    
+    def on_cmb_screen_off_after_bat_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])
+
+            PowerManager.setBatteryScreenOff(value)
+    
+    def on_cmb_put_to_sleep_after_bat_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])
+
+            PowerManager.setBatteryScreenSleep(value)
+    
+    def on_cmb_laptop_screen_closed_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
+
+            PowerManager.setACLaptopScreenClosed(value)
+    
+    def on_cmb_screen_off_after_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])
+
+            PowerManager.setACScreenOff(value)
+    
+    def on_cmb_put_to_sleep_after_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])
+
+            PowerManager.setACScreenSleep(value)
+    
+    def on_btn_restore_panel_clicked(self, button):
+        response = self.dialog_restore_defaults.run()
+        self.dialog_restore_defaults.hide()
+        if response == Gtk.ResponseType.YES:
+            subprocess.run("xfce4-panel --quit; pkill xfconfd; rm -rf ~/.config/xfce4/panel ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml; (xfce4-panel &);", shell=True)
+    
+    def on_btn_restore_thunar_clicked(self, button):
+        response = self.dialog_restore_defaults.run()
+        self.dialog_restore_defaults.hide()
+        if response == Gtk.ResponseType.YES:
+            print("yes!")
+    
+    def on_btn_restore_allxfce_clicked(self, button):
+        response = self.dialog_restore_defaults.run()
+        self.dialog_restore_defaults.hide()
+        if response == Gtk.ResponseType.YES:
+            print("yes!")
+            # subprocess.run("xfce4-panel --quit; pkill xfconfd; rm -rf ~/.config/xfce4; (xfce4-panel &);", shell=True)
         
