@@ -15,7 +15,7 @@ def setBatteryScreenOff(value):
     subprocess.call([
         "xfconf-query",
         "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/dpms-on-battery-off",
+        "-p", "/xfce4-power-manager/blank-on-battery",
         "-s", str(int(value)),
         "--type", "int",
         "--create"
@@ -43,7 +43,7 @@ def setACScreenOff(value):
     subprocess.call([
         "xfconf-query",
         "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/dpms-on-ac-off",
+        "-p", "/xfce4-power-manager/blank-on-ac",
         "-s", str(int(value)),
         "--type", "int",
         "--create"
