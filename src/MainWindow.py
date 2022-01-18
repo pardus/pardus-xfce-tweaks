@@ -1,4 +1,5 @@
 import os, threading, subprocess
+import shutil
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -28,6 +29,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.ScaleManager as ScaleManager
     import xfce.KeyboardManager as KeyboardManager
     import xfce.PowerManager as PowerManager
+    import xfce.ApplicationManager as ApplicationManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -70,6 +72,9 @@ class MainWindow:
 
         # Power Management
         self.getPowerDefaults()
+
+        # Startup Applications
+        self.getStartupApplications()
 
         # Show Screen:
         self.window.show_all()
@@ -114,6 +119,11 @@ class MainWindow:
         self.cmb_screen_off_after         = getUI("cmb_screen_off_after")
         self.cmb_put_to_sleep_after       = getUI("cmb_put_to_sleep_after")
         self.dialog_restore_defaults      = getUI("dialog_restore_defaults")
+
+        # Startup Applications
+        self.lb_startup_applications        = getUI("lb_startup_applications")
+        self.revealer_startup_applications  = getUI("revealer_startup_applications")
+        self.dialog_applications            = getUI("dialog_applications")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -202,7 +212,29 @@ class MainWindow:
         self.cmb_laptop_screen_closed.set_active_id(str(PowerManager.getACLaptopScreenClosed()))
         self.cmb_screen_off_after.set_active_id(str(PowerManager.getACScreenOff()))
         self.cmb_put_to_sleep_after.set_active_id(str(PowerManager.getACScreenSleep()))
+    
 
+    def addStartupApplication(self, name, application_file, icon):
+        print(name, application_file, icon)
+        box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 7)
+        box.props.margin = 7
+        
+        img_icon = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DND)
+        box.add(img_icon)
+
+        lbl_name = Gtk.Label.new(name)
+        box.add(lbl_name)
+
+        box.set_name(application_file)
+
+        self.lb_startup_applications.add(box)
+        self.lb_startup_applications.show_all()
+
+    def getStartupApplications(self):
+        startup_list = ApplicationManager.getStartupTupleList()
+        
+        for (name, application_file, icon) in startup_list:
+            self.addStartupApplication(name, application_file, icon)
 
 
     # SIGNALS
@@ -337,6 +369,58 @@ class MainWindow:
 
             PowerManager.setACScreenSleep(value)
     
+
+    # Fonts
+    def on_font_system_font_set(self, f):
+        pass
+
+    def on_font_monospace_font_set(self, f):
+        pass
+
+    # Startup Applications
+    def on_lb_startup_applications_selected_rows_changed(self, listbox):
+        rows = listbox.get_selected_rows()
+        if len(rows) > 0:
+            self.revealer_startup_applications.set_reveal_child(True)
+        else:
+            self.revealer_startup_applications.set_reveal_child(False)
+        
+    
+    def on_btn_startup_clear_clicked(self, button):
+        self.lb_startup_applications.unselect_all()
+    
+    def on_btn_startup_delete_clicked(self, button):
+        rows = self.lb_startup_applications.get_selected_rows()
+        for row in rows:
+            application_path = row.get_children()[0].get_name()
+            print("Will be removed:",application_path)
+            subprocess.run(f"rm {application_path}", shell="True")
+
+            self.lb_startup_applications.remove(row)
+    
+    def on_btn_startup_add_application_clicked(self, button):
+        self.lb_startup_applications.unselect_all()
+        res = self.dialog_applications.run()
+        self.dialog_applications.hide()
+
+        if res == Gtk.ResponseType.OK:
+            app_info = self.dialog_applications.get_app_info()
+            app_name = app_info.get_name()
+            app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else ""
+            app_path = app_info.get_filename()
+            app_id = app_info.get_id()
+            app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
+
+            try:
+                if not os.path.exists(app_new_path):
+                    shutil.copy(app_path, app_new_path)
+                    self.addStartupApplication(app_name, app_new_path, app_icon)
+            except:
+                pass
+            
+    
+
+    # Restore Defaults
     def on_btn_restore_panel_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
