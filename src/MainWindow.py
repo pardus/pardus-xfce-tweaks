@@ -30,6 +30,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.KeyboardManager as KeyboardManager
     import xfce.PowerManager as PowerManager
     import xfce.ApplicationManager as ApplicationManager
+    import xfce.FontManager as FontManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -70,6 +71,9 @@ class MainWindow:
         # Keyboard
         self.getKeyboardDefaults()
 
+        # Fonts
+        self.getFontDefaults()
+
         # Power Management
         self.getPowerDefaults()
 
@@ -102,7 +106,7 @@ class MainWindow:
         self.sli_desktopIcon = getUI("sli_desktopIcon")
         self.sli_panel = getUI("sli_panel")
 
-        # Keyboard:
+        # Keyboard
         self.stk_trf            = getUI("stk_trf")
         self.stk_trq            = getUI("stk_trq")
         self.stk_en             = getUI("stk_en")
@@ -110,6 +114,10 @@ class MainWindow:
         self.btn_trq_remove     = getUI("btn_trq_remove")
         self.btn_en_remove      = getUI("btn_en_remove")
         self.sw_lang_indicator  = getUI("sw_lang_indicator")
+
+        # Fonts
+        self.font_system        = getUI("font_system")
+        self.font_monospace     = getUI("font_monospace")
 
         # Power Management
         self.cmb_laptop_screen_closed_bat = getUI("cmb_laptop_screen_closed_bat")
@@ -180,6 +188,18 @@ class MainWindow:
         self.btn_trf_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
         self.btn_trq_remove.set_sensitive(self.stk_trf.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
         self.btn_en_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_trf.get_visible_child_name() == "remove")
+    
+
+    def getFontDefaults(self):
+        system_font = FontManager.getSystemFont()
+        monospace_font = FontManager.getMonospaceFont()
+        print(system_font, monospace_font)
+
+        if system_font != "":
+            self.font_system.set_font(system_font)
+        
+        if monospace_font != "":
+            self.font_monospace.set_font(monospace_font)
 
 
     def addWallpapers(self, wallpaperList):
@@ -216,7 +236,6 @@ class MainWindow:
     
 
     def addStartupApplication(self, name, application_file, icon):
-        print(name, application_file, icon)
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 7)
         box.props.margin = 7
         
@@ -320,6 +339,13 @@ class MainWindow:
         else:
             KeyboardManager.removeKeyboardPlugin()
     
+    # Fonts
+    def on_font_system_font_set(self, fontbutton):
+        FontManager.setSystemFont(fontbutton.get_font())
+
+    def on_font_monospace_font_set(self, fontbutton):
+        FontManager.setMonospaceFont(fontbutton.get_font())
+    
 
     # - Power Management
     def on_cmb_laptop_screen_closed_bat_changed(self, combobox):
@@ -371,13 +397,6 @@ class MainWindow:
             PowerManager.setACScreenSleep(value)
     
 
-    # Fonts
-    def on_font_system_font_set(self, f):
-        pass
-
-    def on_font_monospace_font_set(self, f):
-        pass
-
     # Startup Applications
     def on_lb_startup_applications_selected_rows_changed(self, listbox):
         rows = listbox.get_selected_rows()
@@ -394,7 +413,6 @@ class MainWindow:
         rows = self.lb_startup_applications.get_selected_rows()
         for row in rows:
             application_path = row.get_children()[0].get_name()
-            print("Will be removed:",application_path)
             subprocess.run(f"rm {application_path}", shell="True")
 
             self.lb_startup_applications.remove(row)

@@ -1606,6 +1606,7 @@
                             <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkFontButton" id="font_system">
+                                <property name="width-request">200</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -1613,6 +1614,8 @@
                                 <property name="language">tr-tr</property>
                                 <property name="preview-text"/>
                                 <property name="title" translatable="yes">Select Font</property>
+                                <property name="use-font">True</property>
+                                <property name="use-size">True</property>
                                 <signal name="font-set" handler="on_font_system_font_set" swapped="no"/>
                               </object>
                               <packing>
@@ -1630,6 +1633,8 @@
                                 <property name="language">tr-tr</property>
                                 <property name="preview-text"/>
                                 <property name="title" translatable="yes">Select Font</property>
+                                <property name="use-font">True</property>
+                                <property name="use-size">True</property>
                                 <signal name="font-set" handler="on_font_monospace_font_set" swapped="no"/>
                               </object>
                               <packing>
