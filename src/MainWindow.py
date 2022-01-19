@@ -124,6 +124,7 @@ class MainWindow:
         self.lb_startup_applications        = getUI("lb_startup_applications")
         self.revealer_startup_applications  = getUI("revealer_startup_applications")
         self.dialog_applications            = getUI("dialog_applications")
+        self.appchooser_startup             = getUI("appchooser_startup")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -400,11 +401,13 @@ class MainWindow:
     
     def on_btn_startup_add_application_clicked(self, button):
         self.lb_startup_applications.unselect_all()
+        self.dialog_applications_selected_app = None
+
         res = self.dialog_applications.run()
         self.dialog_applications.hide()
 
-        if res == Gtk.ResponseType.OK:
-            app_info = self.dialog_applications.get_app_info()
+        if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app != None:
+            app_info = self.dialog_applications_selected_app
             app_name = app_info.get_name()
             app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else ""
             app_path = app_info.get_filename()
@@ -417,7 +420,9 @@ class MainWindow:
                     self.addStartupApplication(app_name, app_new_path, app_icon)
             except:
                 pass
-            
+    
+    def on_appchooser_startup_application_selected(self, widget, appinfo):
+        self.dialog_applications_selected_app = appinfo
     
 
     # Restore Defaults

@@ -28,10 +28,11 @@
     <property name="step-increment">1</property>
     <property name="page-increment">1</property>
   </object>
-  <object class="GtkAppChooserDialog" id="dialog_applications">
+  <object class="GtkDialog" id="dialog_applications">
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Select Application</property>
+    <property name="icon-name">pardus-xfce-tweaks</property>
     <property name="type-hint">dialog</property>
-    <property name="heading" translatable="yes">Select Application</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can-focus">False</property>
@@ -41,6 +42,35 @@
           <object class="GtkButtonBox">
             <property name="can-focus">False</property>
             <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="button2">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">Select</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -48,8 +78,26 @@
             <property name="position">0</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkAppChooserWidget" id="appchooser_startup">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="show-recommended">False</property>
+            <property name="show-all">True</property>
+            <signal name="application-selected" handler="on_appchooser_startup_application_selected" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="-6">button2</action-widget>
+      <action-widget response="-5">button1</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkMessageDialog" id="dialog_restore_defaults">
     <property name="can-focus">False</property>
