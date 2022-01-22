@@ -1,31 +1,52 @@
+from ast import Break
+import subprocess
 import os
+from configparser import ConfigParser
 
 STARTUP_PATH = f"{os.environ.get('HOME')}/.config/autostart"
 APPLICATIONS_PATH = os.environ.get("XDG_DATA_DIRS").split(":")
+DEFAULT_APPLICATIONS_PATH = f"{os.environ.get('HOME')}/.config/mimeapps.list"
+XFCE_DEFAULT_APPLICATIONS_PATH = f"{os.environ.get('HOME')}/.config/xfce4/helpers.rc"
 
+APPLICATIONS = {}
 
+# Startup Applications
 def _getApplicationTuple(file):
         name = ""
         icon = ""
+        exec = ""
+        categories = ""
         with open(file) as f:
             for line in f.readlines():
-                if "Name=" in line:
-                    name = line.strip().split("=")[1]
-                elif "Icon=" in line:
-                    icon = line.strip().split("=")[1]
-                elif "Type=" in line:
-                    if line.strip().split("=")[1] != "Application":
-                        return None
-                elif "Hidden=" in line:
-                    if line.strip().split("=")[1] == "True":
-                        return None
-                elif name != "" and icon != "":
-                    break
+                line = line.rstrip()
+                
+                try:
+                    key = line[:line.index("=")]
+                    value = line[line.index("=")+1:]
+
+                    if "Name" == key:
+                        name = value
+                    elif "Icon" == key:
+                        icon = value
+                    elif "Categories" == key:
+                        categories = value
+                    elif "Exec" == key:
+                        exec = value.split(" ")[0].split("/")[-1].split(" ")[0]
+                    elif "Type" == key:
+                        if value.lower() != "application":
+                            return None
+                    elif "Hidden" == key or "NoDisplay" == key:
+                        if value.lower() == "true":
+                            return None
+                    elif name != "" and icon != "" and exec != "" and categories != "":
+                        break
+                except:
+                    pass
         
-        return (name, f"{file.path}", icon)
+        return (exec, name, f"{file.path}", icon, categories)
 
 def getStartupTupleList():
-    startup_list = [] # [ (name, application file, icon), (name, application file, icon) ... ]
+    startup_list = [] # [ (executable, name, application file, icon, categories), ... ]
 
     try:
         files = os.scandir( STARTUP_PATH )
@@ -40,8 +61,10 @@ def getStartupTupleList():
 
     return startup_list
 
-def getApplicationTupleList():
-    application_list = [] # [ (name, application file, icon), (name, application file, icon) ... ]
+
+# Default Applications
+def getApplicationsDictionary():
+    applications = {} # { name: {executable, application file, icon}, ... }
 
     for p in APPLICATIONS_PATH:
         try:
@@ -51,8 +74,66 @@ def getApplicationTupleList():
                     if file.name.split(".")[-1] == "desktop":
                         app_tuple = _getApplicationTuple(file)
                         if app_tuple != None:
-                            application_list.append(app_tuple)
+                            applications[app_tuple[1]] = {"name":app_tuple[1], "executable":app_tuple[0], "application_file":app_tuple[2], "icon":app_tuple[3], "categories":app_tuple[4]}
         except FileNotFoundError as error:
-            pass
+            continue
+    
+    return applications
 
-    return application_list
+APPLICATIONS = getApplicationsDictionary()
+
+# webbrowser, filemanager, email. terminalemulator
+def getApplicationListFromCategory(category):
+    apps = []
+    for a in APPLICATIONS:
+        app = APPLICATIONS[a]
+        if category.lower() in app["categories"].lower():
+            apps.append(app)
+    
+    return apps
+
+# -- Default XFCE apps: WebBrowser,FileManager,TerminalEmulator,MailReader
+def getDefaultXFCEApp(category):
+    process = subprocess.run(f"xfce4-mime-helper --query={category}", shell=True, capture_output=True)
+    
+    binary_file = process.stdout.decode("utf-8").rstrip()
+
+    if category == "MailReader":
+        category = "email"
+    
+    for a in getApplicationListFromCategory(category):
+        if binary_file in a["executable"]:
+            return a
+    
+    return None
+
+def setDefaultXFCEApp(category, app):
+    if app == "firefox-esr":
+        app = "firefox"
+    
+    lines = []
+    with open(XFCE_DEFAULT_APPLICATIONS_PATH, "r") as f:
+        lines = f.readlines()
+        is_category_exists = False
+        for i in range(len(lines)):
+            if category in lines[i]:
+                is_category_exists = True
+                lines[i] = f"{category}={app}\n"
+                break
+        
+        if not is_category_exists:
+            lines.append(f"{category}={app}\n")
+    
+    with open(XFCE_DEFAULT_APPLICATIONS_PATH, "w") as f:
+        for line in lines:
+            f.write(line)
+
+
+def setDefaultApp(key, value):
+    conf = ConfigParser()
+    conf.read(DEFAULT_APPLICATIONS_PATH)
+
+    conf.set("Default Applications", key, value)
+
+    with open(DEFAULT_APPLICATIONS_PATH, "w") as f:
+        conf.write(f)

@@ -3,7 +3,7 @@ import shutil
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk, GdkPixbuf
+from gi.repository import GLib, Gtk, GdkPixbuf
 
 import locale
 from locale import gettext as tr
@@ -80,6 +80,9 @@ class MainWindow:
         # Startup Applications
         self.getStartupApplications()
 
+        # Default Applications
+        self.getDefaultApplications()
+
         # Show Screen:
         self.window.show_all()
     
@@ -133,6 +136,17 @@ class MainWindow:
         self.revealer_startup_applications  = getUI("revealer_startup_applications")
         self.dialog_applications            = getUI("dialog_applications")
         self.appchooser_startup             = getUI("appchooser_startup")
+
+        # Default Applications
+        self.cmb_default_browser        = getUI("cmb_default_browser")
+        self.cmb_default_filemanager    = getUI("cmb_default_filemanager")
+        self.cmb_default_email          = getUI("cmb_default_email")
+        self.cmb_default_terminal       = getUI("cmb_default_terminal")
+
+        self.lst_default_browser        = getUI("lst_default_browser")
+        self.lst_default_filemanager    = getUI("lst_default_filemanager")
+        self.lst_default_email          = getUI("lst_default_email")
+        self.lst_default_terminal       = getUI("lst_default_terminal")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -193,7 +207,6 @@ class MainWindow:
     def getFontDefaults(self):
         system_font = FontManager.getSystemFont()
         monospace_font = FontManager.getMonospaceFont()
-        print(system_font, monospace_font)
 
         if system_font != "":
             self.font_system.set_font(system_font)
@@ -253,9 +266,37 @@ class MainWindow:
     def getStartupApplications(self):
         startup_list = ApplicationManager.getStartupTupleList()
         
-        for (name, application_file, icon) in startup_list:
+        for (exec, name, application_file, icon, categories) in startup_list:
             self.addStartupApplication(name, application_file, icon)
+    
+    def getDefaultApplications(self):
+        browser_list = ApplicationManager.getApplicationListFromCategory("webbrowser")
+        filemanager_list = ApplicationManager.getApplicationListFromCategory("filemanager")
+        email_list = ApplicationManager.getApplicationListFromCategory("email")
+        terminal_list = ApplicationManager.getApplicationListFromCategory("terminalemulator")
 
+        # name, executable, icon
+        for a in browser_list:
+            self.lst_default_browser.append( [a["name"], a["executable"], a["icon"]] )
+        
+        for a in filemanager_list:
+            self.lst_default_filemanager.append( [a["name"], a["executable"], a["icon"]] )
+
+        for a in email_list:
+            self.lst_default_email.append( [a["name"], a["executable"], a["icon"]] )
+
+        for a in terminal_list:
+            self.lst_default_terminal.append( [a["name"], a["executable"], a["icon"]] )
+        
+        
+        # set default app
+        self.cmb_default_browser.set_active_id(     ApplicationManager.getDefaultXFCEApp("WebBrowser")["name"])
+        self.cmb_default_filemanager.set_active_id( ApplicationManager.getDefaultXFCEApp("FileManager")["name"])
+        self.cmb_default_email.set_active_id(       ApplicationManager.getDefaultXFCEApp("MailReader")["name"])
+        self.cmb_default_terminal.set_active_id(    ApplicationManager.getDefaultXFCEApp("TerminalEmulator")["name"])
+        
+
+        
 
     # SIGNALS
     def on_lb_rows_row_activated(self, rows, a):
@@ -441,6 +482,73 @@ class MainWindow:
     
     def on_appchooser_startup_application_selected(self, widget, appinfo):
         self.dialog_applications_selected_app = appinfo
+    
+
+    # Default Applications:
+    def _get_cmb_executable(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            executable = model[tree_iter][1]
+            return executable
+        return None
+    
+    def on_cmb_default_browser_changed(self, combobox):
+        exe = self._get_cmb_executable(combobox)
+        ApplicationManager.setDefaultXFCEApp("WebBrowser", exe)
+
+    def on_cmb_default_filemanager_changed(self, combobox):
+        exe = self._get_cmb_executable(combobox)
+        ApplicationManager.setDefaultXFCEApp("FileManager", exe)
+
+    def on_cmb_default_email_changed(self, combobox):
+        exe = self._get_cmb_executable(combobox)
+        ApplicationManager.setDefaultXFCEApp("MailReader", exe)
+            
+    def on_cmb_default_terminal_changed(self, combobox):
+        exe = self._get_cmb_executable(combobox)
+        ApplicationManager.setDefaultXFCEApp("TerminalEmulator", exe)
+
+    
+    def _get_cmb_application(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            desktop_file = model[tree_iter][0].get_filename().split("/")[-1]
+            return desktop_file
+        return None
+    
+    def on_cmb_default_video_changed(self, combobox):
+        desktop_file = self._get_cmb_application(combobox)
+
+        ApplicationManager.setDefaultApp("video/mp4", desktop_file)
+        ApplicationManager.setDefaultApp("video/quicktime", desktop_file)
+        ApplicationManager.setDefaultApp("video/webm", desktop_file)
+        ApplicationManager.setDefaultApp("video/ogg", desktop_file)
+    
+    def on_cmb_default_music_changed(self, combobox):
+        desktop_file = self._get_cmb_application(combobox)
+
+        ApplicationManager.setDefaultApp("audio/mp4", desktop_file)
+        ApplicationManager.setDefaultApp("audio/mpeg", desktop_file)
+        ApplicationManager.setDefaultApp("audio/acc", desktop_file)
+        ApplicationManager.setDefaultApp("audio/flac", desktop_file)
+    
+    def on_cmb_default_image_changed(self, combobox):
+        desktop_file = self._get_cmb_application(combobox)
+
+        ApplicationManager.setDefaultApp("image/jpeg", desktop_file)
+        ApplicationManager.setDefaultApp("image/webp", desktop_file)
+        ApplicationManager.setDefaultApp("image/png", desktop_file)
+        ApplicationManager.setDefaultApp("image/gif", desktop_file)
+        ApplicationManager.setDefaultApp("image/bmp", desktop_file)
+    
+    def on_cmb_default_editor_changed(self, combobox):
+        desktop_file = self._get_cmb_application(combobox)
+
+        ApplicationManager.setDefaultApp("text/plain", desktop_file)
+
+
     
 
     # Restore Defaults
