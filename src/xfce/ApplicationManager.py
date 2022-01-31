@@ -105,7 +105,7 @@ def getDefaultXFCEApp(category):
         if binary_file in a["executable"]:
             return a
     
-    return None
+    return {"name":""}
 
 def setDefaultXFCEApp(category, app):
     if app == "firefox-esr":
@@ -130,7 +130,7 @@ def setDefaultXFCEApp(category, app):
 
 
 def setDefaultApp(key, value):
-    conf = ConfigParser()
+    conf = ConfigParser(strict=False)
     conf.read(DEFAULT_APPLICATIONS_PATH)
 
     conf.set("Default Applications", key, value)
