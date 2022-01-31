@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/bin/python3 /usr/share/pardus/pardus-xfce-tweaks/src/main.py
+/usr/bin/python3 /usr/share/pardus/pardus-xfce-tweaks/src/pardus-xfce-tweaks

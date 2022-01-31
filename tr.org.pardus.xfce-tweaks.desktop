@@ -1,14 +1,14 @@
 [Desktop Entry]
-Name=About Pardus
-Name[tr]=Pardus Hakkında
-GenericName=About
-GenericName[tr]=Hakkında
-Comment=Get info about your Pardus system.
-Comment[tr]=Pardus sisteminiz hakkında bilgi edinin.
-Exec=pardus-about
-Icon=pardus-about
+Name=Pardus XFCE Tweaks
+Name[tr]=Pardus XFCE Ayarları
+GenericName=XFCE Tweaks
+GenericName[tr]=XFCE Ayarları
+Comment=Tweak Pardus XFCE settings
+Comment[tr]=Pardus XFCE ayarlarını değiştirin
+Exec=pardus-xfce-settings
+Icon=pardus-xfce-settings
 Terminal=false
 Type=Application
-Categories=Settings;
+Categories=Settings;XFCE;
 StartupNotify=true
-Keywords=about
+Keywords=tweak;tweaks;xfce;settings;pardus;

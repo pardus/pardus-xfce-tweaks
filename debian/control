@@ -13,6 +13,5 @@ Depends: ${misc:Depends},
          python3 (>=3.5),
          python3-gi,
          gir1.2-gtk-3.0
-Description: Pardus XFCE Tweaks %SHORT_DESCRIPTION% Configurations
- Pardus XFCE Tweaks %LONG_DESCRIPTION% Configurations app
+Description: Tweak Pardus XFCE settings
 
