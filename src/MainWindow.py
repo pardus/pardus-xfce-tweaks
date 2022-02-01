@@ -123,13 +123,15 @@ class MainWindow:
         self.font_monospace     = getUI("font_monospace")
 
         # Power Management
+        self.stk_power_management         = getUI("stk_power_management")
         self.cmb_laptop_screen_closed_bat = getUI("cmb_laptop_screen_closed_bat")
         self.cmb_screen_off_after_bat     = getUI("cmb_screen_off_after_bat")
         self.cmb_put_to_sleep_after_bat   = getUI("cmb_put_to_sleep_after_bat")
         self.cmb_laptop_screen_closed     = getUI("cmb_laptop_screen_closed")
         self.cmb_screen_off_after         = getUI("cmb_screen_off_after")
         self.cmb_put_to_sleep_after       = getUI("cmb_put_to_sleep_after")
-        self.dialog_restore_defaults      = getUI("dialog_restore_defaults")
+        self.cmb_screen_off_after2        = getUI("cmb_screen_off_after2")
+        self.cmb_put_to_sleep_after2      = getUI("cmb_put_to_sleep_after2")
 
         # Startup Applications
         self.lb_startup_applications        = getUI("lb_startup_applications")
@@ -147,6 +149,9 @@ class MainWindow:
         self.lst_default_filemanager    = getUI("lst_default_filemanager")
         self.lst_default_email          = getUI("lst_default_email")
         self.lst_default_terminal       = getUI("lst_default_terminal")
+
+
+        self.dialog_restore_defaults      = getUI("dialog_restore_defaults")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -246,6 +251,11 @@ class MainWindow:
         self.cmb_laptop_screen_closed.set_active_id(str(PowerManager.getACLaptopScreenClosed()))
         self.cmb_screen_off_after.set_active_id(str(PowerManager.getACScreenOff()))
         self.cmb_put_to_sleep_after.set_active_id(str(PowerManager.getACScreenSleep()))
+        self.cmb_screen_off_after2.set_active_id(str(PowerManager.getACScreenOff()))
+        self.cmb_put_to_sleep_after2.set_active_id(str(PowerManager.getACScreenSleep()))
+
+        pageName = "laptop" if PowerManager.isLaptop() else "pc"
+        self.stk_power_management.set_visible_child_name(pageName)
     
 
     def addStartupApplication(self, name, application_file, icon):

@@ -196,164 +196,6 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkListStore" id="lst_laptop_screen_closed">
-    <columns>
-      <!-- column-name value -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">0</col>
-        <col id="1" translatable="yes">Screen Off</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">1</col>
-        <col id="1" translatable="yes">Suspend</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">2</col>
-        <col id="1" translatable="yes">Hibernate</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">3</col>
-        <col id="1" translatable="yes">Lock Screen</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="lst_screen_off_after">
-    <columns>
-      <!-- column-name minute -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">0</col>
-        <col id="1" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0">1</col>
-        <col id="1" translatable="yes">1 Minute</col>
-      </row>
-      <row>
-        <col id="0">2</col>
-        <col id="1" translatable="yes">2 Minutes</col>
-      </row>
-      <row>
-        <col id="0">3</col>
-        <col id="1" translatable="yes">3 Minutes</col>
-      </row>
-      <row>
-        <col id="0">4</col>
-        <col id="1" translatable="yes">4 Minutes</col>
-      </row>
-      <row>
-        <col id="0">5</col>
-        <col id="1" translatable="yes">5 Minutes</col>
-      </row>
-      <row>
-        <col id="0">10</col>
-        <col id="1" translatable="yes">10 Minutes</col>
-      </row>
-      <row>
-        <col id="0">15</col>
-        <col id="1" translatable="yes">15 Minutes</col>
-      </row>
-      <row>
-        <col id="0">20</col>
-        <col id="1" translatable="yes">20 Minutes</col>
-      </row>
-      <row>
-        <col id="0">25</col>
-        <col id="1" translatable="yes">25 Minutes</col>
-      </row>
-      <row>
-        <col id="0">30</col>
-        <col id="1" translatable="yes">30 Minutes</col>
-      </row>
-      <row>
-        <col id="0">45</col>
-        <col id="1" translatable="yes">45 Minutes</col>
-      </row>
-      <row>
-        <col id="0">60</col>
-        <col id="1" translatable="yes">1 Hour</col>
-      </row>
-      <row>
-        <col id="0">120</col>
-        <col id="1" translatable="yes">2 Hours</col>
-      </row>
-      <row>
-        <col id="0">180</col>
-        <col id="1" translatable="yes">3 Hours</col>
-      </row>
-      <row>
-        <col id="0">240</col>
-        <col id="1" translatable="yes">4 Hours</col>
-      </row>
-      <row>
-        <col id="0">300</col>
-        <col id="1" translatable="yes">5 Hours</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="lst_sleep_after">
-    <columns>
-      <!-- column-name minute -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">14</col>
-        <col id="1" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0">15</col>
-        <col id="1" translatable="yes">15 Minutes</col>
-      </row>
-      <row>
-        <col id="0">20</col>
-        <col id="1" translatable="yes">20 Minutes</col>
-      </row>
-      <row>
-        <col id="0">25</col>
-        <col id="1" translatable="yes">25 Minutes</col>
-      </row>
-      <row>
-        <col id="0">30</col>
-        <col id="1" translatable="yes">30 Minutes</col>
-      </row>
-      <row>
-        <col id="0">45</col>
-        <col id="1" translatable="yes">45 Minutes</col>
-      </row>
-      <row>
-        <col id="0">60</col>
-        <col id="1" translatable="yes">1 Hour</col>
-      </row>
-      <row>
-        <col id="0">120</col>
-        <col id="1" translatable="yes">2 Hours</col>
-      </row>
-      <row>
-        <col id="0">180</col>
-        <col id="1" translatable="yes">3 Hours</col>
-      </row>
-      <row>
-        <col id="0">240</col>
-        <col id="1" translatable="yes">4 Hours</col>
-      </row>
-      <row>
-        <col id="0">300</col>
-        <col id="1" translatable="yes">5 Hours</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkApplicationWindow" id="window">
     <property name="can-focus">False</property>
     <property name="window-position">center</property>
@@ -1712,396 +1554,632 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">7</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkStack" id="stk_power_management">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">7</property>
+                        <property name="transition-duration">0</property>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">On Battery</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                              <attribute name="size" value="16000"/>
-                            </attributes>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">15</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">7</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">7</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">On Battery</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                          <attribute name="size" value="16000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="icon-name">battery-level-100-charged-symbolic</property>
+                                        <property name="icon_size">3</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSeparator">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">When Laptop Screen is Closed:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Screen Off After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Put to Sleep After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_laptop_screen_closed_bat">
+                                            <property name="width-request">200</property>
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_laptop_screen_closed</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_laptop_screen_closed_bat_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_screen_off_after_bat">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_screen_off_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_screen_off_after_bat_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_put_to_sleep_after_bat">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_sleep_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_put_to_sleep_after_bat_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="margin-top">17</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">7</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">7</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">Plugged in</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                          <attribute name="size" value="16000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="icon-name">ac-adapter-symbolic</property>
+                                        <property name="icon_size">3</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSeparator">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">15</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">When Laptop Screen is Closed:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Screen Off After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Put to Sleep After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_laptop_screen_closed">
+                                            <property name="width-request">200</property>
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_laptop_screen_closed</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_laptop_screen_closed_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_screen_off_after">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_screen_off_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_screen_off_after_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_put_to_sleep_after">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_sleep_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_put_to_sleep_after_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="name">laptop</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkImage">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="icon-name">battery-level-100-charged-symbolic</property>
-                            <property name="icon_size">3</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">7</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">7</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">Plugged in</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                          <attribute name="size" value="16000"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="icon-name">ac-adapter-symbolic</property>
+                                        <property name="icon_size">3</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkSeparator">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Screen Off After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Put to Sleep After:</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">7</property>
+                                        <property name="homogeneous">True</property>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_screen_off_after2">
+                                            <property name="width-request">200</property>
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_screen_off_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_screen_off_after_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkComboBox" id="cmb_put_to_sleep_after2">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="model">lst_sleep_after</property>
+                                            <property name="active">0</property>
+                                            <property name="id-column">0</property>
+                                            <signal name="changed" handler="on_cmb_put_to_sleep_after_changed" swapped="no"/>
+                                            <child>
+                                              <object class="GtkCellRendererText"/>
+                                              <attributes>
+                                                <attribute name="text">1</attribute>
+                                              </attributes>
+                                            </child>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
+                            <property name="name">pc</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="spacing">15</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">7</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">When Laptop Screen is Closed:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Screen Off After:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Put to Sleep After:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">7</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_laptop_screen_closed_bat">
-                                <property name="width-request">200</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_laptop_screen_closed</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_laptop_screen_closed_bat_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_screen_off_after_bat">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_screen_off_after</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_screen_off_after_bat_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_put_to_sleep_after_bat">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_sleep_after</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_put_to_sleep_after_bat_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-top">25</property>
-                        <property name="spacing">7</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">Plugged in</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                              <attribute name="size" value="16000"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="icon-name">ac-adapter-symbolic</property>
-                            <property name="icon_size">3</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="spacing">15</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">7</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">When Laptop Screen is Closed:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Screen Off After:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Put to Sleep After:</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">7</property>
-                            <property name="homogeneous">True</property>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_laptop_screen_closed">
-                                <property name="width-request">200</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_laptop_screen_closed</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_laptop_screen_closed_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_screen_off_after">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_screen_off_after</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_screen_off_after_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_put_to_sleep_after">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_sleep_after</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_put_to_sleep_after_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">1</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -2861,5 +2939,163 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkListStore" id="lst_laptop_screen_closed">
+    <columns>
+      <!-- column-name value -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">0</col>
+        <col id="1" translatable="yes">Screen Off</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">1</col>
+        <col id="1" translatable="yes">Suspend</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">2</col>
+        <col id="1" translatable="yes">Hibernate</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">3</col>
+        <col id="1" translatable="yes">Lock Screen</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lst_screen_off_after">
+    <columns>
+      <!-- column-name minute -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0">1</col>
+        <col id="1" translatable="yes">1 Minute</col>
+      </row>
+      <row>
+        <col id="0">2</col>
+        <col id="1" translatable="yes">2 Minutes</col>
+      </row>
+      <row>
+        <col id="0">3</col>
+        <col id="1" translatable="yes">3 Minutes</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+        <col id="1" translatable="yes">4 Minutes</col>
+      </row>
+      <row>
+        <col id="0">5</col>
+        <col id="1" translatable="yes">5 Minutes</col>
+      </row>
+      <row>
+        <col id="0">10</col>
+        <col id="1" translatable="yes">10 Minutes</col>
+      </row>
+      <row>
+        <col id="0">15</col>
+        <col id="1" translatable="yes">15 Minutes</col>
+      </row>
+      <row>
+        <col id="0">20</col>
+        <col id="1" translatable="yes">20 Minutes</col>
+      </row>
+      <row>
+        <col id="0">25</col>
+        <col id="1" translatable="yes">25 Minutes</col>
+      </row>
+      <row>
+        <col id="0">30</col>
+        <col id="1" translatable="yes">30 Minutes</col>
+      </row>
+      <row>
+        <col id="0">45</col>
+        <col id="1" translatable="yes">45 Minutes</col>
+      </row>
+      <row>
+        <col id="0">60</col>
+        <col id="1" translatable="yes">1 Hour</col>
+      </row>
+      <row>
+        <col id="0">120</col>
+        <col id="1" translatable="yes">2 Hours</col>
+      </row>
+      <row>
+        <col id="0">180</col>
+        <col id="1" translatable="yes">3 Hours</col>
+      </row>
+      <row>
+        <col id="0">240</col>
+        <col id="1" translatable="yes">4 Hours</col>
+      </row>
+      <row>
+        <col id="0">300</col>
+        <col id="1" translatable="yes">5 Hours</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lst_sleep_after">
+    <columns>
+      <!-- column-name minute -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">14</col>
+        <col id="1" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0">15</col>
+        <col id="1" translatable="yes">15 Minutes</col>
+      </row>
+      <row>
+        <col id="0">20</col>
+        <col id="1" translatable="yes">20 Minutes</col>
+      </row>
+      <row>
+        <col id="0">25</col>
+        <col id="1" translatable="yes">25 Minutes</col>
+      </row>
+      <row>
+        <col id="0">30</col>
+        <col id="1" translatable="yes">30 Minutes</col>
+      </row>
+      <row>
+        <col id="0">45</col>
+        <col id="1" translatable="yes">45 Minutes</col>
+      </row>
+      <row>
+        <col id="0">60</col>
+        <col id="1" translatable="yes">1 Hour</col>
+      </row>
+      <row>
+        <col id="0">120</col>
+        <col id="1" translatable="yes">2 Hours</col>
+      </row>
+      <row>
+        <col id="0">180</col>
+        <col id="1" translatable="yes">3 Hours</col>
+      </row>
+      <row>
+        <col id="0">240</col>
+        <col id="1" translatable="yes">4 Hours</col>
+      </row>
+      <row>
+        <col id="0">300</col>
+        <col id="1" translatable="yes">5 Hours</col>
+      </row>
+    </data>
   </object>
 </interface>

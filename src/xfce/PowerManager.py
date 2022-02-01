@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, os
 
 
 # -- SETTERS
@@ -76,7 +76,7 @@ def getBatteryScreenOff():
         value = int(subprocess.check_output([
             "xfconf-query",
             "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/dpms-on-battery-off",
+            "-p", "/xfce4-power-manager/blank-on-battery",
         ]).decode("utf-8").rstrip())
     except:
         return 60
@@ -112,7 +112,7 @@ def getACScreenOff():
         value = int(subprocess.check_output([
             "xfconf-query",
             "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/dpms-on-ac-off",
+            "-p", "/xfce4-power-manager/blank-on-ac",
         ]).decode("utf-8").rstrip())
     except:
         return 60
@@ -130,3 +130,19 @@ def getACScreenSleep():
         return 14
     
     return value
+
+def isLaptop():
+    if os.path.isdir("/proc/pmu"):
+        return "Battery" in open("/proc/pmu/info","r").read()
+    if os.path.exists("/sys/devices/virtual/dmi/id/chassis_type"):
+        type = open("/sys/devices/virtual/dmi/id/chassis_type","r").read().strip()
+        return type in ["8", "9", "10", "11"]
+    for dev in os.listdir("/sys/class/power_supply"):
+        if "BAT" in dev:
+            return True
+    if os.path.exists("/proc/acpi/battery"):
+        return True
+    if os.path.isfile("/proc/apm"):
+        type = open("/proc/apm","r").read().split(" ")[5]
+        return type in ["0xff", "0x80"]
+    return False
