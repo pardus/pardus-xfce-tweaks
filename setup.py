@@ -10,7 +10,7 @@ data_files = [
     (APPLICATION_FOLDER, ["pardus-xfce-tweaks.svg"]),
     (f"{APPLICATION_FOLDER}/assets", ["assets/theme-light.png", "assets/theme-dark.png"]),
     (f"{APPLICATION_FOLDER}/src", ["src/pardus-xfce-tweaks", "src/MainWindow.py"]),
-    (f"{APPLICATION_FOLDER}/src/xfce", ["src/xfce/ApplicationManager.py", "src/xfce/FontManager.py", "src/xfce/KeyboardManager.py", "src/xfce/PowerManager.py", "src/xfce/ScaleManager.py", "src/xfce/ThemeManager.py", "src/xfce/WallpaperManager.py"]),
+    (f"{APPLICATION_FOLDER}/src/xfce", ["src/xfce/ApplicationManager.py", "src/xfce/FontManager.py", "src/xfce/KeyboardManager.py", "src/xfce/PowerManager.py", "src/xfce/ScaleManager.py", "src/xfce/ThemeManager.py", "src/xfce/WallpaperManager.py", "src/xfce/WhiskerManager.py"]),
     (f"{APPLICATION_FOLDER}/ui", ["ui/MainWindow.glade"]),
     ("/usr/bin/", ["pardus-xfce-tweaks"]),
     ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-xfce-tweaks.svg"])

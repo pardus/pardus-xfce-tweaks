@@ -108,6 +108,9 @@ def getDefaultXFCEApp(category):
     return {"name":""}
 
 def setDefaultXFCEApp(category, app):
+    if not os.path.exists(XFCE_DEFAULT_APPLICATIONS_PATH):
+        with open(XFCE_DEFAULT_APPLICATIONS_PATH, 'w'): pass
+
     if app == "firefox-esr":
         app = "firefox"
     
@@ -130,6 +133,10 @@ def setDefaultXFCEApp(category, app):
 
 
 def setDefaultApp(key, value):
+    if not os.path.exists(DEFAULT_APPLICATIONS_PATH):
+        with open(DEFAULT_APPLICATIONS_PATH, 'w') as f:
+            f.write("[Default Applications]\n")
+
     conf = ConfigParser(strict=False)
     conf.read(DEFAULT_APPLICATIONS_PATH)
 
