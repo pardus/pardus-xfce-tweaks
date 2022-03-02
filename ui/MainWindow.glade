@@ -196,6 +196,164 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="lst_laptop_screen_closed">
+    <columns>
+      <!-- column-name value -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">0</col>
+        <col id="1" translatable="yes">Screen Off</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">1</col>
+        <col id="1" translatable="yes">Suspend</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">2</col>
+        <col id="1" translatable="yes">Hibernate</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">3</col>
+        <col id="1" translatable="yes">Lock Screen</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lst_screen_off_after">
+    <columns>
+      <!-- column-name minute -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0">1</col>
+        <col id="1" translatable="yes">1 Minute</col>
+      </row>
+      <row>
+        <col id="0">2</col>
+        <col id="1" translatable="yes">2 Minutes</col>
+      </row>
+      <row>
+        <col id="0">3</col>
+        <col id="1" translatable="yes">3 Minutes</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+        <col id="1" translatable="yes">4 Minutes</col>
+      </row>
+      <row>
+        <col id="0">5</col>
+        <col id="1" translatable="yes">5 Minutes</col>
+      </row>
+      <row>
+        <col id="0">10</col>
+        <col id="1" translatable="yes">10 Minutes</col>
+      </row>
+      <row>
+        <col id="0">15</col>
+        <col id="1" translatable="yes">15 Minutes</col>
+      </row>
+      <row>
+        <col id="0">20</col>
+        <col id="1" translatable="yes">20 Minutes</col>
+      </row>
+      <row>
+        <col id="0">25</col>
+        <col id="1" translatable="yes">25 Minutes</col>
+      </row>
+      <row>
+        <col id="0">30</col>
+        <col id="1" translatable="yes">30 Minutes</col>
+      </row>
+      <row>
+        <col id="0">45</col>
+        <col id="1" translatable="yes">45 Minutes</col>
+      </row>
+      <row>
+        <col id="0">60</col>
+        <col id="1" translatable="yes">1 Hour</col>
+      </row>
+      <row>
+        <col id="0">120</col>
+        <col id="1" translatable="yes">2 Hours</col>
+      </row>
+      <row>
+        <col id="0">180</col>
+        <col id="1" translatable="yes">3 Hours</col>
+      </row>
+      <row>
+        <col id="0">240</col>
+        <col id="1" translatable="yes">4 Hours</col>
+      </row>
+      <row>
+        <col id="0">300</col>
+        <col id="1" translatable="yes">5 Hours</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="lst_sleep_after">
+    <columns>
+      <!-- column-name minute -->
+      <column type="gchararray"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">14</col>
+        <col id="1" translatable="yes">Never</col>
+      </row>
+      <row>
+        <col id="0">15</col>
+        <col id="1" translatable="yes">15 Minutes</col>
+      </row>
+      <row>
+        <col id="0">20</col>
+        <col id="1" translatable="yes">20 Minutes</col>
+      </row>
+      <row>
+        <col id="0">25</col>
+        <col id="1" translatable="yes">25 Minutes</col>
+      </row>
+      <row>
+        <col id="0">30</col>
+        <col id="1" translatable="yes">30 Minutes</col>
+      </row>
+      <row>
+        <col id="0">45</col>
+        <col id="1" translatable="yes">45 Minutes</col>
+      </row>
+      <row>
+        <col id="0">60</col>
+        <col id="1" translatable="yes">1 Hour</col>
+      </row>
+      <row>
+        <col id="0">120</col>
+        <col id="1" translatable="yes">2 Hours</col>
+      </row>
+      <row>
+        <col id="0">180</col>
+        <col id="1" translatable="yes">3 Hours</col>
+      </row>
+      <row>
+        <col id="0">240</col>
+        <col id="1" translatable="yes">4 Hours</col>
+      </row>
+      <row>
+        <col id="0">300</col>
+        <col id="1" translatable="yes">5 Hours</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkApplicationWindow" id="window">
     <property name="can-focus">False</property>
     <property name="window-position">center</property>
@@ -434,6 +592,47 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="icon-name">preferences-system-time-symbolic</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Clock</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">7</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-top">7</property>
+                    <property name="margin-bottom">7</property>
+                    <property name="spacing">7</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
                         <property name="icon-name">ac-adapter-symbolic</property>
                       </object>
                       <packing>
@@ -475,7 +674,7 @@
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">preferences-system-time-symbolic</property>
+                        <property name="icon-name">preferences-other-symbolic</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1554,6 +1753,150 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">7</property>
                     <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Clock</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="size" value="16000"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSeparator">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="spacing">15</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">7</property>
+                            <child>
+                              <object class="GtkButton" id="btn_clock_time_only">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_btn_clock_time_only_clicked" swapped="no"/>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="pixbuf">../assets/time-only.png</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Time Only</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">7</property>
+                            <child>
+                              <object class="GtkButton" id="btn_clock_date_only">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_btn_clock_date_only_clicked" swapped="no"/>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="pixbuf">../assets/date-only.png</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Date Only</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">start</property>
+                    <property name="margin-top">70</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">7</property>
+                    <child>
                       <object class="GtkStack" id="stk_power_management">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
@@ -2184,7 +2527,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                   </packing>
                 </child>
                 <child>
@@ -2388,7 +2731,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                   </packing>
                 </child>
                 <child>
@@ -2733,7 +3076,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="position">7</property>
+                    <property name="position">8</property>
                   </packing>
                 </child>
                 <child>
@@ -2905,11 +3248,8 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="position">8</property>
+                    <property name="position">9</property>
                   </packing>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -2939,163 +3279,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="lst_laptop_screen_closed">
-    <columns>
-      <!-- column-name value -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">0</col>
-        <col id="1" translatable="yes">Screen Off</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">1</col>
-        <col id="1" translatable="yes">Suspend</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">2</col>
-        <col id="1" translatable="yes">Hibernate</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">3</col>
-        <col id="1" translatable="yes">Lock Screen</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="lst_screen_off_after">
-    <columns>
-      <!-- column-name minute -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">0</col>
-        <col id="1" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0">1</col>
-        <col id="1" translatable="yes">1 Minute</col>
-      </row>
-      <row>
-        <col id="0">2</col>
-        <col id="1" translatable="yes">2 Minutes</col>
-      </row>
-      <row>
-        <col id="0">3</col>
-        <col id="1" translatable="yes">3 Minutes</col>
-      </row>
-      <row>
-        <col id="0">4</col>
-        <col id="1" translatable="yes">4 Minutes</col>
-      </row>
-      <row>
-        <col id="0">5</col>
-        <col id="1" translatable="yes">5 Minutes</col>
-      </row>
-      <row>
-        <col id="0">10</col>
-        <col id="1" translatable="yes">10 Minutes</col>
-      </row>
-      <row>
-        <col id="0">15</col>
-        <col id="1" translatable="yes">15 Minutes</col>
-      </row>
-      <row>
-        <col id="0">20</col>
-        <col id="1" translatable="yes">20 Minutes</col>
-      </row>
-      <row>
-        <col id="0">25</col>
-        <col id="1" translatable="yes">25 Minutes</col>
-      </row>
-      <row>
-        <col id="0">30</col>
-        <col id="1" translatable="yes">30 Minutes</col>
-      </row>
-      <row>
-        <col id="0">45</col>
-        <col id="1" translatable="yes">45 Minutes</col>
-      </row>
-      <row>
-        <col id="0">60</col>
-        <col id="1" translatable="yes">1 Hour</col>
-      </row>
-      <row>
-        <col id="0">120</col>
-        <col id="1" translatable="yes">2 Hours</col>
-      </row>
-      <row>
-        <col id="0">180</col>
-        <col id="1" translatable="yes">3 Hours</col>
-      </row>
-      <row>
-        <col id="0">240</col>
-        <col id="1" translatable="yes">4 Hours</col>
-      </row>
-      <row>
-        <col id="0">300</col>
-        <col id="1" translatable="yes">5 Hours</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="lst_sleep_after">
-    <columns>
-      <!-- column-name minute -->
-      <column type="gchararray"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0">14</col>
-        <col id="1" translatable="yes">Never</col>
-      </row>
-      <row>
-        <col id="0">15</col>
-        <col id="1" translatable="yes">15 Minutes</col>
-      </row>
-      <row>
-        <col id="0">20</col>
-        <col id="1" translatable="yes">20 Minutes</col>
-      </row>
-      <row>
-        <col id="0">25</col>
-        <col id="1" translatable="yes">25 Minutes</col>
-      </row>
-      <row>
-        <col id="0">30</col>
-        <col id="1" translatable="yes">30 Minutes</col>
-      </row>
-      <row>
-        <col id="0">45</col>
-        <col id="1" translatable="yes">45 Minutes</col>
-      </row>
-      <row>
-        <col id="0">60</col>
-        <col id="1" translatable="yes">1 Hour</col>
-      </row>
-      <row>
-        <col id="0">120</col>
-        <col id="1" translatable="yes">2 Hours</col>
-      </row>
-      <row>
-        <col id="0">180</col>
-        <col id="1" translatable="yes">3 Hours</col>
-      </row>
-      <row>
-        <col id="0">240</col>
-        <col id="1" translatable="yes">4 Hours</col>
-      </row>
-      <row>
-        <col id="0">300</col>
-        <col id="1" translatable="yes">5 Hours</col>
-      </row>
-    </data>
   </object>
 </interface>

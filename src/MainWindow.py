@@ -31,6 +31,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.PowerManager as PowerManager
     import xfce.ApplicationManager as ApplicationManager
     import xfce.FontManager as FontManager
+    import xfce.DatetimeManager as DatetimeManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -396,6 +397,17 @@ class MainWindow:
 
     def on_font_monospace_font_set(self, fontbutton):
         FontManager.setMonospaceFont(fontbutton.get_font())
+    
+    # Clock
+    def on_btn_clock_time_only_clicked(self, btn):
+        DatetimeManager.set("layout", "3")
+
+        DatetimeManager.saveFile()
+
+    def on_btn_clock_date_only_clicked(self, btn):
+        DatetimeManager.set("layout", "2")
+
+        DatetimeManager.saveFile()
     
 
     # - Power Management
