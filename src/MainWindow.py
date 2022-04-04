@@ -32,6 +32,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.ApplicationManager as ApplicationManager
     import xfce.FontManager as FontManager
     import xfce.DatetimeManager as DatetimeManager
+    import xfce.LocaleManager as LocaleManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -74,6 +75,9 @@ class MainWindow:
 
         # Fonts
         self.getFontDefaults()
+
+        # Languages
+        self.getLocales()
 
         # Power Management
         self.getPowerDefaults()
@@ -122,6 +126,10 @@ class MainWindow:
         # Fonts
         self.font_system        = getUI("font_system")
         self.font_monospace     = getUI("font_monospace")
+
+        # Languages
+        self.lb_langs_installed         = getUI("lb_langs_installed")
+        self.lb_langs_not_installed     = getUI("lb_langs_not_installed")
 
         # Power Management
         self.stk_power_management         = getUI("stk_power_management")
@@ -219,6 +227,57 @@ class MainWindow:
         
         if monospace_font != "":
             self.font_monospace.set_font(monospace_font)
+    
+    def addLocaleToListBox(self, lang, codeset, isInstalled):
+        box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
+        box.set_margin_start(7)
+        box.set_margin_end(1)
+
+        if isInstalled:
+            # Remove button
+            btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
+            btn.get_style_context().add_class("destructive-action")
+            btn.connect("clicked", self.on_locale_remove)
+
+            btn.set_relief(Gtk.ReliefStyle.NONE)
+            btn.set_name(f"{lang} {codeset}")
+            box.pack_end(btn, False, False, 0)
+
+            # Set as Default button
+            btn_default = Gtk.Button.new_from_icon_name("view-reveal-symbolic", Gtk.IconSize.BUTTON)
+            btn_default.connect("clicked", self.on_locale_set_default)
+
+            btn_default.set_relief(Gtk.ReliefStyle.NONE)
+            btn_default.set_name(f"{lang} {codeset}")
+            btn_default.set_tooltip_text(tr("Set as Default"))
+
+            box.pack_end(btn_default, False, False, 0)     
+        else:
+            # Add button
+            btn = Gtk.Button.new_from_icon_name("list-add-symbolic", Gtk.IconSize.BUTTON)
+            btn.connect("clicked", self.on_locale_add)
+            
+            btn.set_relief(Gtk.ReliefStyle.NONE)
+            btn.set_name(f"{lang} {codeset}")
+            box.pack_end(btn, False, False, 0)
+
+
+        lbl_name = Gtk.Label.new(lang)
+        box.add(lbl_name)        
+
+        if isInstalled:
+            self.lb_langs_installed.add(box)
+            self.lb_langs_installed.show_all()
+        else:
+            self.lb_langs_not_installed.add(box)
+            self.lb_langs_not_installed.show_all()
+    
+    def getLocales(self):
+        availableLocales = LocaleManager.getAvailableLocales()
+        installedLocales = LocaleManager.getInstalledLocales()
+
+        for lc in availableLocales:
+            self.addLocaleToListBox(lc[0], lc[1], True if lc in installedLocales else False)
 
 
     def addWallpapers(self, wallpaperList):
@@ -397,6 +456,16 @@ class MainWindow:
 
     def on_font_monospace_font_set(self, fontbutton):
         FontManager.setMonospaceFont(fontbutton.get_font())
+    
+    # Language
+    def on_locale_add(self, btn):
+        LocaleManager.installLocale(btn.get_name())
+
+    def on_locale_remove(self, btn):
+        LocaleManager.removeLocale(btn.get_name())
+    
+    def on_locale_set_default(self, btn):
+        LocaleManager.setDefaultLocale(btn.get_name())
     
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
