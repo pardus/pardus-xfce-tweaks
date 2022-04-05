@@ -1,5 +1,10 @@
-import subprocess
-from threading import local
+import subprocess, os
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib
+
+LOCALE_CHANGER_PY = os.path.dirname(os.path.abspath(__file__)) + "/locale_changer.py"
 
 def getAvailableLocales():
     langs = []
@@ -23,18 +28,20 @@ def getInstalledLocales():
     # [(tr_TR.UTF-8, UTF-8), ...]
     return langs
 
+def getDefaultLocale():
+    p = subprocess.run(["localectl"], capture_output=True)
+    lines = p.stdout.decode("utf-8").splitlines()
+    if "LANG=" in lines[0]:
+        return lines[0].split("LANG=")[-1].strip()
 
-def installLocale(full_locale):
+def startProcess(params, on_exit):
+    pid, _, _, _ = GLib.spawn_async(params,
+                                        flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
+                                        standard_input=False, standard_output=False,
+                                        standard_error=False)
+
+    GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, on_exit)
+
+def saveLocaleSettings(locales, default_locale, on_exit):
     # locale should be like this: "tr_TR.UTF-8 UTF-8"
-    subprocess.run(f"sed -i 's/^# *\({full_locale}\)/\1/' /etc/locale.gen", shell=True)
-
-def removeLocale(full_locale):
-    subprocess.run(f"sed -i 's/^\({full_locale}\)/# \1/' /etc/locale.gen", shell=True)
-
-def setDefaultLocale(full_locale):
-    # locale should be like this: "tr_TR.UTF-8"
-    lc = full_locale.split(" ")[0]
-    subprocess.run(f"localectl set-locale LANG={lc}", shell=True)
-
-def generateLocale():
-    subprocess.run("pkexec locale-gen")
+    startProcess(["pkexec", LOCALE_CHANGER_PY, "setlocales", locales, default_locale], on_exit)

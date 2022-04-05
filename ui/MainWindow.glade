@@ -99,49 +99,29 @@
       <action-widget response="-5">button1</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkMessageDialog" id="dialog_restore_defaults">
+  <object class="GtkMessageDialog" id="dialog_languages_generate_failed">
     <property name="can-focus">False</property>
+    <property name="modal">True</property>
     <property name="type-hint">dialog</property>
-    <property name="text" translatable="yes">Attention</property>
-    <property name="secondary-text" translatable="yes">All custom configurations will be reverted to defaults. Do you want to continue?</property>
+    <property name="transient-for">window</property>
+    <property name="attached-to">window</property>
+    <property name="message-type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error</property>
+    <property name="secondary-text" translatable="yes">Couldn't generated languages.</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can-focus">False</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">30</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox">
             <property name="can-focus">False</property>
             <property name="layout-style">end</property>
-            <child>
-              <object class="GtkButton" id="dialog_button_no">
-                <property name="label" translatable="yes">Cancel</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="dialog_button_yes">
-                <property name="label" translatable="yes">Restore to Defaults</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -151,10 +131,6 @@
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="-9">dialog_button_no</action-widget>
-      <action-widget response="-8">dialog_button_yes</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkListStore" id="lst_default_browser">
     <columns>
@@ -1788,15 +1764,15 @@
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="margin-top">40</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">7</property>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkBox" id="box_languages">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">start</property>
+                        <property name="margin-top">40</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">7</property>
                         <child>
@@ -1928,6 +1904,9 @@
                             <property name="no-show-all">True</property>
                             <property name="opacity">0</property>
                             <property name="label" translatable="yes">Set as Default</property>
+                            <attributes>
+                              <attribute name="size" value="1"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1936,9 +1915,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLockButton">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
+                          <object class="GtkLabel">
+                            <property name="sensitive">False</property>
+                            <property name="can-focus">False</property>
+                            <property name="no-show-all">True</property>
+                            <property name="opacity">0</property>
+                            <property name="label" translatable="yes">Default System Language</property>
+                            <attributes>
+                              <attribute name="size" value="1"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1951,6 +1936,56 @@
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label-xalign">0</property>
+                        <property name="shadow-type">out</property>
+                        <child>
+                          <object class="GtkRevealer" id="revealer_languages">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="transition-type">slide-up</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="margin-top">7</property>
+                                <property name="margin-bottom">7</property>
+                                <child>
+                                  <object class="GtkButton" id="btn_languages_save_changes">
+                                    <property name="label" translatable="yes">Save Changes</property>
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <signal name="clicked" handler="on_btn_languages_save_changes_clicked" swapped="no"/>
+                                    <style>
+                                      <class name="suggested-action"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label_item">
+                          <placeholder/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="pack-type">end</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
@@ -3528,5 +3563,116 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkMessageDialog" id="dialog_languages_generate">
+    <property name="can-focus">False</property>
+    <property name="modal">True</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">window</property>
+    <property name="attached-to">window</property>
+    <property name="text" translatable="yes">Generating Languages</property>
+    <property name="secondary-text" translatable="yes">This may take a while.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">30</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="homogeneous">True</property>
+            <property name="layout-style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinner">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="active">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="dialog_restore_defaults">
+    <property name="can-focus">False</property>
+    <property name="type">popup</property>
+    <property name="window-position">center-on-parent</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">window</property>
+    <property name="attached-to">window</property>
+    <property name="text" translatable="yes">Attention</property>
+    <property name="secondary-text" translatable="yes">All custom configurations will be reverted to defaults. Do you want to continue?</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="dialog_button_no">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="dialog_button_yes">
+                <property name="label" translatable="yes">Restore to Defaults</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <style>
+                  <class name="destructive-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-9">dialog_button_no</action-widget>
+      <action-widget response="-8">dialog_button_yes</action-widget>
+    </action-widgets>
   </object>
 </interface>

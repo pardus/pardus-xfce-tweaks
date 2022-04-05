@@ -96,71 +96,76 @@ class MainWindow:
         self.window.get_application().quit()
 
     def defineComponents(self):
-        def getUI(str):
+        def UI(str):
             return self.builder.get_object(str)
         
-        self.nb_pages = getUI("nb_pages")
-        self.lb_rows = getUI("lb_rows")
+        self.nb_pages   = UI("nb_pages")
+        self.lb_rows    = UI("lb_rows")
 
         # Wallpapers
-        self.flow_wallpapers = getUI("flow_wallpapers")
+        self.flow_wallpapers = UI("flow_wallpapers")
 
         # Theme
-        self.rb_darkTheme = getUI("rb_darkTheme")
-        self.rb_lightTheme = getUI("rb_lightTheme")
+        self.rb_darkTheme   = UI("rb_darkTheme")
+        self.rb_lightTheme  = UI("rb_lightTheme")
 
         # Display
-        self.sli_scaling = getUI("sli_scaling")
-        self.sli_desktopIcon = getUI("sli_desktopIcon")
-        self.sli_panel = getUI("sli_panel")
+        self.sli_scaling        = UI("sli_scaling")
+        self.sli_desktopIcon    = UI("sli_desktopIcon")
+        self.sli_panel          = UI("sli_panel")
 
         # Keyboard
-        self.stk_trf            = getUI("stk_trf")
-        self.stk_trq            = getUI("stk_trq")
-        self.stk_en             = getUI("stk_en")
-        self.btn_trf_remove     = getUI("btn_trf_remove")
-        self.btn_trq_remove     = getUI("btn_trq_remove")
-        self.btn_en_remove      = getUI("btn_en_remove")
-        self.sw_lang_indicator  = getUI("sw_lang_indicator")
+        self.stk_trf            = UI("stk_trf")
+        self.stk_trq            = UI("stk_trq")
+        self.stk_en             = UI("stk_en")
+        self.btn_trf_remove     = UI("btn_trf_remove")
+        self.btn_trq_remove     = UI("btn_trq_remove")
+        self.btn_en_remove      = UI("btn_en_remove")
+        self.sw_lang_indicator  = UI("sw_lang_indicator")
 
         # Fonts
-        self.font_system        = getUI("font_system")
-        self.font_monospace     = getUI("font_monospace")
+        self.font_system        = UI("font_system")
+        self.font_monospace     = UI("font_monospace")
 
         # Languages
-        self.lb_langs_installed         = getUI("lb_langs_installed")
-        self.lb_langs_not_installed     = getUI("lb_langs_not_installed")
+        self.dialog_languages_generate          = UI("dialog_languages_generate")
+        self.dialog_languages_generate_failed   = UI("dialog_languages_generate_failed")
+        self.revealer_languages                 = UI("revealer_languages")
+        self.box_languages                      = UI("box_languages")
+        self.btn_languages_lock                 = UI("btn_languages_lock")
+        self.lb_langs_installed                 = UI("lb_langs_installed")
+        self.lb_langs_not_installed             = UI("lb_langs_not_installed")
 
         # Power Management
-        self.stk_power_management         = getUI("stk_power_management")
-        self.cmb_laptop_screen_closed_bat = getUI("cmb_laptop_screen_closed_bat")
-        self.cmb_screen_off_after_bat     = getUI("cmb_screen_off_after_bat")
-        self.cmb_put_to_sleep_after_bat   = getUI("cmb_put_to_sleep_after_bat")
-        self.cmb_laptop_screen_closed     = getUI("cmb_laptop_screen_closed")
-        self.cmb_screen_off_after         = getUI("cmb_screen_off_after")
-        self.cmb_put_to_sleep_after       = getUI("cmb_put_to_sleep_after")
-        self.cmb_screen_off_after2        = getUI("cmb_screen_off_after2")
-        self.cmb_put_to_sleep_after2      = getUI("cmb_put_to_sleep_after2")
+        self.stk_power_management         = UI("stk_power_management")
+        self.cmb_laptop_screen_closed_bat = UI("cmb_laptop_screen_closed_bat")
+        self.cmb_screen_off_after_bat     = UI("cmb_screen_off_after_bat")
+        self.cmb_put_to_sleep_after_bat   = UI("cmb_put_to_sleep_after_bat")
+        self.cmb_laptop_screen_closed     = UI("cmb_laptop_screen_closed")
+        self.cmb_screen_off_after         = UI("cmb_screen_off_after")
+        self.cmb_put_to_sleep_after       = UI("cmb_put_to_sleep_after")
+        self.cmb_screen_off_after2        = UI("cmb_screen_off_after2")
+        self.cmb_put_to_sleep_after2      = UI("cmb_put_to_sleep_after2")
 
         # Startup Applications
-        self.lb_startup_applications        = getUI("lb_startup_applications")
-        self.revealer_startup_applications  = getUI("revealer_startup_applications")
-        self.dialog_applications            = getUI("dialog_applications")
-        self.appchooser_startup             = getUI("appchooser_startup")
+        self.lb_startup_applications        = UI("lb_startup_applications")
+        self.revealer_startup_applications  = UI("revealer_startup_applications")
+        self.dialog_applications            = UI("dialog_applications")
+        self.appchooser_startup             = UI("appchooser_startup")
 
         # Default Applications
-        self.cmb_default_browser        = getUI("cmb_default_browser")
-        self.cmb_default_filemanager    = getUI("cmb_default_filemanager")
-        self.cmb_default_email          = getUI("cmb_default_email")
-        self.cmb_default_terminal       = getUI("cmb_default_terminal")
+        self.cmb_default_browser        = UI("cmb_default_browser")
+        self.cmb_default_filemanager    = UI("cmb_default_filemanager")
+        self.cmb_default_email          = UI("cmb_default_email")
+        self.cmb_default_terminal       = UI("cmb_default_terminal")
 
-        self.lst_default_browser        = getUI("lst_default_browser")
-        self.lst_default_filemanager    = getUI("lst_default_filemanager")
-        self.lst_default_email          = getUI("lst_default_email")
-        self.lst_default_terminal       = getUI("lst_default_terminal")
+        self.lst_default_browser        = UI("lst_default_browser")
+        self.lst_default_filemanager    = UI("lst_default_filemanager")
+        self.lst_default_email          = UI("lst_default_email")
+        self.lst_default_terminal       = UI("lst_default_terminal")
 
 
-        self.dialog_restore_defaults      = getUI("dialog_restore_defaults")
+        self.dialog_restore_defaults      = UI("dialog_restore_defaults")
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -234,9 +239,19 @@ class MainWindow:
         box.set_margin_end(1)
 
         if isInstalled:
+            # Default Indicator
+            default_img = Gtk.Image.new_from_icon_name("emblem-default-symbolic", Gtk.IconSize.BUTTON)
+            default_img.set_tooltip_text(tr("Default System Language"))
+            default_img.set_no_show_all(True)
+            default_img.set_visible(lang == self.default_locale)
+            default_img.set_margin_end(9)
+            box.pack_end(default_img, False, False, 0)
+
             # Remove button
             btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
             btn.get_style_context().add_class("destructive-action")
+            btn.set_no_show_all(True)
+            btn.set_visible(lang != self.default_locale)
             btn.connect("clicked", self.on_locale_remove)
 
             btn.set_relief(Gtk.ReliefStyle.NONE)
@@ -250,8 +265,10 @@ class MainWindow:
             btn_default.set_relief(Gtk.ReliefStyle.NONE)
             btn_default.set_name(f"{lang} {codeset}")
             btn_default.set_tooltip_text(tr("Set as Default"))
+            btn_default.set_no_show_all(True)
+            btn_default.set_visible(lang != self.default_locale)
 
-            box.pack_end(btn_default, False, False, 0)     
+            box.pack_end(btn_default, False, False, 0)
         else:
             # Add button
             btn = Gtk.Button.new_from_icon_name("list-add-symbolic", Gtk.IconSize.BUTTON)
@@ -263,7 +280,9 @@ class MainWindow:
 
 
         lbl_name = Gtk.Label.new(lang)
-        box.add(lbl_name)        
+        lbl_name.set_margin_top(8)
+        lbl_name.set_margin_bottom(8)
+        box.add(lbl_name)
 
         if isInstalled:
             self.lb_langs_installed.add(box)
@@ -273,12 +292,24 @@ class MainWindow:
             self.lb_langs_not_installed.show_all()
     
     def getLocales(self):
+        # Set Sorting function for listboxes
+        def sortfunc(row1, row2):
+            row1_label = row1.get_children()[0].get_children()[0].get_text()
+            row2_label = row2.get_children()[0].get_children()[0].get_text()
+            
+            return locale.strcoll(row1_label, row2_label)
+        
+        self.lb_langs_installed.set_sort_func(sortfunc)
+        self.lb_langs_not_installed.set_sort_func(sortfunc)
+
+        # Get Available Locales
         availableLocales = LocaleManager.getAvailableLocales()
         installedLocales = LocaleManager.getInstalledLocales()
+        self.default_locale = LocaleManager.getDefaultLocale()
 
         for lc in availableLocales:
-            self.addLocaleToListBox(lc[0], lc[1], True if lc in installedLocales else False)
-
+            GLib.idle_add(self.addLocaleToListBox, lc[0], lc[1], True if lc in installedLocales else False)
+        
 
     def addWallpapers(self, wallpaperList):
         for i in range(len(wallpaperList)):
@@ -459,13 +490,77 @@ class MainWindow:
     
     # Language
     def on_locale_add(self, btn):
-        LocaleManager.installLocale(btn.get_name())
+        lang, codeset = btn.get_name().split(" ")
+        self.addLocaleToListBox(lang, codeset, True)
+        
+        parent_row = btn.get_parent().get_parent()
+        parent_row.destroy()
+
+        self.lb_langs_installed.invalidate_sort()
+        self.lb_langs_not_installed.invalidate_sort()
+
+        self.revealer_languages.set_reveal_child(True)
 
     def on_locale_remove(self, btn):
-        LocaleManager.removeLocale(btn.get_name())
+        if len(self.lb_langs_installed.get_children()) <= 1:
+            return
+        
+        lang, codeset = btn.get_name().split(" ")
+        self.addLocaleToListBox(lang, codeset, False)
+        
+        parent_row = btn.get_parent().get_parent()
+        parent_row.destroy()
+
+        self.lb_langs_installed.invalidate_sort()
+        self.lb_langs_not_installed.invalidate_sort()
+
+        self.revealer_languages.set_reveal_child(True)
     
     def on_locale_set_default(self, btn):
-        LocaleManager.setDefaultLocale(btn.get_name())
+        self.default_locale = btn.get_name().split(" ")[0]
+
+        # Show default icon
+        default_btn = btn.get_parent().get_children()[1]
+        default_btn.set_visible(False)
+
+        trash_btn = btn.get_parent().get_children()[2]
+        trash_btn.set_visible(False)
+
+        default_img = btn.get_parent().get_children()[3]
+        default_img.set_visible(True)
+
+        self.revealer_languages.set_reveal_child(True)
+
+        # Hide old default icon
+        for rows in self.lb_langs_installed.get_children():
+            box = rows.get_children()[0]
+
+            label = box.get_children()[0]
+            default_btn = box.get_children()[1]
+            trash_btn = box.get_children()[2]
+            default_img = box.get_children()[3]
+
+            if label.get_text() != self.default_locale:
+                default_img.set_visible(False)
+                default_btn.set_visible(True)
+                trash_btn.set_visible(True)
+    
+    def on_language_changes_saved(self, pid, status):
+        self.dialog_languages_generate.hide()
+        
+        if status == 0:          
+            self.revealer_languages.set_reveal_child(False)
+        else:
+            self.dialog_languages_generate_failed.run()
+            self.dialog_languages_generate_failed.hide()        
+    
+    def on_btn_languages_save_changes_clicked(self, btn):
+        installed_languages = []
+
+        self.lb_langs_installed.foreach(lambda x: installed_languages.append(x.get_children()[0].get_children()[-2].get_name()))
+
+        LocaleManager.saveLocaleSettings("\|".join(installed_languages), self.default_locale, self.on_language_changes_saved)
+        self.dialog_languages_generate.show_all()
     
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):

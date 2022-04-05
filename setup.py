@@ -8,12 +8,25 @@ data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.xfce-tweaks.desktop"]),
     ("/usr/share/locale/tr/LC_MESSAGES/", ["translations/tr/LC_MESSAGES/pardus-xfce-tweaks.mo"]),
     (APPLICATION_FOLDER, ["pardus-xfce-tweaks.svg"]),
-    (f"{APPLICATION_FOLDER}/assets", ["assets/theme-light.png", "assets/theme-dark.png", "assets/date-only.png", "assets/time-only.png"]),
+    (f"{APPLICATION_FOLDER}/assets", ["assets/theme-light.png", "assets/theme-dark.png"]),
     (f"{APPLICATION_FOLDER}/src", ["src/pardus-xfce-tweaks", "src/MainWindow.py"]),
-    (f"{APPLICATION_FOLDER}/src/xfce", ["src/xfce/ApplicationManager.py", "src/xfce/FontManager.py", "src/xfce/KeyboardManager.py", "src/xfce/PowerManager.py", "src/xfce/ScaleManager.py", "src/xfce/ThemeManager.py", "src/xfce/WallpaperManager.py", "src/xfce/WhiskerManager.py"]),
+    (f"{APPLICATION_FOLDER}/src/xfce", [
+        "src/xfce/ApplicationManager.py",
+        "src/xfce/DatetimeManager.py",
+        "src/xfce/FontManager.py",
+        "src/xfce/KeyboardManager.py",
+        "src/xfce/LocaleManager.py",
+        "src/xfce/PowerManager.py",
+        "src/xfce/ScaleManager.py",
+        "src/xfce/ThemeManager.py",
+        "src/xfce/WallpaperManager.py",
+        "src/xfce/WhiskerManager.py",
+        "src/xfce/locale_changer.py"
+    ]),
     (f"{APPLICATION_FOLDER}/ui", ["ui/MainWindow.glade"]),
     ("/usr/bin/", ["pardus-xfce-tweaks"]),
-    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-xfce-tweaks.svg"])
+    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-xfce-tweaks.svg"]),
+    ("/usr/share/polkit-1/actions/", ["tr.org.pardus.xfce-tweaks.policy"])
 ]
 
 setup(
