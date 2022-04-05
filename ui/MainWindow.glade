@@ -1935,6 +1935,17 @@
                             <property name="position">3</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkLockButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">4</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1975,6 +1986,7 @@
                     </child>
                     <child>
                       <object class="GtkSeparator">
+                        <property name="width-request">200</property>
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                       </object>
@@ -1988,13 +2000,15 @@
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="orientation">vertical</property>
                         <property name="spacing">15</property>
                         <child>
                           <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
                             <property name="spacing">7</property>
+                            <property name="homogeneous">True</property>
                             <child>
                               <object class="GtkButton" id="btn_clock_time_only">
                                 <property name="visible">True</property>
@@ -2002,10 +2016,13 @@
                                 <property name="receives-default">True</property>
                                 <signal name="clicked" handler="on_btn_clock_time_only_clicked" swapped="no"/>
                                 <child>
-                                  <object class="GtkImage">
+                                  <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">../assets/time-only.png</property>
+                                    <property name="label">12:34</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="Quicksand Medium, Bold 14"/>
+                                    </attributes>
                                   </object>
                                 </child>
                               </object>
@@ -2038,19 +2055,49 @@
                           <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="orientation">vertical</property>
                             <property name="spacing">7</property>
+                            <property name="homogeneous">True</property>
                             <child>
-                              <object class="GtkButton" id="btn_clock_date_only">
+                              <object class="GtkButton" id="btn_clock_date_time">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
-                                <signal name="clicked" handler="on_btn_clock_date_only_clicked" swapped="no"/>
+                                <signal name="clicked" handler="on_btn_clock_date_time_clicked" swapped="no"/>
                                 <child>
-                                  <object class="GtkImage">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">../assets/date-only.png</property>
+                                    <property name="orientation">vertical</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="label">12:34</property>
+                                        <attributes>
+                                          <attribute name="font-desc" value="Quicksand Medium, Bold 14"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="label">01/01/2023</property>
+                                        <attributes>
+                                          <attribute name="font-desc" value="Quicksand Medium, Bold 12"/>
+                                        </attributes>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -2064,7 +2111,7 @@
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="label" translatable="yes">Date Only</property>
+                                <property name="label" translatable="yes">Date &amp; Time</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>

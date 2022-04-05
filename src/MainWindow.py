@@ -470,11 +470,15 @@ class MainWindow:
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
         DatetimeManager.set("layout", "3")
+        DatetimeManager.set("time_font", "Quicksand Medium, Bold 16")
 
         DatetimeManager.saveFile()
 
-    def on_btn_clock_date_only_clicked(self, btn):
-        DatetimeManager.set("layout", "2")
+    def on_btn_clock_date_time_clicked(self, btn):
+        DatetimeManager.set("layout", "1")
+        DatetimeManager.set("date_font", "Quicksand Medium, Bold 8")
+        DatetimeManager.set("time_font", "Quicksand Medium, Bold 9")
+        DatetimeManager.set("date_format", "%d/%m/%Y")
 
         DatetimeManager.saveFile()
     
