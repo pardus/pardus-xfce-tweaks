@@ -1,0 +1,26 @@
+pardus-xfce-tweaks (unknown) UNRELEASED; urgency=medium
+
+  [ ef ]
+  * 
+
+  [ Emin Fedar ]
+  * Added Power Management methods
+  * Reset Thunar and All XFCE Options added
+  * added new Minutes to blank screen combobox.
+  * Added Translations
+  * Startup Applications implemented
+  * Startup Application Select dialog refreshed.
+  * Font Settings added.
+  * Default Application Selecting Page Added
+  * Added Turkish Translations
+  * Packaging updated
+  * None type crash fix.
+  * Added show only Plugged in settings if PC. Fixed little bugs.
+  * Fix crash on clear system
+  * Added Clock Settings
+  * Updated icon
+  * Added Locales (not stable yet)
+  * Datetime Fixes
+  * Language Adding & Removing works
+
+ -- ef <ef@monster-pardus>  Thu, 07 Apr 2022 14:09:29 +0300
