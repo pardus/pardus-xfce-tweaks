@@ -1,7 +1,4 @@
-pardus-xfce-tweaks (unknown) UNRELEASED; urgency=medium
-
-  [ ef ]
-  * 
+pardus-xfce-tweaks (0.1.0) unstable; urgency=medium
 
   [ Emin Fedar ]
   * Added Power Management methods
@@ -23,4 +20,4 @@ pardus-xfce-tweaks (unknown) UNRELEASED; urgency=medium
   * Datetime Fixes
   * Language Adding & Removing works
 
- -- ef <ef@monster-pardus>  Thu, 07 Apr 2022 14:09:29 +0300
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 07 Apr 2022 14:09:29 +0300
