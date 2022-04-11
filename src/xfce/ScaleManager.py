@@ -46,6 +46,16 @@ def setDesktopIconSize(px):
         "--create"
     ])
 
+def setPointerSize(px):
+    subprocess.call([
+        "xfconf-query",
+        "-c", "xsettings",
+        "-p", "/Gtk/CursorThemeSize",
+        "-s", str(px),
+        "--type", "int",
+        "--create"
+    ])
+
 def getScale():
     try:
         dpi = int(subprocess.check_output([
@@ -81,3 +91,13 @@ def getDesktopIconSize():
         ]).decode("utf-8").rstrip())
     except:
         return 48 # default value
+
+def getPointerSize():
+    try:
+        return int(subprocess.check_output([
+            "xfconf-query",
+            "-c", "xsettings",
+            "-p", "/Gtk/CursorThemeSize",
+        ]).decode("utf-8").rstrip())
+    except:
+        return 16

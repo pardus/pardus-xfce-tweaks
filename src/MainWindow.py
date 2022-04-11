@@ -110,6 +110,7 @@ class MainWindow:
         self.rb_lightTheme  = UI("rb_lightTheme")
 
         # Display
+        self.sli_cursor         = UI("sli_cursor")
         self.sli_scaling        = UI("sli_scaling")
         self.sli_desktopIcon    = UI("sli_desktopIcon")
         self.sli_panel          = UI("sli_panel")
@@ -442,6 +443,12 @@ class MainWindow:
     
     def on_sli_desktopIcon_value_changed(self, sli):
         ScaleManager.setDesktopIconSize(int(sli.get_value()))
+    
+    def on_sli_cursor_format_value(self, sli, value):
+        return f"{int(value+1)*16}"
+    
+    def on_sli_cursor_value_changed(self, sli):
+        ScaleManager.setPointerSize(int(sli.get_value()+1)*16)
     
 
     # - Keyboard Layout Changed:

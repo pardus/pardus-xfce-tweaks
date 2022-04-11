@@ -2,6 +2,11 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkAdjustment" id="adj_cursorSize">
+    <property name="upper">3</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">1</property>
+  </object>
   <object class="GtkAdjustment" id="adj_desktopIconSize">
     <property name="lower">32</property>
     <property name="upper">96</property>
@@ -98,39 +103,6 @@
       <action-widget response="-6">button2</action-widget>
       <action-widget response="-5">button1</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkMessageDialog" id="dialog_languages_generate_failed">
-    <property name="can-focus">False</property>
-    <property name="modal">True</property>
-    <property name="type-hint">dialog</property>
-    <property name="transient-for">window</property>
-    <property name="attached-to">window</property>
-    <property name="message-type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error</property>
-    <property name="secondary-text" translatable="yes">Couldn't generated languages.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can-focus">False</property>
-        <property name="margin-start">20</property>
-        <property name="margin-end">20</property>
-        <property name="margin-top">10</property>
-        <property name="margin-bottom">30</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can-focus">False</property>
-            <property name="layout-style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
   <object class="GtkListStore" id="lst_default_browser">
     <columns>
@@ -1072,7 +1044,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="lbl_panelSize">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
@@ -1102,7 +1074,7 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="lbl_desktopIconSize">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
@@ -1129,6 +1101,37 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">&lt;b&gt;Mouse Cursor Size&lt;/b&gt; (px):</property>
+                            <property name="use-markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkScale" id="sli_cursor">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="adjustment">adj_cursorSize</property>
+                            <property name="show-fill-level">True</property>
+                            <property name="round-digits">0</property>
+                            <property name="digits">0</property>
+                            <signal name="format-value" handler="on_sli_cursor_format_value" swapped="no"/>
+                            <signal name="value-changed" handler="on_sli_cursor_value_changed" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">9</property>
                           </packing>
                         </child>
                       </object>
@@ -3609,6 +3612,39 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="dialog_languages_generate_failed">
+    <property name="can-focus">False</property>
+    <property name="modal">True</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">window</property>
+    <property name="attached-to">window</property>
+    <property name="message-type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error</property>
+    <property name="secondary-text" translatable="yes">Couldn't generated languages.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">30</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
