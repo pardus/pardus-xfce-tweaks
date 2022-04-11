@@ -153,19 +153,19 @@
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">0</col>
+        <col id="0">0</col>
         <col id="1" translatable="yes">Screen Off</col>
       </row>
       <row>
-        <col id="0" translatable="yes">1</col>
+        <col id="0">1</col>
         <col id="1" translatable="yes">Suspend</col>
       </row>
       <row>
-        <col id="0" translatable="yes">2</col>
+        <col id="0">2</col>
         <col id="1" translatable="yes">Hibernate</col>
       </row>
       <row>
-        <col id="0" translatable="yes">3</col>
+        <col id="0">3</col>
         <col id="1" translatable="yes">Lock Screen</col>
       </row>
     </data>
@@ -1254,7 +1254,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">add</property>
-                                            <property name="title" translatable="yes">page0</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -1295,7 +1294,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">remove</property>
-                                            <property name="title" translatable="yes">page1</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -1355,7 +1353,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">add</property>
-                                            <property name="title" translatable="yes">page0</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -1396,7 +1393,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">remove</property>
-                                            <property name="title" translatable="yes">page1</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
@@ -1456,7 +1452,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">add</property>
-                                            <property name="title" translatable="yes">page0</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -1497,7 +1492,6 @@
                                           </object>
                                           <packing>
                                             <property name="name">remove</property>
-                                            <property name="title" translatable="yes">page1</property>
                                             <property name="position">1</property>
                                           </packing>
                                         </child>
