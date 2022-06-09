@@ -1,135 +1,49 @@
-import subprocess, os
+import os
 
+import gi
+gi.require_version('Xfconf', '0')
+from gi.repository import Xfconf
+
+Xfconf.init()
+xfce4_power_manager = Xfconf.Channel.new("xfce4-power-manager")
 
 # -- SETTERS
 def setBatteryLaptopScreenClosed(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/lid-action-on-battery",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/lid-action-on-battery", int(value))
+    
 def setBatteryScreenOff(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/blank-on-battery",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/blank-on-battery", int(value))
+
 def setBatteryScreenSleep(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/inactivity-on-battery",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/inactivity-on-battery", int(value))
 
 def setACLaptopScreenClosed(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/lid-action-on-ac",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/lid-action-on-ac", int(value))
+
 def setACScreenOff(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/blank-on-ac",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/blank-on-ac", int(value))
+
 def setACScreenSleep(value):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfce4-power-manager",
-        "-p", "/xfce4-power-manager/inactivity-on-ac",
-        "-s", str(int(value)),
-        "--type", "int",
-        "--create"
-    ])
+    xfce4_power_manager.set_int("/xfce4-power-manager/inactivity-on-ac", int(value))
 
 # -- GETTERS
 def getBatteryLaptopScreenClosed():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/lid-action-on-battery",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 3
-    
-    return value
+    return xfce4_power_manager.get_int("/xfce4-power-manager/lid-action-on-battery", 3)
 
-def getBatteryScreenOff():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/blank-on-battery",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 60
-    
-    return value
+def getBatteryScreenOff():    
+    return xfce4_power_manager.get_int("/xfce4-power-manager/blank-on-battery", 60)
 
 def getBatteryScreenSleep():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/inactivity-on-battery",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 14
-    
-    return value
+    return xfce4_power_manager.get_int("/xfce4-power-manager/inactivity-on-battery", 14)
 
-def getACLaptopScreenClosed():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/lid-action-on-ac",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 3
-    
-    return value
+def getACLaptopScreenClosed():    
+    return xfce4_power_manager.get_int("/xfce4-power-manager/lid-action-on-ac", 3)
 
-def getACScreenOff():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/blank-on-ac",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 60
-    
-    return value
+def getACScreenOff():    
+    return xfce4_power_manager.get_int("/xfce4-power-manager/blank-on-ac", 60)
 
-def getACScreenSleep():
-    try:
-        value = int(subprocess.check_output([
-            "xfconf-query",
-            "-c", "xfce4-power-manager",
-            "-p", "/xfce4-power-manager/inactivity-on-ac",
-        ]).decode("utf-8").rstrip())
-    except:
-        return 14
-    
-    return value
+def getACScreenSleep():    
+    return xfce4_power_manager.get_int("/xfce4-power-manager/inactivity-on-ac", 14)
 
 def isLaptop():
     if os.path.isdir("/proc/pmu"):

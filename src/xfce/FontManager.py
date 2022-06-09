@@ -1,43 +1,18 @@
-import subprocess
+import gi
+gi.require_version('Xfconf', '0')
+from gi.repository import Xfconf
+
+Xfconf.init()
+xsettings = Xfconf.Channel.new("xsettings")
 
 def getSystemFont():
-    try:
-        font = subprocess.check_output([
-                "xfconf-query",
-                "-c", "xsettings",
-                "-p", "/Gtk/FontName",
-            ]).decode("utf-8").rstrip()
-        return font
-    except:
-        return ""
+    return xsettings.get_string("/Gtk/FontName", "")
 
 def getMonospaceFont():
-    try:
-        font = subprocess.check_output([
-                "xfconf-query",
-                "-c", "xsettings",
-                "-p", "/Gtk/MonospaceFontName",
-            ]).decode("utf-8").rstrip()
-        return font
-    except:
-        return ""
+    return xsettings.get_string("/Gtk/MonospaceFontName", "")
 
 def setSystemFont(font):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Gtk/FontName",
-        "-s", font,
-        "--type", "string",
-        "--create"
-    ])
+    xsettings.set_string("/Gtk/FontName", font)
 
 def setMonospaceFont(font):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Gtk/MonospaceFontName",
-        "-s", font,
-        "--type", "string",
-        "--create"
-    ])
+    xsettings.set_string("/Gtk/MonospaceFontName", font)

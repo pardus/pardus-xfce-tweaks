@@ -1,8 +1,12 @@
-import os, subprocess, pwd
+import os, pwd
 
 import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
+gi.require_version('Xfconf', '0')
+from gi.repository import Xfconf
+
+Xfconf.init()
+xsettings = Xfconf.Channel.new("xsettings")
+xfwm4 = Xfconf.Channel.new("xfwm4")
 
 USER = pwd.getpwuid(os.getuid()).pw_name
 
@@ -29,52 +33,19 @@ def getThemeList():
     return [themes, windowThemes]
 
 def setTheme(theme):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Net/ThemeName",
-        "-s", theme,
-        "--type", "string",
-        "--create"
-    ])
+    xsettings.set_string("/Net/ThemeName", theme)
 
 def setWindowTheme(theme):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xfwm4",
-        "-p", "/general/theme",
-        "-s", theme,
-        "--type", "string",
-        "--create"
-    ])
+    xfwm4.set_string("/general/theme", theme)
 
 def setIconTheme(theme):
-    subprocess.call([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Net/IconThemeName",
-        "-s", theme,
-        "--type", "string",
-        "--create"
-    ])
+    xsettings.set_string("/Net/IconThemeName", theme)
 
 def getTheme():
-    return subprocess.check_output([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Net/ThemeName"
-    ]).decode("utf-8").rstrip()
+    return xsettings.get_string("/Net/ThemeName", "")
 
 def getWindowTheme():
-    return subprocess.check_output([
-        "xfconf-query",
-        "-c", "xfwm4",
-        "-p", "/general/theme"
-    ]).decode("utf-8").rstrip()
+    return xfwm4.get_string("/general/theme", "")
 
 def getIconTheme():
-    return subprocess.check_output([
-        "xfconf-query",
-        "-c", "xsettings",
-        "-p", "/Net/IconThemeName",
-    ]).decode("utf-8").rstrip()
+    return xsettings.get_string("/Net/IconThemeName", "")

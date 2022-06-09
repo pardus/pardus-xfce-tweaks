@@ -197,17 +197,17 @@ class MainWindow:
 
         states = KeyboardManager.getKeyboardState()
 
-        if states[0] == True:
+        if states["tr-"] == True:
             self.stk_trq.set_visible_child_name("remove")
         else:
             self.stk_trq.set_visible_child_name("add")
         
-        if states[1] == True:
+        if states["tr-f"] == True:
             self.stk_trf.set_visible_child_name("remove")
         else:
             self.stk_trf.set_visible_child_name("add")
         
-        if states[2] == True:
+        if states["us-"] == True:
             self.stk_en.set_visible_child_name("remove")
         else:
             self.stk_en.set_visible_child_name("add")
