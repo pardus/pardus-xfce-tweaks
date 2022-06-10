@@ -33,6 +33,7 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.FontManager as FontManager
     import xfce.DatetimeManager as DatetimeManager
     import xfce.LocaleManager as LocaleManager
+    import xfce.PanelManager as PanelManager
 else:
     print("This program requires XFCE desktop.")
     exit(0)
@@ -78,6 +79,9 @@ class MainWindow:
 
         # Languages
         self.getLocales()
+
+        # Panel
+        self.getPanelPreferences()
 
         # Power Management
         self.getPowerDefaults()
@@ -136,6 +140,17 @@ class MainWindow:
         self.btn_languages_lock                 = UI("btn_languages_lock")
         self.lb_langs_installed                 = UI("lb_langs_installed")
         self.lb_langs_not_installed             = UI("lb_langs_not_installed")
+
+        # Panel Preferences
+        self.cb_panel_action_lockscreen = UI("cb_panel_action_lockscreen")
+        self.cb_panel_action_switchuser = UI("cb_panel_action_switchuser")
+        self.cb_panel_action_suspend = UI("cb_panel_action_suspend")
+        self.cb_panel_action_hibernate = UI("cb_panel_action_hibernate")
+        self.cb_panel_action_shutdown = UI("cb_panel_action_shutdown")
+        self.cb_panel_action_restart = UI("cb_panel_action_restart")
+        self.cb_panel_action_logout = UI("cb_panel_action_logout")
+        self.cb_panel_action_logoutdialog = UI("cb_panel_action_logoutdialog")
+        self.cb_panel_action_hybridsleep = UI("cb_panel_action_hybridsleep")
 
         # Power Management
         self.stk_power_management         = UI("stk_power_management")
@@ -218,7 +233,6 @@ class MainWindow:
         self.sw_lang_indicator.set_active(len(keyboardPlugin) > 0)
     
     def keyboardSelectionDisablingCheck(self):
-        # print(f"trq:{self.stk_trq.get_visible_child_name()}, trf:{self.stk_trf.get_visible_child_name()}, en:{self.stk_en.get_visible_child_name()}")
         self.btn_trf_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
         self.btn_trq_remove.set_sensitive(self.stk_trf.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
         self.btn_en_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_trf.get_visible_child_name() == "remove")
@@ -310,6 +324,19 @@ class MainWindow:
 
         for lc in availableLocales:
             GLib.idle_add(self.addLocaleToListBox, lc[0], lc[1], True if lc in installedLocales else False)
+    
+    def getPanelPreferences(self):
+        PanelManager.restoreActionsDefault()
+        items = PanelManager.getActionsItems()
+        self.cb_panel_action_lockscreen.set_active(items["lock-screen"])
+        self.cb_panel_action_switchuser.set_active(items["switch-user"])
+        self.cb_panel_action_suspend.set_active(items["suspend"])
+        self.cb_panel_action_hibernate.set_active(items["hibernate"])
+        self.cb_panel_action_shutdown.set_active(items["shutdown"])
+        self.cb_panel_action_restart.set_active(items["restart"])
+        self.cb_panel_action_logout.set_active(items["logout"])
+        self.cb_panel_action_logoutdialog.set_active(items["logout-dialog"])
+        self.cb_panel_action_hybridsleep.set_active(items["hybrid-sleep"])
         
 
     def addWallpapers(self, wallpaperList):
@@ -585,7 +612,15 @@ class MainWindow:
         DatetimeManager.saveFile()
     
 
-    # - Power Management
+    # Panel Preferences
+    def on_panel_action_icon_clicked(self, btn):
+        PanelManager.setActionsItem(btn.get_name(), "+" if btn.get_active() else "-")
+    
+    def on_btn_panel_actions_reset_clicked(self, btn):
+        PanelManager.restoreActionsDefault()
+        self.getPanelPreferences()
+
+    # Power Management
     def on_cmb_laptop_screen_closed_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
