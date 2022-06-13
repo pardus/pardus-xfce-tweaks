@@ -3,7 +3,8 @@ import shutil
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gtk, GdkPixbuf
+gi.require_version('Xfconf', '0')
+from gi.repository import GLib, Gtk, GdkPixbuf, Xfconf
 
 import locale
 from locale import gettext as tr
@@ -135,6 +136,7 @@ class MainWindow:
         # Languages
         self.dialog_languages_generate          = UI("dialog_languages_generate")
         self.dialog_languages_generate_failed   = UI("dialog_languages_generate_failed")
+        self.dialog_languages_generate_success   = UI("dialog_languages_generate_success")
         self.revealer_languages                 = UI("revealer_languages")
         self.box_languages                      = UI("box_languages")
         self.btn_languages_lock                 = UI("btn_languages_lock")
@@ -584,6 +586,8 @@ class MainWindow:
         
         if status == 0:          
             self.revealer_languages.set_reveal_child(False)
+            self.dialog_languages_generate_success.run()
+            self.dialog_languages_generate_success.hide()
         else:
             self.dialog_languages_generate_failed.run()
             self.dialog_languages_generate_failed.hide()        

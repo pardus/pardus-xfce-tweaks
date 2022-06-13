@@ -9,41 +9,41 @@ xfce4_power_manager = Xfconf.Channel.new("xfce4-power-manager")
 
 # -- SETTERS
 def setBatteryLaptopScreenClosed(value):
-    xfce4_power_manager.set_int("/xfce4-power-manager/lid-action-on-battery", int(value))
+    xfce4_power_manager.set_uint("/xfce4-power-manager/lid-action-on-battery", int(value))
     
 def setBatteryScreenOff(value):
     xfce4_power_manager.set_int("/xfce4-power-manager/blank-on-battery", int(value))
 
 def setBatteryScreenSleep(value):
-    xfce4_power_manager.set_int("/xfce4-power-manager/inactivity-on-battery", int(value))
+    xfce4_power_manager.set_uint("/xfce4-power-manager/inactivity-on-battery", int(value))
 
 def setACLaptopScreenClosed(value):
-    xfce4_power_manager.set_int("/xfce4-power-manager/lid-action-on-ac", int(value))
+    xfce4_power_manager.set_uint("/xfce4-power-manager/lid-action-on-ac", int(value))
 
 def setACScreenOff(value):
     xfce4_power_manager.set_int("/xfce4-power-manager/blank-on-ac", int(value))
 
 def setACScreenSleep(value):
-    xfce4_power_manager.set_int("/xfce4-power-manager/inactivity-on-ac", int(value))
+    xfce4_power_manager.set_uint("/xfce4-power-manager/inactivity-on-ac", int(value))
 
 # -- GETTERS
 def getBatteryLaptopScreenClosed():
-    return xfce4_power_manager.get_int("/xfce4-power-manager/lid-action-on-battery", 3)
+    return xfce4_power_manager.get_uint("/xfce4-power-manager/lid-action-on-battery", 3)
 
 def getBatteryScreenOff():    
     return xfce4_power_manager.get_int("/xfce4-power-manager/blank-on-battery", 60)
 
 def getBatteryScreenSleep():
-    return xfce4_power_manager.get_int("/xfce4-power-manager/inactivity-on-battery", 14)
+    return xfce4_power_manager.get_uint("/xfce4-power-manager/inactivity-on-battery", 14)
 
 def getACLaptopScreenClosed():    
-    return xfce4_power_manager.get_int("/xfce4-power-manager/lid-action-on-ac", 3)
+    return xfce4_power_manager.get_uint("/xfce4-power-manager/lid-action-on-ac", 3)
 
 def getACScreenOff():    
     return xfce4_power_manager.get_int("/xfce4-power-manager/blank-on-ac", 60)
 
 def getACScreenSleep():    
-    return xfce4_power_manager.get_int("/xfce4-power-manager/inactivity-on-ac", 14)
+    return xfce4_power_manager.get_uint("/xfce4-power-manager/inactivity-on-ac", 14)
 
 def isLaptop():
     if os.path.isdir("/proc/pmu"):

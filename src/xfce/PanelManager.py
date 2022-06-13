@@ -1,11 +1,9 @@
-from operator import getitem
 import gi
 gi.require_version('Xfconf', '0')
 from gi.repository import Xfconf
 
 Xfconf.init()
 xfce4_panel = Xfconf.Channel.new("xfce4-panel")
-
 
 plugin = ""
 items = []

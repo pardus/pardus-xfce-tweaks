@@ -21,13 +21,13 @@ def setScale(scaling_factor):
     ])
 
 def setPanelSize(px):
-    xfce4_panel.set_int("/panels/panel-1/size", px)
+    xfce4_panel.set_uint("/panels/panel-1/size", px)
 
 def setPanelIconSize(px):
-    xfce4_panel.set_int("/panels/panel-1/icon-size", px)
+    xfce4_panel.set_uint("/panels/panel-1/icon-size", px)
 
 def setDesktopIconSize(px):
-    xfce4_desktop.set_int("/desktop-icons/icon-size", px)
+    xfce4_desktop.set_uint("/desktop-icons/icon-size", px)
 
 def setPointerSize(px):
     xsettings.set_int("/Gtk/CursorThemeSize", px)
@@ -37,13 +37,13 @@ def getScale():
     return float(dpi / defaultDPI)
 
 def getPanelSize():
-    return xfce4_panel.get_int("/panels/panel-1/size", 32)
+    return xfce4_panel.get_uint("/panels/panel-1/size", 34)
 
 def getPanelIconSize():
-    return xfce4_panel.get_int("/panels/panel-1/icon-size", 24)
+    return xfce4_panel.get_uint("/panels/panel-1/icon-size", 24)
 
 def getDesktopIconSize():
-    return xfce4_desktop.get_int("/desktop-icons/icon-size", 48)
+    return xfce4_desktop.get_uint("/desktop-icons/icon-size", 42)
 
 def getPointerSize():
     return xsettings.get_int("/Gtk/CursorThemeSize", 16)
