@@ -2538,7 +2538,7 @@
                                         <property name="can-focus">False</property>
                                         <child>
                                           <object class="GtkCheckButton" id="cb_panel_action_logout">
-                                            <property name="label" translatable="yes">Log out</property>
+                                            <property name="label" translatable="yes">Log Out (Dialog)</property>
                                             <property name="name">logout</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
@@ -2579,7 +2579,7 @@
                                         <property name="can-focus">False</property>
                                         <child>
                                           <object class="GtkCheckButton" id="cb_panel_action_logoutdialog">
-                                            <property name="label" translatable="yes">Log out (Dialog)</property>
+                                            <property name="label" translatable="yes">Log Out</property>
                                             <property name="name">logout-dialog</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
@@ -2678,46 +2678,6 @@
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">5</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -4119,8 +4079,9 @@
   <object class="GtkMessageDialog" id="dialog_languages_generate">
     <property name="can-focus">False</property>
     <property name="modal">True</property>
-    <property name="type-hint">dialog</property>
-    <property name="transient-for">window</property>
+    <property name="window-position">center</property>
+    <property name="type-hint">normal</property>
+    <property name="skip-taskbar-hint">True</property>
     <property name="attached-to">window</property>
     <property name="text" translatable="yes">Generating Languages</property>
     <property name="secondary-text" translatable="yes">This may take a while.</property>
@@ -4167,13 +4128,16 @@
     </child>
   </object>
   <object class="GtkMessageDialog" id="dialog_languages_generate_failed">
-    <property name="can-focus">False</property>
+    <property name="can-focus">True</property>
+    <property name="has-focus">True</property>
+    <property name="is-focus">True</property>
+    <property name="type">popup</property>
     <property name="modal">True</property>
+    <property name="window-position">center</property>
     <property name="type-hint">dialog</property>
-    <property name="transient-for">window</property>
+    <property name="skip-taskbar-hint">True</property>
     <property name="attached-to">window</property>
     <property name="message-type">error</property>
-    <property name="buttons">ok</property>
     <property name="text" translatable="yes">Error</property>
     <property name="secondary-text" translatable="yes">Couldn't generate languages.</property>
     <child internal-child="vbox">
@@ -4189,6 +4153,19 @@
           <object class="GtkButtonBox">
             <property name="can-focus">False</property>
             <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label" translatable="yes">Close</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -4198,13 +4175,64 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="-7">button3</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkMessageDialog" id="dialog_languages_generate_success">
+    <property name="can-focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window-position">center</property>
+    <property name="type-hint">dialog</property>
+    <property name="attached-to">window</property>
+    <property name="text" translatable="yes">Success</property>
+    <property name="secondary-text" translatable="yes">Restart to see changes.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">30</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="button4">
+                <property name="label" translatable="yes">Close</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-7">button4</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkMessageDialog" id="dialog_restore_defaults">
     <property name="can-focus">False</property>
     <property name="type">popup</property>
-    <property name="window-position">center-on-parent</property>
+    <property name="modal">True</property>
+    <property name="window-position">center</property>
     <property name="type-hint">dialog</property>
-    <property name="transient-for">window</property>
     <property name="attached-to">window</property>
     <property name="text" translatable="yes">Attention</property>
     <property name="secondary-text" translatable="yes">All custom configurations will be reverted to defaults. Do you want to continue?</property>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-11 14:54+0300\n"
+"POT-Creation-Date: 2022-06-13 15:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Select Application"
 msgstr ""
 
-#: ../ui/MainWindow.glade:52 ../ui/MainWindow.glade:3667
+#: ../ui/MainWindow.glade:52 ../ui/MainWindow.glade:4250
 msgid "Cancel"
 msgstr ""
 
@@ -33,15 +33,15 @@ msgstr ""
 msgid "Screen Off"
 msgstr ""
 
-#: ../ui/MainWindow.glade:161
+#: ../ui/MainWindow.glade:161 ../ui/MainWindow.glade:2377
 msgid "Suspend"
 msgstr ""
 
-#: ../ui/MainWindow.glade:165
+#: ../ui/MainWindow.glade:165 ../ui/MainWindow.glade:2418
 msgid "Hibernate"
 msgstr ""
 
-#: ../ui/MainWindow.glade:169
+#: ../ui/MainWindow.glade:169 ../ui/MainWindow.glade:2295
 msgid "Lock Screen"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: ../ui/MainWindow.glade:432 ../ui/MainWindow.glade:990
+#: ../ui/MainWindow.glade:432 ../ui/MainWindow.glade:1031
 msgid "Display"
 msgstr ""
 
@@ -129,246 +129,287 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-#: ../ui/MainWindow.glade:514 ../ui/MainWindow.glade:1627
+#: ../ui/MainWindow.glade:514 ../ui/MainWindow.glade:1668
 msgid "Fonts"
 msgstr ""
 
-#: ../ui/MainWindow.glade:555 ../ui/MainWindow.glade:1780
+#: ../ui/MainWindow.glade:555 ../ui/MainWindow.glade:1821
 msgid "Languages"
 msgstr ""
 
-#: ../ui/MainWindow.glade:596 ../ui/MainWindow.glade:2007
+#: ../ui/MainWindow.glade:596 ../ui/MainWindow.glade:2048
 msgid "Clock"
 msgstr ""
 
-#: ../ui/MainWindow.glade:637
+#: ../ui/MainWindow.glade:637 ../ui/MainWindow.glade:2228
+msgid "Panel Preferences"
+msgstr ""
+
+#: ../ui/MainWindow.glade:678
 msgid "Power Management"
 msgstr ""
 
-#: ../ui/MainWindow.glade:678 ../ui/MainWindow.glade:2836
+#: ../ui/MainWindow.glade:719 ../ui/MainWindow.glade:3351
 msgid "Startup Applications"
 msgstr ""
 
-#: ../ui/MainWindow.glade:719 ../ui/MainWindow.glade:3032
+#: ../ui/MainWindow.glade:760 ../ui/MainWindow.glade:3547
 msgid "Default Applications"
 msgstr ""
 
-#: ../ui/MainWindow.glade:760
+#: ../ui/MainWindow.glade:801
 msgid "Restore Defaults"
 msgstr ""
 
-#: ../ui/MainWindow.glade:886
+#: ../ui/MainWindow.glade:927
 msgid "Light"
 msgstr ""
 
-#: ../ui/MainWindow.glade:938
+#: ../ui/MainWindow.glade:979
 msgid "Dark"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1019
+#: ../ui/MainWindow.glade:1060
 msgid "<b>Scaling:</b>"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1051
+#: ../ui/MainWindow.glade:1092
 msgid "<b>Panel Size</b> (px):"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1081
+#: ../ui/MainWindow.glade:1122
 msgid "<b>Desktop Icon Size</b> (px):"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1111
+#: ../ui/MainWindow.glade:1152
 msgid "<b>Mouse Cursor Size</b> (px):"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1171
+#: ../ui/MainWindow.glade:1212
 msgid "Add / Remove Keyboard layouts"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1228 ../ui/MainWindow.glade:1268
+#: ../ui/MainWindow.glade:1269 ../ui/MainWindow.glade:1309
 msgid "Turkish - Q Keyboard"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1238 ../ui/MainWindow.glade:1337
-#: ../ui/MainWindow.glade:1436
+#: ../ui/MainWindow.glade:1279 ../ui/MainWindow.glade:1378
+#: ../ui/MainWindow.glade:1477
 msgid "Add"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1278 ../ui/MainWindow.glade:1377
-#: ../ui/MainWindow.glade:1476
+#: ../ui/MainWindow.glade:1319 ../ui/MainWindow.glade:1418
+#: ../ui/MainWindow.glade:1517
 msgid "Remove"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1327 ../ui/MainWindow.glade:1367
+#: ../ui/MainWindow.glade:1368 ../ui/MainWindow.glade:1408
 msgid "Turkish - F Keyboard"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1426 ../ui/MainWindow.glade:1466
+#: ../ui/MainWindow.glade:1467 ../ui/MainWindow.glade:1507
 msgid "English Keyboard"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1519
+#: ../ui/MainWindow.glade:1560
 msgid ""
 "<span size=\"10000\">You can switch between keyboard layouts with:\n"
 "<b>Super + Space</b></span>"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1564
+#: ../ui/MainWindow.glade:1605
 msgid "Show Language Indicator on Panel"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1667
+#: ../ui/MainWindow.glade:1708
 msgid "System Font"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1680
+#: ../ui/MainWindow.glade:1721
 msgid "Monospace Font"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1711 ../ui/MainWindow.glade:1730
+#: ../ui/MainWindow.glade:1752 ../ui/MainWindow.glade:1771
 msgid "Select Font"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1814
+#: ../ui/MainWindow.glade:1855
 msgid "Installed"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1855
+#: ../ui/MainWindow.glade:1896
 msgid "Not Installed"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1903
+#: ../ui/MainWindow.glade:1944
 msgid "Set as Default"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1920
+#: ../ui/MainWindow.glade:1961
 msgid "Default System Language"
 msgstr ""
 
-#: ../ui/MainWindow.glade:1958
+#: ../ui/MainWindow.glade:1999
 msgid "Save Changes"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2071
+#: ../ui/MainWindow.glade:2112
 msgid "Time Only"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2146
+#: ../ui/MainWindow.glade:2187
 msgid "Date & Time"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2209
-msgid "On Battery"
+#: ../ui/MainWindow.glade:2336
+msgid "Switch User"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2269 ../ui/MainWindow.glade:2479
-msgid "When Laptop Screen is Closed:"
+#: ../ui/MainWindow.glade:2459
+msgid "Shutdown"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2282 ../ui/MainWindow.glade:2492
-#: ../ui/MainWindow.glade:2699
-msgid "Screen Off After:"
+#: ../ui/MainWindow.glade:2500
+msgid "Restart"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2295 ../ui/MainWindow.glade:2505
-#: ../ui/MainWindow.glade:2712
-msgid "Put to Sleep After:"
+#: ../ui/MainWindow.glade:2541
+msgid "Log Out (Dialog)"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2419 ../ui/MainWindow.glade:2638
-msgid "Plugged in"
+#: ../ui/MainWindow.glade:2582
+msgid "Log Out"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2896
-msgid "<b>+</b> New"
+#: ../ui/MainWindow.glade:2623
+msgid "Hybrid Sleep"
 msgstr ""
 
-#: ../ui/MainWindow.glade:2951
-msgid "Delete"
-msgstr ""
-
-#: ../ui/MainWindow.glade:2986
-msgid "Clear"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3072
-msgid "Browser"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3085
-msgid "File Manager"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3098
-msgid "E-Mail"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3111
-msgid "Video"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3124
-msgid "Music"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3137
-msgid "Picture"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3150
-msgid "Text Editor"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3163
-msgid "Terminal"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3377
-msgid "Restore Default Settings"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3417
-msgid "Panel Settings"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3430
-msgid "File Manager(Thunar) Settings"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3443
-msgid "All XFCE Settings"
-msgstr ""
-
-#: ../ui/MainWindow.glade:3467 ../ui/MainWindow.glade:3484
-#: ../ui/MainWindow.glade:3501 ../ui/MainWindow.glade:3680
+#: ../ui/MainWindow.glade:2667 ../ui/MainWindow.glade:3982
+#: ../ui/MainWindow.glade:3999 ../ui/MainWindow.glade:4016
+#: ../ui/MainWindow.glade:4263
 msgid "Restore to Defaults"
 msgstr ""
 
-#: ../ui/MainWindow.glade:3555
+#: ../ui/MainWindow.glade:2724
+msgid "On Battery"
+msgstr ""
+
+#: ../ui/MainWindow.glade:2784 ../ui/MainWindow.glade:2994
+msgid "When Laptop Screen is Closed:"
+msgstr ""
+
+#: ../ui/MainWindow.glade:2797 ../ui/MainWindow.glade:3007
+#: ../ui/MainWindow.glade:3214
+msgid "Screen Off After:"
+msgstr ""
+
+#: ../ui/MainWindow.glade:2810 ../ui/MainWindow.glade:3020
+#: ../ui/MainWindow.glade:3227
+msgid "Put to Sleep After:"
+msgstr ""
+
+#: ../ui/MainWindow.glade:2934 ../ui/MainWindow.glade:3153
+msgid "Plugged in"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3411
+msgid "<b>+</b> New"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3466
+msgid "Delete"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3501
+msgid "Clear"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3587
+msgid "Browser"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3600
+msgid "File Manager"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3613
+msgid "E-Mail"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3626
+msgid "Video"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3639
+msgid "Music"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3652
+msgid "Picture"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3665
+msgid "Text Editor"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3678
+msgid "Terminal"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3892
+msgid "Restore Default Settings"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3932
+msgid "Panel Settings"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3945
+msgid "File Manager(Thunar) Settings"
+msgstr ""
+
+#: ../ui/MainWindow.glade:3958
+msgid "All XFCE Settings"
+msgstr ""
+
+#: ../ui/MainWindow.glade:4070
 msgid "Pardus XFCE Tweaks"
 msgstr ""
 
-#: ../ui/MainWindow.glade:3570
+#: ../ui/MainWindow.glade:4086
 msgid "Generating Languages"
 msgstr ""
 
-#: ../ui/MainWindow.glade:3571
+#: ../ui/MainWindow.glade:4087
 msgid "This may take a while."
 msgstr ""
 
-#: ../ui/MainWindow.glade:3622
+#: ../ui/MainWindow.glade:4141
 msgid "Error"
 msgstr ""
 
-#: ../ui/MainWindow.glade:3623
-msgid "Couldn't generated languages."
+#: ../ui/MainWindow.glade:4142
+msgid "Couldn't generate languages."
 msgstr ""
 
-#: ../ui/MainWindow.glade:3654
+#: ../ui/MainWindow.glade:4158 ../ui/MainWindow.glade:4206
+msgid "Close"
+msgstr ""
+
+#: ../ui/MainWindow.glade:4189
+msgid "Success"
+msgstr ""
+
+#: ../ui/MainWindow.glade:4190
+msgid "Restart to see changes."
+msgstr ""
+
+#: ../ui/MainWindow.glade:4237
 msgid "Attention"
 msgstr ""
 
-#: ../ui/MainWindow.glade:3655
+#: ../ui/MainWindow.glade:4238
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
