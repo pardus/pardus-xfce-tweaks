@@ -2264,396 +2264,391 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkScrolledWindow">
-                        <property name="width-request">300</property>
-                        <property name="height-request">130</property>
+                      <object class="GtkFrame">
                         <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="hscrollbar-policy">never</property>
+                        <property name="can-focus">False</property>
+                        <property name="label-xalign">0</property>
                         <property name="shadow-type">in</property>
                         <child>
-                          <object class="GtkViewport">
+                          <object class="GtkListBox">
+                            <property name="width-request">300</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="shadow-type">none</property>
+                            <property name="selection-mode">none</property>
+                            <property name="activate-on-single-click">False</property>
                             <child>
-                              <object class="GtkListBox">
+                              <object class="GtkListBoxRow">
                                 <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="selection-mode">none</property>
-                                <property name="activate-on-single-click">False</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_lockscreen">
+                                        <property name="label" translatable="yes">Lock Screen</property>
+                                        <property name="name">lock-screen</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_lockscreen">
-                                            <property name="label" translatable="yes">Lock Screen</property>
-                                            <property name="name">lock-screen</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-lock</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-lock</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_switchuser">
+                                        <property name="label" translatable="yes">Switch User</property>
+                                        <property name="name">switch-user</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_switchuser">
-                                            <property name="label" translatable="yes">Switch User</property>
-                                            <property name="name">switch-user</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-switch-user</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-switch-user</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_suspend">
+                                        <property name="label" translatable="yes">Suspend</property>
+                                        <property name="name">suspend</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_suspend">
-                                            <property name="label" translatable="yes">Suspend</property>
-                                            <property name="name">suspend</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-suspend</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-suspend</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_hibernate">
+                                        <property name="label" translatable="yes">Hibernate</property>
+                                        <property name="name">hibernate</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_hibernate">
-                                            <property name="label" translatable="yes">Hibernate</property>
-                                            <property name="name">hibernate</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-hibernate</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-hibernate</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_shutdown">
+                                        <property name="label" translatable="yes">Shutdown</property>
+                                        <property name="name">shutdown</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_shutdown">
-                                            <property name="label" translatable="yes">Shutdown</property>
-                                            <property name="name">shutdown</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-shutdown</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-shutdown</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_restart">
+                                        <property name="label" translatable="yes">Restart</property>
+                                        <property name="name">restart</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_restart">
-                                            <property name="label" translatable="yes">Restart</property>
-                                            <property name="name">restart</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-reboot</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-reboot</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_logout">
+                                        <property name="label" translatable="yes">Log Out (Dialog)</property>
+                                        <property name="name">logout</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_logout">
-                                            <property name="label" translatable="yes">Log Out (Dialog)</property>
-                                            <property name="name">logout</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-logout</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-logout</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_logoutdialog">
+                                        <property name="label" translatable="yes">Log Out</property>
+                                        <property name="name">logout-dialog</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_logoutdialog">
-                                            <property name="label" translatable="yes">Log Out</property>
-                                            <property name="name">logout-dialog</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-logout</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-logout</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
                                 <child>
-                                  <object class="GtkListBoxRow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
+                                    <property name="can-focus">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkCheckButton" id="cb_panel_action_hybridsleep">
+                                        <property name="label" translatable="yes">Hybrid Sleep</property>
+                                        <property name="name">hybrid-sleep</property>
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">True</property>
+                                        <property name="receives-default">False</property>
+                                        <property name="draw-indicator">True</property>
+                                        <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <child>
-                                          <object class="GtkCheckButton" id="cb_panel_action_hybridsleep">
-                                            <property name="label" translatable="yes">Hybrid Sleep</property>
-                                            <property name="name">hybrid-sleep</property>
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">True</property>
-                                            <property name="receives-default">False</property>
-                                            <property name="draw-indicator">True</property>
-                                            <signal name="released" handler="on_panel_action_icon_clicked" swapped="no"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="icon-name">xfsm-suspend-hibernate</property>
-                                            <property name="icon_size">3</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">xfsm-suspend-hibernate</property>
+                                        <property name="icon_size">3</property>
                                       </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>
                               </object>
                             </child>
                           </object>
+                        </child>
+                        <child type="label_item">
+                          <placeholder/>
                         </child>
                       </object>
                       <packing>
