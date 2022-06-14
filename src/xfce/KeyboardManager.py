@@ -32,9 +32,6 @@ def set_keyboard_state():
         if value:
             layouts.append(layout)
             variants.append(variant)
-        else:
-            layouts.append("")
-            variants.append("")
 
     keyboard_layout.set_string("/Default/XkbLayout", ",".join(layouts))
     keyboard_layout.set_string("/Default/XkbVariant", ",".join(variants))
@@ -124,6 +121,8 @@ def createKeyboardPlugin():
 
 def removeKeyboardPlugin():
     global xfce4_panel
+    if keyboardPlugin == "": return
+    
     # Remove plugin
     xfce4_panel.reset_property(f"/plugins/{keyboardPlugin}", True)
 
@@ -144,6 +143,7 @@ def getKeyboardPlugin():
 
 def changeKeyboardPluginPlacement():
     global xfce4_panel
+    if keyboardPlugin == "": return
     
     pluginList = xfce4_panel.get_arrayv("/panels/panel-1/plugin-ids")
     pluginID = int(keyboardPlugin.split("-")[1])
