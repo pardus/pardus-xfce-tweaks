@@ -206,6 +206,7 @@ class MainWindow:
         
         currentScale = int((ScaleManager.getScale() / 0.25) - 4)
         self.sli_scaling.set_value(currentScale)
+        self.sli_cursor.set_value((ScaleManager.getPointerSize()/16)-1)
     
     # Keyboard Settings:
     def getKeyboardDefaults(self):
