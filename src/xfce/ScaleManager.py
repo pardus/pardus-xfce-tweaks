@@ -30,8 +30,10 @@ def setDesktopIconSize(px):
     xfce4_desktop.set_uint("/desktop-icons/icon-size", px)
 
 def setPointerSize(px):
+    current_theme = xsettings.get_string("/Gtk/CursorThemeName", "Adwaita")
     xsettings.set_int("/Gtk/CursorThemeSize", px)
     xsettings.set_string("/Gtk/CursorThemeName", "Adwaita")
+    xsettings.set_string("/Gtk/CursorThemeName", current_theme)
 
 def getScale():
     dpi = xsettings.get_int("/Xft/DPI", 96)
