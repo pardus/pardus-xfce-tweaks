@@ -1,3 +1,5 @@
+import subprocess
+
 import gi
 gi.require_version('Xfconf', '0')
 from gi.repository import Xfconf
@@ -54,3 +56,12 @@ def restoreActionsDefault():
     items = ['-lock-screen', '-switch-user', '-separator', '-suspend', '-hibernate', '-separator', '-shutdown', '-restart', '-separator', '+logout', '-logout-dialog', '-hybrid-sleep']
 
     xfce4_panel.set_arrayv(f"{plugin}/items", items)
+
+def restoreDefaultSettings():
+    xfce4_panel.reset_property("/", True)
+    subprocess.run("""xfce4-panel --quit;
+        pkill xfconfd;
+        rm -rf ~/.config/xfce4/panel/* ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+        cp -R /etc/xdg/pardus/xfce4/panel/* ~/.config/xfce4/panel/;
+        cp /etc/xdg/pardus/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml;
+        (xfce4-panel &)""", shell=True)

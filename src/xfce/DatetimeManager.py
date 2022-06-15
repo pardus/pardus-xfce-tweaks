@@ -58,3 +58,7 @@ def saveFile():
         file.write(configFileData)
     
     subprocess.run("xfce4-panel &", shell=True)
+
+def restoreDefaultSettings():
+    os.remove(PLUGIN_RC_FILE_PATH)
+    shutil.copyfile(ETC_XDG_DATETIME_PATH, PLUGIN_RC_FILE_PATH)

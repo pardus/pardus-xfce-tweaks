@@ -21,6 +21,7 @@ data_files = [
         "src/xfce/PowerManager.py",
         "src/xfce/ScaleManager.py",
         "src/xfce/ThemeManager.py",
+        "src/xfce/ThunarManager.py",
         "src/xfce/WallpaperManager.py",
         "src/xfce/WhiskerManager.py",
     ]),
