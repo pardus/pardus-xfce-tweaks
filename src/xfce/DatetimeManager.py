@@ -49,8 +49,7 @@ def set(key, value):
 
 def saveFile():
     global configFileData
-
-    print(configFileData)
+    
     subprocess.run("xfce4-panel -q", shell=True)
 
     sleep(0.5)

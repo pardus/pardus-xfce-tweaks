@@ -31,6 +31,7 @@ def setDesktopIconSize(px):
 
 def setPointerSize(px):
     xsettings.set_int("/Gtk/CursorThemeSize", px)
+    xsettings.set_string("/Gtk/CursorThemeName", "Adwaita")
 
 def getScale():
     dpi = xsettings.get_int("/Xft/DPI", 96)
