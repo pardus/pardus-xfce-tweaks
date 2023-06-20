@@ -1,10 +1,10 @@
 Source: pardus-xfce-tweaks
 Section: utils
 Priority: optional
-Maintainer: Pardus Altyapı <altyapi@pardus.org.tr>
-Build-Depends: debhelper (>= 10), dh-python, python3-all, python3-setuptools
-Standards-Version: 4.3.0
-Homepage: https://www.pardus.org.tr
+Maintainer: Fatih Altun <fatih.altun@pardus.org.tr>
+Build-Depends: debhelper-compat (= 13), dh-python, python3-all, python3-setuptools
+Standards-Version: 4.6.1
+Homepage: https://github.com/pardus/pardus-xfce-tweaks
 
 Package: pardus-xfce-tweaks
 Architecture: amd64
@@ -14,5 +14,5 @@ Depends: ${misc:Depends},
          python3-gi,
          gir1.2-gtk-3.0,
          gir1.2-xfconf-0
-Description: Tweak Pardus XFCE settings
-
+Description: Tweak Pardus Xfce settings
+ Simple Gtk+ and Python based tweaks application for Xfce.

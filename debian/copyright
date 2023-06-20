@@ -1,11 +1,11 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pardus-about
-Source: https://www.pardus.org.tr
-
+Upstream-Contact: Fatih Altun <fatih.altun@pardus.org.tr>
+Source: https://github.com/pardus/pardus-xfce-tweaks
 
 
 Files: *
-Copyright: TÜBİTAK ULAKBİM <altyapi@pardus.org.tr>
+Copyright: 2023, Pardus <dev@pardus.org.tr>
 License: GPL-3.0+
 
 License: GPL-3.0+
