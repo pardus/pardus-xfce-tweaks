@@ -62,3 +62,10 @@ def saveFile():
 def restoreDefaultSettings():
     os.remove(PLUGIN_RC_FILE_PATH)
     shutil.copyfile(ETC_XDG_DATETIME_PATH, PLUGIN_RC_FILE_PATH)
+
+def set_panel_clock(key, value):
+    subprocess.call([
+        "/bin/sh", "-c",
+        f"xfconf-query -c xfce4-panel -l | grep plugin | grep {key} | while read path; do xfconf-query -c xfce4-panel -p $path -s {value}; done"
+    ])
+

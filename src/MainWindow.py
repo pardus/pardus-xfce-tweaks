@@ -607,6 +607,11 @@ class MainWindow:
         DatetimeManager.set("layout", "3")
         DatetimeManager.set("time_font", "Quicksand Medium, Bold 16")
 
+        DatetimeManager.set_panel_clock("digital-layout", "3")
+        DatetimeManager.set_panel_clock("digital-time-font", "Quicksand\ Medium,\ Bold\ 16")
+        DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
+
+
         DatetimeManager.saveFile()
 
     def on_btn_clock_date_time_clicked(self, btn):
@@ -614,6 +619,12 @@ class MainWindow:
         DatetimeManager.set("date_font", "Quicksand Medium, Bold 8")
         DatetimeManager.set("time_font", "Quicksand Medium, Bold 9")
         DatetimeManager.set("date_format", "%d/%m/%Y")
+
+        DatetimeManager.set_panel_clock("digital-layout", "1")
+        DatetimeManager.set_panel_clock("digital-time-font", "Quicksand\ Medium,\ Bold\ 15")
+        DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
+        DatetimeManager.set_panel_clock("digital-date-font", "Quicksand\ Medium,\ Bold\ 10")
+        DatetimeManager.set_panel_clock("digital-date-format", "%d/%m/%Y")
 
         DatetimeManager.saveFile()
     
