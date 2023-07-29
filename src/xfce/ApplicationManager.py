@@ -2,6 +2,7 @@ from ast import Break
 import subprocess
 import os
 from configparser import ConfigParser
+from gi.repository import Gio
 
 STARTUP_PATH = f"{os.environ.get('HOME')}/.config/autostart"
 APPLICATIONS_PATH = os.environ.get("XDG_DATA_DIRS").split(":")
@@ -12,38 +13,22 @@ APPLICATIONS = {}
 
 # Startup Applications
 def _getApplicationTuple(file):
-        name = ""
-        icon = ""
-        exec = ""
-        categories = ""
-        with open(file) as f:
-            for line in f.readlines():
-                line = line.rstrip()
-                
-                try:
-                    key = line[:line.index("=")]
-                    value = line[line.index("=")+1:]
-
-                    if "Name" == key:
-                        name = value
-                    elif "Icon" == key:
-                        icon = value
-                    elif "Categories" == key:
-                        categories = value
-                    elif "Exec" == key:
-                        exec = value.split(" ")[0].split("/")[-1].split(" ")[0]
-                    elif "Type" == key:
-                        if value.lower() != "application":
-                            return None
-                    elif "Hidden" == key or "NoDisplay" == key:
-                        if value.lower() == "true":
-                            return None
-                    elif name != "" and icon != "" and exec != "" and categories != "":
-                        break
-                except:
-                    pass
+    name = ""
+    icon = ""
+    exec = ""
+    categories = ""
+    try:
+        app = Gio.DesktopAppInfo.new_from_filename(file.path)
+        if app:
+            name = app.get_name()
+            icon = app.get_string('Icon') if app.get_string('Icon') is not None else "image-missing"
+            exec = app.get_executable()
+            categories = app.get_categories() if app.get_categories() is not None else ""
+    except Exception as e:
+        print("{}".format(e))
+        print("parse_desktopfile error: {} {}".format(file.name, file.path))
         
-        return (exec, name, f"{file.path}", icon, categories)
+    return (exec, name, f"{file.path}", icon, categories)
 
 def getStartupTupleList():
     startup_list = [] # [ (executable, name, application file, icon, categories), ... ]
