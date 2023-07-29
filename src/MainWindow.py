@@ -706,7 +706,8 @@ class MainWindow:
         rows = self.lb_startup_applications.get_selected_rows()
         for row in rows:
             application_path = row.get_children()[0].get_name()
-            subprocess.run(f"rm {application_path}", shell="True")
+            if os.path.exists(application_path):
+                os.remove(application_path)
 
             self.lb_startup_applications.remove(row)
     
@@ -727,7 +728,7 @@ class MainWindow:
 
             try:
                 if not os.path.exists(app_new_path):
-                    shutil.copy(app_path, app_new_path)
+                    shutil.copy2(app_path, app_new_path)
                     self.addStartupApplication(app_name, app_new_path, app_icon)
             except:
                 pass

@@ -2665,9 +2665,6 @@
                         <property name="receives-default">True</property>
                         <property name="halign">end</property>
                         <signal name="clicked" handler="on_btn_panel_actions_reset_clicked" swapped="no"/>
-                        <style>
-                          <class name="destructive-action"/>
-                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3380,6 +3377,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="selection-mode">multiple</property>
+                                <property name="activate-on-single-click">False</property>
                                 <signal name="selected-rows-changed" handler="on_lb_startup_applications_selected_rows_changed" swapped="no"/>
                               </object>
                             </child>
@@ -3453,12 +3451,12 @@
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="spacing">7</property>
+                                        <property name="spacing">5</property>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkImage">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">Delete</property>
+                                            <property name="icon-name">user-trash-symbolic</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -3467,10 +3465,10 @@
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkImage">
+                                          <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="icon-name">user-trash-symbolic</property>
+                                            <property name="label" translatable="yes">Delete</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -3493,7 +3491,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="btn_startup_clear">
-                                    <property name="label" translatable="yes">Clear</property>
+                                    <property name="label" translatable="yes">Clear Selection</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
@@ -3982,9 +3980,6 @@
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
                                 <signal name="clicked" handler="on_btn_restore_panel_clicked" swapped="no"/>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -3999,9 +3994,6 @@
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
                                 <signal name="clicked" handler="on_btn_restore_thunar_clicked" swapped="no"/>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -4016,9 +4008,6 @@
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
                                 <signal name="clicked" handler="on_btn_restore_allxfce_clicked" swapped="no"/>
-                                <style>
-                                  <class name="destructive-action"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
