@@ -281,7 +281,7 @@ class MainWindow:
             box.pack_end(btn, False, False, 0)
 
             # Set as Default button
-            btn_default = Gtk.Button.new_from_icon_name("view-reveal-symbolic", Gtk.IconSize.BUTTON)
+            btn_default = Gtk.Button.new_from_icon_name("emblem-ok-symbolic", Gtk.IconSize.BUTTON)
             btn_default.connect("clicked", self.on_locale_set_default)
 
             btn_default.set_relief(Gtk.ReliefStyle.NONE)
