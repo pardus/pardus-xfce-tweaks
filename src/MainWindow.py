@@ -721,7 +721,7 @@ class MainWindow:
         if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app != None:
             app_info = self.dialog_applications_selected_app
             app_name = app_info.get_name()
-            app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else ""
+            app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else "image-missing"
             app_path = app_info.get_filename()
             app_id = app_info.get_id()
             app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
@@ -735,7 +735,23 @@ class MainWindow:
     
     def on_appchooser_startup_application_selected(self, widget, appinfo):
         self.dialog_applications_selected_app = appinfo
-    
+
+    def on_appchooser_startup_application_activated(self, widget, appinfo):
+        app_info = appinfo
+        app_name = app_info.get_name()
+        app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else "image-missing"
+        app_path = app_info.get_filename()
+        app_id = app_info.get_id()
+        app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
+        try:
+            if not os.path.exists(app_new_path):
+                shutil.copy2(app_path, app_new_path)
+                self.addStartupApplication(app_name, app_new_path, app_icon)
+        except:
+            pass
+        self.lb_startup_applications.unselect_all()
+        self.dialog_applications_selected_app = None
+        self.dialog_applications.hide()
 
     # Default Applications:
     def _get_cmb_executable(self, combobox):

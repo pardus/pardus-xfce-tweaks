@@ -89,6 +89,7 @@
             <property name="can-focus">False</property>
             <property name="show-recommended">False</property>
             <property name="show-all">True</property>
+            <signal name="application-activated" handler="on_appchooser_startup_application_activated" swapped="no"/>
             <signal name="application-selected" handler="on_appchooser_startup_application_selected" swapped="no"/>
           </object>
           <packing>
