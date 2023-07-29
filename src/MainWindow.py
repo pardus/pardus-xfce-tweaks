@@ -820,7 +820,4 @@ class MainWindow:
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            # DatetimeManager.restoreDefaultSettings()
-            ThunarManager.restoreDefaultSettings()
-            PanelManager.restoreDefaultSettings()
-        
+            subprocess.Popen(os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh")
