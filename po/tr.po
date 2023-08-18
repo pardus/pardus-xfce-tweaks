@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-20 21:48+0300\n"
-"PO-Revision-Date: 2023-06-20 21:48+0300\n"
+"POT-Creation-Date: 2023-08-19 01:30+0300\n"
+"PO-Revision-Date: 2023-08-19 01:31+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Select Application"
 msgstr "Uygulama Seç"
 
-#: ui/MainWindow.glade:52 ui/MainWindow.glade:4245
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4252
 msgid "Cancel"
 msgstr "İptal"
 
@@ -29,187 +29,187 @@ msgstr "İptal"
 msgid "Select"
 msgstr "Seç"
 
-#: ui/MainWindow.glade:157
+#: ui/MainWindow.glade:158
 msgid "Screen Off"
 msgstr "Ekranı Kapat"
 
-#: ui/MainWindow.glade:161 ui/MainWindow.glade:2371
+#: ui/MainWindow.glade:162 ui/MainWindow.glade:2373
 msgid "Suspend"
 msgstr "Askıya Al"
 
-#: ui/MainWindow.glade:165 ui/MainWindow.glade:2412
+#: ui/MainWindow.glade:166 ui/MainWindow.glade:2414
 msgid "Hibernate"
 msgstr "Hazırda Beklet"
 
-#: ui/MainWindow.glade:169 ui/MainWindow.glade:2289
+#: ui/MainWindow.glade:170 ui/MainWindow.glade:2291
 msgid "Lock Screen"
 msgstr "Ekranı Kilitle"
 
-#: ui/MainWindow.glade:183 ui/MainWindow.glade:261
+#: ui/MainWindow.glade:184 ui/MainWindow.glade:262
 msgid "Never"
 msgstr "Asla"
 
-#: ui/MainWindow.glade:187
+#: ui/MainWindow.glade:188
 msgid "1 Minute"
 msgstr "1 dakika"
 
-#: ui/MainWindow.glade:191
+#: ui/MainWindow.glade:192
 msgid "2 Minutes"
 msgstr "2 dakika"
 
-#: ui/MainWindow.glade:195
+#: ui/MainWindow.glade:196
 msgid "3 Minutes"
 msgstr "3 dakika"
 
-#: ui/MainWindow.glade:199
+#: ui/MainWindow.glade:200
 msgid "4 Minutes"
 msgstr "4 dakika"
 
-#: ui/MainWindow.glade:203
+#: ui/MainWindow.glade:204
 msgid "5 Minutes"
 msgstr "5 dakika"
 
-#: ui/MainWindow.glade:207
+#: ui/MainWindow.glade:208
 msgid "10 Minutes"
 msgstr "10 dakika"
 
-#: ui/MainWindow.glade:211 ui/MainWindow.glade:265
+#: ui/MainWindow.glade:212 ui/MainWindow.glade:266
 msgid "15 Minutes"
 msgstr "15 dakika"
 
-#: ui/MainWindow.glade:215 ui/MainWindow.glade:269
+#: ui/MainWindow.glade:216 ui/MainWindow.glade:270
 msgid "20 Minutes"
 msgstr "20 dakika"
 
-#: ui/MainWindow.glade:219 ui/MainWindow.glade:273
+#: ui/MainWindow.glade:220 ui/MainWindow.glade:274
 msgid "25 Minutes"
 msgstr "25 dakika"
 
-#: ui/MainWindow.glade:223 ui/MainWindow.glade:277
+#: ui/MainWindow.glade:224 ui/MainWindow.glade:278
 msgid "30 Minutes"
 msgstr "30 dakika"
 
-#: ui/MainWindow.glade:227 ui/MainWindow.glade:281
+#: ui/MainWindow.glade:228 ui/MainWindow.glade:282
 msgid "45 Minutes"
 msgstr "45 dakika"
 
-#: ui/MainWindow.glade:231 ui/MainWindow.glade:285
+#: ui/MainWindow.glade:232 ui/MainWindow.glade:286
 msgid "1 Hour"
 msgstr "1 saat"
 
-#: ui/MainWindow.glade:235 ui/MainWindow.glade:289
+#: ui/MainWindow.glade:236 ui/MainWindow.glade:290
 msgid "2 Hours"
 msgstr "2 saat"
 
-#: ui/MainWindow.glade:239 ui/MainWindow.glade:293
+#: ui/MainWindow.glade:240 ui/MainWindow.glade:294
 msgid "3 Hours"
 msgstr "3 saat"
 
-#: ui/MainWindow.glade:243 ui/MainWindow.glade:297
+#: ui/MainWindow.glade:244 ui/MainWindow.glade:298
 msgid "4 Hours"
 msgstr "4 saat"
 
-#: ui/MainWindow.glade:247 ui/MainWindow.glade:301
+#: ui/MainWindow.glade:248 ui/MainWindow.glade:302
 msgid "5 Hours"
 msgstr "5 saat"
 
-#: ui/MainWindow.glade:350
+#: ui/MainWindow.glade:352
 msgid "Wallpapers"
 msgstr "Duvar Kağıdı"
 
-#: ui/MainWindow.glade:391
+#: ui/MainWindow.glade:393
 msgid "Themes"
 msgstr "Tema"
 
-#: ui/MainWindow.glade:432 ui/MainWindow.glade:1031
+#: ui/MainWindow.glade:434 ui/MainWindow.glade:1033
 msgid "Display"
 msgstr "Ekran"
 
-#: ui/MainWindow.glade:473
+#: ui/MainWindow.glade:475
 msgid "Keyboard"
 msgstr "Klavye"
 
-#: ui/MainWindow.glade:514 ui/MainWindow.glade:1668
+#: ui/MainWindow.glade:516 ui/MainWindow.glade:1670
 msgid "Fonts"
 msgstr "Yazı Tipleri"
 
-#: ui/MainWindow.glade:555 ui/MainWindow.glade:1821
+#: ui/MainWindow.glade:557 ui/MainWindow.glade:1823
 msgid "Languages"
 msgstr "Diller"
 
-#: ui/MainWindow.glade:596 ui/MainWindow.glade:2048
+#: ui/MainWindow.glade:598 ui/MainWindow.glade:2050
 msgid "Clock"
 msgstr "Saat"
 
-#: ui/MainWindow.glade:637 ui/MainWindow.glade:2228
+#: ui/MainWindow.glade:639 ui/MainWindow.glade:2230
 msgid "Panel Preferences"
 msgstr "Panel Tercihleri"
 
-#: ui/MainWindow.glade:678
+#: ui/MainWindow.glade:680
 msgid "Power Management"
 msgstr "Güç Yönetimi"
 
-#: ui/MainWindow.glade:719 ui/MainWindow.glade:3346
+#: ui/MainWindow.glade:721 ui/MainWindow.glade:3345
 msgid "Startup Applications"
 msgstr "Başlangıç Uygulamaları"
 
-#: ui/MainWindow.glade:760 ui/MainWindow.glade:3542
+#: ui/MainWindow.glade:762 ui/MainWindow.glade:3542
 msgid "Default Applications"
 msgstr "Varsayılan Uygulamalar"
 
-#: ui/MainWindow.glade:801
+#: ui/MainWindow.glade:803
 msgid "Restore Defaults"
 msgstr "Varsayılan Ayarlar"
 
-#: ui/MainWindow.glade:927
+#: ui/MainWindow.glade:929
 msgid "Light"
 msgstr "Açık"
 
-#: ui/MainWindow.glade:979
+#: ui/MainWindow.glade:981
 msgid "Dark"
 msgstr "Koyu"
 
-#: ui/MainWindow.glade:1060
+#: ui/MainWindow.glade:1062
 msgid "<b>Scaling:</b>"
 msgstr "<b>Görüntü Ölçekleme:</b>"
 
-#: ui/MainWindow.glade:1092
+#: ui/MainWindow.glade:1094
 msgid "<b>Panel Size</b> (px):"
 msgstr "<b>Panel Boyutu</b> (px):"
 
-#: ui/MainWindow.glade:1122
+#: ui/MainWindow.glade:1124
 msgid "<b>Desktop Icon Size</b> (px):"
 msgstr "<b>Masaüstü İkon Boyutu</b> (px):"
 
-#: ui/MainWindow.glade:1152
+#: ui/MainWindow.glade:1154
 msgid "<b>Mouse Cursor Size</b> (px):"
 msgstr "<b>Fare İşaretçi Boyutu</b> (px):"
 
-#: ui/MainWindow.glade:1212
+#: ui/MainWindow.glade:1214
 msgid "Add / Remove Keyboard layouts"
 msgstr "Klavye Yerleşimi Ekle / Çıkar"
 
-#: ui/MainWindow.glade:1269 ui/MainWindow.glade:1309
+#: ui/MainWindow.glade:1271 ui/MainWindow.glade:1311
 msgid "Turkish - Q Keyboard"
 msgstr "Türkçe - Q Klavye"
 
-#: ui/MainWindow.glade:1279 ui/MainWindow.glade:1378 ui/MainWindow.glade:1477
+#: ui/MainWindow.glade:1281 ui/MainWindow.glade:1380 ui/MainWindow.glade:1479
 msgid "Add"
 msgstr "Ekle"
 
-#: ui/MainWindow.glade:1319 ui/MainWindow.glade:1418 ui/MainWindow.glade:1517
+#: ui/MainWindow.glade:1321 ui/MainWindow.glade:1420 ui/MainWindow.glade:1519
 msgid "Remove"
 msgstr "Kaldır"
 
-#: ui/MainWindow.glade:1368 ui/MainWindow.glade:1408
+#: ui/MainWindow.glade:1370 ui/MainWindow.glade:1410
 msgid "Turkish - F Keyboard"
 msgstr "Türkçe - F Klavye"
 
-#: ui/MainWindow.glade:1467 ui/MainWindow.glade:1507
+#: ui/MainWindow.glade:1469 ui/MainWindow.glade:1509
 msgid "English Keyboard"
 msgstr "İngilizce Klavye"
 
-#: ui/MainWindow.glade:1560
+#: ui/MainWindow.glade:1562
 msgid ""
 "<span size=\"10000\">You can switch between keyboard layouts with:\n"
 "<b>Super + Space</b></span>"
@@ -217,96 +217,96 @@ msgstr ""
 "<span size=\"10000\">Klavye yerleşimini değiştirmek için:\n"
 "<b>Super + Boşluk</b></span>"
 
-#: ui/MainWindow.glade:1605
+#: ui/MainWindow.glade:1607
 msgid "Show Language Indicator on Panel"
 msgstr "Klavye Göstergesini Panel'de Göster"
 
-#: ui/MainWindow.glade:1708
+#: ui/MainWindow.glade:1710
 msgid "System Font"
 msgstr "Sistem Yazı Tipi"
 
-#: ui/MainWindow.glade:1721
+#: ui/MainWindow.glade:1723
 msgid "Monospace Font"
 msgstr "Eş Aralıklı Yazı Tipi"
 
-#: ui/MainWindow.glade:1752 ui/MainWindow.glade:1771
+#: ui/MainWindow.glade:1754 ui/MainWindow.glade:1773
 msgid "Select Font"
 msgstr "Yazı Tipi Seç"
 
-#: ui/MainWindow.glade:1855
+#: ui/MainWindow.glade:1857
 msgid "Installed"
 msgstr "Kurulu"
 
-#: ui/MainWindow.glade:1896
+#: ui/MainWindow.glade:1898
 msgid "Not Installed"
 msgstr "Kurulu Değil"
 
-#: ui/MainWindow.glade:1944
+#: ui/MainWindow.glade:1946
 msgid "Set as Default"
 msgstr "Varsayılan Yap"
 
-#: ui/MainWindow.glade:1961
+#: ui/MainWindow.glade:1963
 msgid "Default System Language"
 msgstr "Varsayılan Sistem Dili"
 
-#: ui/MainWindow.glade:1999
+#: ui/MainWindow.glade:2001
 msgid "Save Changes"
 msgstr "Değişiklikleri Kaydet"
 
-#: ui/MainWindow.glade:2112
+#: ui/MainWindow.glade:2114
 msgid "Time Only"
 msgstr "Yalnızca Saat"
 
-#: ui/MainWindow.glade:2187
+#: ui/MainWindow.glade:2189
 msgid "Date & Time"
 msgstr "Tarih & Saat"
 
-#: ui/MainWindow.glade:2330
+#: ui/MainWindow.glade:2332
 msgid "Switch User"
 msgstr "Kullanıcı Değiştir"
 
-#: ui/MainWindow.glade:2453
+#: ui/MainWindow.glade:2455
 msgid "Shutdown"
 msgstr "Kapat"
 
-#: ui/MainWindow.glade:2494
+#: ui/MainWindow.glade:2496
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
-#: ui/MainWindow.glade:2535
+#: ui/MainWindow.glade:2537
 msgid "Log Out (Dialog)"
 msgstr "Oturumu Kapat (Diyalog)"
 
-#: ui/MainWindow.glade:2576
+#: ui/MainWindow.glade:2578
 msgid "Log Out"
 msgstr "Oturumu Kapat"
 
-#: ui/MainWindow.glade:2617
+#: ui/MainWindow.glade:2619
 msgid "Hybrid Sleep"
 msgstr "Melez Uyku"
 
-#: ui/MainWindow.glade:2662 ui/MainWindow.glade:3977 ui/MainWindow.glade:3994
-#: ui/MainWindow.glade:4011 ui/MainWindow.glade:4258
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3980 ui/MainWindow.glade:3994
+#: ui/MainWindow.glade:4008 ui/MainWindow.glade:4265
 msgid "Restore to Defaults"
 msgstr "Varsayılana Döndür"
 
-#: ui/MainWindow.glade:2719
+#: ui/MainWindow.glade:2718
 msgid "On Battery"
 msgstr "Pilde"
 
-#: ui/MainWindow.glade:2779 ui/MainWindow.glade:2989
+#: ui/MainWindow.glade:2778 ui/MainWindow.glade:2988
 msgid "When Laptop Screen is Closed:"
 msgstr "Dizüstü Ekranı Kapandığında:"
 
-#: ui/MainWindow.glade:2792 ui/MainWindow.glade:3002 ui/MainWindow.glade:3209
+#: ui/MainWindow.glade:2791 ui/MainWindow.glade:3001 ui/MainWindow.glade:3208
 msgid "Screen Off After:"
 msgstr "Ekranı Karart:"
 
-#: ui/MainWindow.glade:2805 ui/MainWindow.glade:3015 ui/MainWindow.glade:3222
+#: ui/MainWindow.glade:2804 ui/MainWindow.glade:3014 ui/MainWindow.glade:3221
 msgid "Put to Sleep After:"
 msgstr "Uykuya Al:"
 
-#: ui/MainWindow.glade:2929 ui/MainWindow.glade:3148
+#: ui/MainWindow.glade:2928 ui/MainWindow.glade:3147
 msgid "Plugged in"
 msgstr "Fişte"
 
@@ -314,13 +314,13 @@ msgstr "Fişte"
 msgid "<b>+</b> New"
 msgstr "<b>+</b> Yeni"
 
-#: ui/MainWindow.glade:3461
+#: ui/MainWindow.glade:3473
 msgid "Delete"
 msgstr "Sil"
 
 #: ui/MainWindow.glade:3496
-msgid "Clear"
-msgstr "Temizle"
+msgid "Clear Selection"
+msgstr "Seçimi Temizle"
 
 #: ui/MainWindow.glade:3582
 msgid "Browser"
@@ -354,62 +354,69 @@ msgstr "Metin Düzenleyici"
 msgid "Terminal"
 msgstr "Uçbirim"
 
-#: ui/MainWindow.glade:3887
+#: ui/MainWindow.glade:3890
 msgid "Restore Default Settings"
 msgstr "Varsayılan Ayarlara Döndür"
 
-#: ui/MainWindow.glade:3927
+#: ui/MainWindow.glade:3930
 msgid "Panel Settings"
 msgstr "Panel Ayarları"
 
-#: ui/MainWindow.glade:3940
+#: ui/MainWindow.glade:3943
 msgid "File Manager(Thunar) Settings"
 msgstr "Dosya Yöneticisi(Thunar) Ayarları"
 
-#: ui/MainWindow.glade:3953
+#: ui/MainWindow.glade:3956
 msgid "All XFCE Settings"
 msgstr "Tüm XFCE Ayarları"
 
-#: ui/MainWindow.glade:4065
-msgid "Pardus XFCE Tweaks"
-msgstr "Pardus XFCE Ayarları"
+#: ui/MainWindow.glade:4059
+msgid "Pardus Xfce Tweaks"
+msgstr "Pardus Xfce İnce Ayarları"
 
-#: ui/MainWindow.glade:4081
+#: ui/MainWindow.glade:4088
 msgid "Generating Languages"
 msgstr "Diller Oluşturuluyor"
 
-#: ui/MainWindow.glade:4082
+#: ui/MainWindow.glade:4089
 msgid "This may take a while."
 msgstr "Bu biraz zaman alabilir"
 
-#: ui/MainWindow.glade:4136
+#: ui/MainWindow.glade:4143
 msgid "Error"
 msgstr "Hata"
 
-#: ui/MainWindow.glade:4137
+#: ui/MainWindow.glade:4144
 msgid "Couldn't generate languages."
 msgstr "Diller oluşturulamadı."
 
-#: ui/MainWindow.glade:4153 ui/MainWindow.glade:4201
+#: ui/MainWindow.glade:4160 ui/MainWindow.glade:4208
 msgid "Close"
 msgstr "Kapat"
 
-#: ui/MainWindow.glade:4184
+#: ui/MainWindow.glade:4191
 msgid "Success"
 msgstr "Başarılı"
 
-#: ui/MainWindow.glade:4185
+#: ui/MainWindow.glade:4192
 msgid "Restart to see changes."
 msgstr "Değişiklikleri görmek için Yeniden Başlatın."
 
-#: ui/MainWindow.glade:4232
+#: ui/MainWindow.glade:4239
 msgid "Attention"
 msgstr "Dikkat"
 
-#: ui/MainWindow.glade:4233
+#: ui/MainWindow.glade:4240
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
 msgstr ""
 "Sonradan yapılmış tüm ayarlar varsayılana geri döndürülecek. Devam etmek "
 "istiyor musunuz?"
+
+#: ui/MainWindow.glade:4301
+msgid "Tweak Pardus Xfce settings."
+msgstr "Pardus Xfce ayarlarını değiştirin."
+
+#~ msgid "Clear"
+#~ msgstr "Temizle"
