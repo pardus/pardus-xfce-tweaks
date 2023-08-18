@@ -104,9 +104,23 @@ class MainWindow:
     def onDestroy(self, action):
         self.window.get_application().quit()
 
+    def on_ui_about_button_clicked(self, button):
+        self.ui_about_dialog.run()
+        self.ui_about_dialog.hide()
+
     def defineComponents(self):
         def UI(str):
             return self.builder.get_object(str)
+
+        self.ui_about_dialog   = UI("ui_about_dialog")
+        self.ui_about_dialog.set_program_name(tr("Pardus Xfce Tweaks"))
+        # Set version
+        # If not getted from __version__ file then accept version in MainWindow.glade file
+        try:
+            version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
+            self.ui_about_dialog.set_version(version)
+        except:
+            pass
         
         self.nb_pages   = UI("nb_pages")
         self.lb_rows    = UI("lb_rows")
