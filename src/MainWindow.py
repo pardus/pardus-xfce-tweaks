@@ -271,20 +271,20 @@ class MainWindow:
 
             # Remove button
             btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
-            btn.get_style_context().add_class("destructive-action")
+            # btn.get_style_context().add_class("destructive-action")
             btn.set_no_show_all(True)
             btn.set_visible(lang != self.default_locale)
             btn.connect("clicked", self.on_locale_remove)
 
-            btn.set_relief(Gtk.ReliefStyle.NONE)
+            # btn.set_relief(Gtk.ReliefStyle.NONE)
             btn.set_name(f"{lang} {codeset}")
-            box.pack_end(btn, False, False, 0)
+            box.pack_end(btn, False, False, 5)
 
             # Set as Default button
             btn_default = Gtk.Button.new_from_icon_name("emblem-ok-symbolic", Gtk.IconSize.BUTTON)
             btn_default.connect("clicked", self.on_locale_set_default)
 
-            btn_default.set_relief(Gtk.ReliefStyle.NONE)
+            # btn_default.set_relief(Gtk.ReliefStyle.NONE)
             btn_default.set_name(f"{lang} {codeset}")
             btn_default.set_tooltip_text(tr("Set as Default"))
             btn_default.set_no_show_all(True)
