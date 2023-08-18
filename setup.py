@@ -47,6 +47,7 @@ data_files = [
          "src/xfce/LocaleManager.py",
          "src/xfce/PanelManager.py",
          "src/xfce/PowerManager.py",
+         "src/xfce/resetall.sh",
          "src/xfce/ScaleManager.py",
          "src/xfce/ThemeManager.py",
          "src/xfce/ThunarManager.py",
