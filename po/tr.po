@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 01:30+0300\n"
-"PO-Revision-Date: 2023-08-19 01:31+0300\n"
+"POT-Creation-Date: 2023-08-20 01:33+0300\n"
+"PO-Revision-Date: 2023-08-20 01:34+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
@@ -390,7 +390,7 @@ msgstr "Hata"
 msgid "Couldn't generate languages."
 msgstr "Diller oluşturulamadı."
 
-#: ui/MainWindow.glade:4160 ui/MainWindow.glade:4208
+#: ui/MainWindow.glade:4160
 msgid "Close"
 msgstr "Kapat"
 
@@ -399,8 +399,12 @@ msgid "Success"
 msgstr "Başarılı"
 
 #: ui/MainWindow.glade:4192
-msgid "Restart to see changes."
-msgstr "Değişiklikleri görmek için Yeniden Başlatın."
+msgid "You need to log out and log in again to see the changes."
+msgstr "Değişiklikleri görmek için oturumu kapatıp açmalısınız."
+
+#: ui/MainWindow.glade:4208
+msgid "OK"
+msgstr "Tamam"
 
 #: ui/MainWindow.glade:4239
 msgid "Attention"
@@ -417,6 +421,9 @@ msgstr ""
 #: ui/MainWindow.glade:4301
 msgid "Tweak Pardus Xfce settings."
 msgstr "Pardus Xfce ayarlarını değiştirin."
+
+#~ msgid "Restart to see changes."
+#~ msgstr "Değişiklikleri görmek için Yeniden Başlatın."
 
 #~ msgid "Clear"
 #~ msgstr "Temizle"
