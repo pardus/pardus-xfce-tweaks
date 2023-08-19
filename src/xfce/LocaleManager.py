@@ -24,7 +24,10 @@ def getInstalledLocales():
             if line[0] != "#" and len(line) > 3:
                 lang, encode_type = line.strip().split(" ")[0:2]
                 langs.append((lang, encode_type))
-    
+    # we are using en_US.UTF-8 for lc_ctype
+    if ("en_US.UTF-8", "UTF-8") not in langs:
+        langs.append(("en_US.UTF-8", "UTF-8"))
+
     # [(tr_TR.UTF-8, UTF-8), ...]
     return langs
 
@@ -43,5 +46,6 @@ def startProcess(params, on_exit):
     GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, on_exit)
 
 def saveLocaleSettings(locales, default_locale, on_exit):
+    print("saveLocaleSettings locales:{} -- defaultlocale{}".format(locales, default_locale))
     # locale should be like this: "tr_TR.UTF-8 UTF-8"
     startProcess(["pkexec", LOCALE_CHANGER_PY, "setlocales", locales, default_locale], on_exit)

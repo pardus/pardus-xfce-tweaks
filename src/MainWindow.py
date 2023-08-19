@@ -283,16 +283,16 @@ class MainWindow:
             default_img.set_margin_end(9)
             box.pack_end(default_img, False, False, 0)
 
-            # Remove button
-            btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
-            # btn.get_style_context().add_class("destructive-action")
-            btn.set_no_show_all(True)
-            btn.set_visible(lang != self.default_locale)
-            btn.connect("clicked", self.on_locale_remove)
-
-            # btn.set_relief(Gtk.ReliefStyle.NONE)
-            btn.set_name(f"{lang} {codeset}")
-            box.pack_end(btn, False, False, 5)
+            # # Remove button
+            # btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
+            # # btn.get_style_context().add_class("destructive-action")
+            # btn.set_no_show_all(True)
+            # btn.set_visible(lang != self.default_locale)
+            # btn.connect("clicked", self.on_locale_remove)
+            #
+            # # btn.set_relief(Gtk.ReliefStyle.NONE)
+            # btn.set_name(f"{lang} {codeset}")
+            # box.pack_end(btn, False, False, 5)
 
             # Set as Default button
             btn_default = Gtk.Button.new_from_icon_name("emblem-ok-symbolic", Gtk.IconSize.BUTTON)
@@ -578,10 +578,10 @@ class MainWindow:
         default_btn = btn.get_parent().get_children()[1]
         default_btn.set_visible(False)
 
-        trash_btn = btn.get_parent().get_children()[2]
-        trash_btn.set_visible(False)
+        # trash_btn = btn.get_parent().get_children()[2]
+        # trash_btn.set_visible(False)
 
-        default_img = btn.get_parent().get_children()[3]
+        default_img = btn.get_parent().get_children()[2]
         default_img.set_visible(True)
 
         self.revealer_languages.set_reveal_child(True)
@@ -592,13 +592,13 @@ class MainWindow:
 
             label = box.get_children()[0]
             default_btn = box.get_children()[1]
-            trash_btn = box.get_children()[2]
-            default_img = box.get_children()[3]
+            # trash_btn = box.get_children()[2]
+            default_img = box.get_children()[2]
 
             if label.get_text() != self.default_locale:
                 default_img.set_visible(False)
                 default_btn.set_visible(True)
-                trash_btn.set_visible(True)
+                # trash_btn.set_visible(True)
     
     def on_language_changes_saved(self, pid, status):
         self.dialog_languages_generate.hide()
