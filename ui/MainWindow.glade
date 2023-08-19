@@ -4189,7 +4189,7 @@
     <property name="type-hint">dialog</property>
     <property name="attached-to">window</property>
     <property name="text" translatable="yes">Success</property>
-    <property name="secondary-text" translatable="yes">Restart to see changes.</property>
+    <property name="secondary-text" translatable="yes">You need to log out and log in again to see the changes.</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can-focus">False</property>
@@ -4205,7 +4205,7 @@
             <property name="layout-style">end</property>
             <child>
               <object class="GtkButton" id="button4">
-                <property name="label" translatable="yes">Close</property>
+                <property name="label" translatable="yes">OK</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -4226,7 +4226,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-7">button4</action-widget>
+      <action-widget response="-5">button4</action-widget>
     </action-widgets>
   </object>
   <object class="GtkMessageDialog" id="dialog_restore_defaults">
