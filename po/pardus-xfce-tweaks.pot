@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-19 01:30+0300\n"
+"POT-Creation-Date: 2023-08-20 01:33+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -388,7 +388,7 @@ msgstr ""
 msgid "Couldn't generate languages."
 msgstr ""
 
-#: ui/MainWindow.glade:4160 ui/MainWindow.glade:4208
+#: ui/MainWindow.glade:4160
 msgid "Close"
 msgstr ""
 
@@ -397,7 +397,11 @@ msgid "Success"
 msgstr ""
 
 #: ui/MainWindow.glade:4192
-msgid "Restart to see changes."
+msgid "You need to log out and log in again to see the changes."
+msgstr ""
+
+#: ui/MainWindow.glade:4208
+msgid "OK"
 msgstr ""
 
 #: ui/MainWindow.glade:4239
