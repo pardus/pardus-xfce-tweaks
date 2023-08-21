@@ -1,3 +1,50 @@
+pardus-xfce-tweaks (0.2.0) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * .desktop file typo fix
+  * Added Cursor Size Slider
+  * Updated Turkish Translations
+  * [Added] xfconf as dependency
+  * Refactor: subprocess -> Xfconf methods
+  * [Added] Panel Preferences
+  * Xfconf bugs fixed.
+  * Translations Updated
+  * [Fixed] Cursor size doesn't change
+  * [Fixed] Keyboard Panel empty menu entries.
+  * [Fixed] Locale.gen file remove duplication entries.
+  * [UI] Panel Preferences Scrolled Window removed. Now only Listbox.
+  * [Fixed] Cursor size isn't changing.
+  * [Fixed] Mouse theme consistency.
+  * [Fixed] Thunar & Panel restore to defaults.
+
+  [ Fatih Altun ]
+  * Update gitignore
+  * Update main row icons as symbolic
+  * Add clock plugin confs to Datetime manager
+  * Update project structure, bin script and Main
+  * Change pardus theme names
+  * Update desktop file
+  * Add resetall script for restore all settings button
+  * Enable show-default-item on default apps
+  * Update set default locale icon
+  * Update reset button classes and Fix copy, rm startup app funcs
+  * Update getApplicationTuple, use Gio for parse
+  * Add activated signal to startup app chooser
+  * Add X-Pardus-Apps to desktop file categories
+  * Update app icon
+  * Add missing resetall.sh to setup.py
+  * Update lang buttons relief style
+  * Add about dialog
+  * Update pot file
+  * Update Turkish translations
+  * Disable rm lang and force en for lc_ctype
+  * Update lang dialog success text
+  * Update pot file
+  * Update Turkish translations
+  * Update Architecture as all !
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 21 Aug 2023 12:56:03 +0300
+
 pardus-xfce-tweaks (0.1.0) unstable; urgency=medium
 
   [ Emin Fedar ]
