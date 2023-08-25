@@ -97,6 +97,8 @@ class MainWindow:
         # Default Applications
         self.getDefaultApplications()
 
+        self.set_show_default_apps()
+
         # Show Screen:
         self.window.show_all()
     
@@ -121,6 +123,12 @@ class MainWindow:
             self.ui_about_dialog.set_version(version)
         except:
             pass
+
+        # default apps appchoser
+        self.cmb_default_video = UI("cmb_default_video")
+        self.cmb_default_music = UI("cmb_default_music")
+        self.cmb_default_image = UI("cmb_default_image")
+        self.cmb_default_editor = UI("cmb_default_editor")
         
         self.nb_pages   = UI("nb_pages")
         self.lb_rows    = UI("lb_rows")
@@ -202,6 +210,12 @@ class MainWindow:
 
 
         self.dialog_restore_defaults      = UI("dialog_restore_defaults")
+
+    def set_show_default_apps(self):
+        self.cmb_default_video.set_show_default_item(True)
+        self.cmb_default_music.set_show_default_item(True)
+        self.cmb_default_image.set_show_default_item(True)
+        self.cmb_default_editor.set_show_default_item(True)
     
     def addSliderMarks(self):        
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
@@ -817,6 +831,9 @@ class MainWindow:
         return None
     
     def on_cmb_default_video_changed(self, combobox):
+        if combobox.get_active_iter() is None:
+            return
+
         desktop_file = self._get_cmb_application(combobox)
 
         ApplicationManager.setDefaultApp("video/mp4", desktop_file)
@@ -828,6 +845,9 @@ class MainWindow:
         ApplicationManager.setDefaultApp("video/flv", desktop_file)
     
     def on_cmb_default_music_changed(self, combobox):
+        if combobox.get_active_iter() is None:
+            return
+
         desktop_file = self._get_cmb_application(combobox)
 
         ApplicationManager.setDefaultApp("audio/mp4", desktop_file)
@@ -841,6 +861,9 @@ class MainWindow:
 
     
     def on_cmb_default_image_changed(self, combobox):
+        if combobox.get_active_iter() is None:
+            return
+
         desktop_file = self._get_cmb_application(combobox)
 
         ApplicationManager.setDefaultApp("image/bmp", desktop_file)
@@ -868,6 +891,9 @@ class MainWindow:
 
     
     def on_cmb_default_editor_changed(self, combobox):
+        if combobox.get_active_iter() is None:
+            return
+
         desktop_file = self._get_cmb_application(combobox)
 
         ApplicationManager.setDefaultApp("text/plain", desktop_file)
@@ -888,6 +914,7 @@ class MainWindow:
         ApplicationManager.setDefaultApp("text/x-perl", desktop_file)
         ApplicationManager.setDefaultApp("text/x-php", desktop_file)
         ApplicationManager.setDefaultApp("text/x-python", desktop_file)
+        ApplicationManager.setDefaultApp("text/x-python3", desktop_file)
         ApplicationManager.setDefaultApp("text/x-sql", desktop_file)
         ApplicationManager.setDefaultApp("text/x-tcl", desktop_file)
         ApplicationManager.setDefaultApp("text/x-tex", desktop_file)

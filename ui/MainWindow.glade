@@ -3777,7 +3777,6 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="content-type">video/mp4</property>
-                                <property name="show-default-item">True</property>
                                 <signal name="changed" handler="on_cmb_default_video_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -3791,7 +3790,6 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="content-type">audio/mpeg</property>
-                                <property name="show-default-item">True</property>
                                 <signal name="changed" handler="on_cmb_default_music_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -3805,7 +3803,6 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="content-type">image/jpeg</property>
-                                <property name="show-default-item">True</property>
                                 <signal name="changed" handler="on_cmb_default_image_changed" swapped="no"/>
                               </object>
                               <packing>
@@ -3819,7 +3816,6 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="content-type">text/plain</property>
-                                <property name="show-default-item">True</property>
                                 <signal name="changed" handler="on_cmb_default_editor_changed" swapped="no"/>
                               </object>
                               <packing>
