@@ -369,6 +369,21 @@ class MainWindow:
             img_wallpaper = Gtk.Image.new_from_pixbuf(bitmap)
             img_wallpaper.img_path = wallpaperList[i]
 
+            tooltip = wallpaperList[i]
+            try:
+                tooltip = os.path.basename(tooltip)
+                tooltip = os.path.splitext(tooltip)[0]
+                if "pardus23-0_" in tooltip:
+                    tooltip = tooltip.split("pardus23-0_")[1]
+                    tooltip = tooltip.replace("-", " ")
+                elif "pardus23-" in tooltip and "_" in tooltip:
+                    tooltip = tooltip.split("_")[1]
+                    tooltip = tooltip.replace("-", " ")
+            except Exception as e:
+                print("{}".format(e))
+                pass
+            img_wallpaper.set_tooltip_text(tooltip)
+
             GLib.idle_add(self.flow_wallpapers.insert, img_wallpaper, -1)
             GLib.idle_add(self.flow_wallpapers.show_all)
     
