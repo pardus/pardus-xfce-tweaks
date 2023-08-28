@@ -1604,7 +1604,7 @@
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="halign">start</property>
-                                            <property name="label" translatable="yes">Show Language Indicator on Panel</property>
+                                            <property name="label" translatable="yes">Show Keyboard Indicator on Panel</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
