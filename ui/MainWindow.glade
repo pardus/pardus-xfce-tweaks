@@ -4077,7 +4077,7 @@
   <object class="GtkMessageDialog" id="dialog_languages_generate">
     <property name="can-focus">False</property>
     <property name="modal">True</property>
-    <property name="window-position">center</property>
+    <property name="window-position">center-on-parent</property>
     <property name="type-hint">normal</property>
     <property name="skip-taskbar-hint">True</property>
     <property name="attached-to">window</property>
@@ -4131,7 +4131,7 @@
     <property name="is-focus">True</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window-position">center</property>
+    <property name="window-position">center-on-parent</property>
     <property name="type-hint">dialog</property>
     <property name="skip-taskbar-hint">True</property>
     <property name="attached-to">window</property>
@@ -4181,7 +4181,7 @@
     <property name="can-focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window-position">center</property>
+    <property name="window-position">center-on-parent</property>
     <property name="type-hint">dialog</property>
     <property name="attached-to">window</property>
     <property name="text" translatable="yes">Success</property>
@@ -4229,7 +4229,7 @@
     <property name="can-focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window-position">center</property>
+    <property name="window-position">center-on-parent</property>
     <property name="type-hint">dialog</property>
     <property name="attached-to">window</property>
     <property name="text" translatable="yes">Attention</property>
