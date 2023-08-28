@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-20 01:33+0300\n"
+"POT-Creation-Date: 2023-08-29 00:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Select Application"
 msgstr ""
 
-#: ui/MainWindow.glade:52 ui/MainWindow.glade:4252
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4248
 msgid "Cancel"
 msgstr ""
 
@@ -114,11 +114,11 @@ msgid "5 Hours"
 msgstr ""
 
 #: ui/MainWindow.glade:352
-msgid "Wallpapers"
+msgid "Wallpaper"
 msgstr ""
 
 #: ui/MainWindow.glade:393
-msgid "Themes"
+msgid "Theme"
 msgstr ""
 
 #: ui/MainWindow.glade:434 ui/MainWindow.glade:1033
@@ -216,7 +216,7 @@ msgid ""
 msgstr ""
 
 #: ui/MainWindow.glade:1607
-msgid "Show Language Indicator on Panel"
+msgid "Show Keyboard Indicator on Panel"
 msgstr ""
 
 #: ui/MainWindow.glade:1710
@@ -283,8 +283,8 @@ msgstr ""
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3980 ui/MainWindow.glade:3994
-#: ui/MainWindow.glade:4008 ui/MainWindow.glade:4265
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3976 ui/MainWindow.glade:3990
+#: ui/MainWindow.glade:4004 ui/MainWindow.glade:4261
 msgid "Restore to Defaults"
 msgstr ""
 
@@ -352,68 +352,68 @@ msgstr ""
 msgid "Terminal"
 msgstr ""
 
-#: ui/MainWindow.glade:3890
+#: ui/MainWindow.glade:3886
 msgid "Restore Default Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3930
+#: ui/MainWindow.glade:3926
 msgid "Panel Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3943
+#: ui/MainWindow.glade:3939
 msgid "File Manager(Thunar) Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3956
-msgid "All XFCE Settings"
+#: ui/MainWindow.glade:3952
+msgid "All Xfce Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:4059
+#: ui/MainWindow.glade:4055
 msgid "Pardus Xfce Tweaks"
 msgstr ""
 
-#: ui/MainWindow.glade:4088
+#: ui/MainWindow.glade:4084
 msgid "Generating Languages"
 msgstr ""
 
-#: ui/MainWindow.glade:4089
+#: ui/MainWindow.glade:4085
 msgid "This may take a while."
 msgstr ""
 
-#: ui/MainWindow.glade:4143
+#: ui/MainWindow.glade:4139
 msgid "Error"
 msgstr ""
 
-#: ui/MainWindow.glade:4144
+#: ui/MainWindow.glade:4140
 msgid "Couldn't generate languages."
 msgstr ""
 
-#: ui/MainWindow.glade:4160
+#: ui/MainWindow.glade:4156
 msgid "Close"
 msgstr ""
 
-#: ui/MainWindow.glade:4191
+#: ui/MainWindow.glade:4187
 msgid "Success"
 msgstr ""
 
-#: ui/MainWindow.glade:4192
+#: ui/MainWindow.glade:4188
 msgid "You need to log out and log in again to see the changes."
 msgstr ""
 
-#: ui/MainWindow.glade:4208
+#: ui/MainWindow.glade:4204
 msgid "OK"
 msgstr ""
 
-#: ui/MainWindow.glade:4239
+#: ui/MainWindow.glade:4235
 msgid "Attention"
 msgstr ""
 
-#: ui/MainWindow.glade:4240
+#: ui/MainWindow.glade:4236
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
 msgstr ""
 
-#: ui/MainWindow.glade:4301
+#: ui/MainWindow.glade:4297
 msgid "Tweak Pardus Xfce settings."
 msgstr ""
