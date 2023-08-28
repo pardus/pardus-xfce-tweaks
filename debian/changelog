@@ -1,3 +1,17 @@
+pardus-xfce-tweaks (0.2.2) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Add Portuguese translation
+
+  [ Fatih Altun ]
+  * Fix typo
+  * Fix typo
+  * Update pot file
+  * Update Turkish translations
+  * Fix position of message dialogs
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 29 Aug 2023 01:02:46 +0300
+
 pardus-xfce-tweaks (0.2.1) unstable; urgency=medium
 
   * Update get wallpaper func
