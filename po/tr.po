@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 00:36+0300\n"
-"PO-Revision-Date: 2023-08-29 00:31+0300\n"
+"POT-Creation-Date: 2023-08-29 18:36+0300\n"
+"PO-Revision-Date: 2023-08-29 18:40+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Select Application"
 msgstr "Uygulama Seç"
 
-#: ui/MainWindow.glade:52 ui/MainWindow.glade:4248
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4118
 msgid "Cancel"
 msgstr "İptal"
 
@@ -155,7 +155,7 @@ msgstr "Başlangıç Uygulamaları"
 
 #: ui/MainWindow.glade:762 ui/MainWindow.glade:3542
 msgid "Default Applications"
-msgstr "Varsayılan Uygulamalar"
+msgstr "Öntanımlı Uygulamalar"
 
 #: ui/MainWindow.glade:803
 msgid "Restore Defaults"
@@ -285,8 +285,8 @@ msgstr "Oturumu Kapat"
 msgid "Hybrid Sleep"
 msgstr "Melez Uyku"
 
-#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3976 ui/MainWindow.glade:3990
-#: ui/MainWindow.glade:4004 ui/MainWindow.glade:4261
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3846 ui/MainWindow.glade:3860
+#: ui/MainWindow.glade:3874 ui/MainWindow.glade:4131
 msgid "Restore to Defaults"
 msgstr "Varsayılana Döndür"
 
@@ -323,94 +323,86 @@ msgid "Clear Selection"
 msgstr "Seçimi Temizle"
 
 #: ui/MainWindow.glade:3582
-msgid "Browser"
-msgstr "Tarayıcı"
+msgid "Text Editor"
+msgstr "Metin Düzenleyici"
 
 #: ui/MainWindow.glade:3595
-msgid "File Manager"
-msgstr "Dosya Yöneticisi"
+msgid "Picture"
+msgstr "Resim"
 
 #: ui/MainWindow.glade:3608
-msgid "E-Mail"
-msgstr "E-Mail"
+msgid "Music"
+msgstr "Müzik"
 
 #: ui/MainWindow.glade:3621
 msgid "Video"
 msgstr "Video"
 
 #: ui/MainWindow.glade:3634
-msgid "Music"
-msgstr "Müzik"
+msgid "Other"
+msgstr "Diğer"
 
-#: ui/MainWindow.glade:3647
-msgid "Picture"
-msgstr "Resim"
+#: ui/MainWindow.glade:3711
+msgid "Other Default Applications"
+msgstr "Diğer Öntanımlı Uygulamalar"
 
-#: ui/MainWindow.glade:3660
-msgid "Text Editor"
-msgstr "Metin Düzenleyici"
-
-#: ui/MainWindow.glade:3673
-msgid "Terminal"
-msgstr "Uçbirim"
-
-#: ui/MainWindow.glade:3886
+#: ui/MainWindow.glade:3756
 msgid "Restore Default Settings"
 msgstr "Varsayılan Ayarlara Döndür"
 
-#: ui/MainWindow.glade:3926
+#: ui/MainWindow.glade:3796
 msgid "Panel Settings"
 msgstr "Panel Ayarları"
 
-#: ui/MainWindow.glade:3939
+#: ui/MainWindow.glade:3809
 msgid "File Manager(Thunar) Settings"
 msgstr "Dosya Yöneticisi(Thunar) Ayarları"
 
-#: ui/MainWindow.glade:3952
+#: ui/MainWindow.glade:3822
 msgid "All Xfce Settings"
 msgstr "Tüm Xfce Ayarları"
 
-#: ui/MainWindow.glade:4055
+#: ui/MainWindow.glade:3925
 msgid "Pardus Xfce Tweaks"
 msgstr "Pardus Xfce İnce Ayarları"
 
-#: ui/MainWindow.glade:4084
+#: ui/MainWindow.glade:3954
 msgid "Generating Languages"
 msgstr "Diller Oluşturuluyor"
 
-#: ui/MainWindow.glade:4085
+#: ui/MainWindow.glade:3955
 msgid "This may take a while."
 msgstr "Bu biraz zaman alabilir"
 
-#: ui/MainWindow.glade:4139
+#: ui/MainWindow.glade:4009
 msgid "Error"
 msgstr "Hata"
 
-#: ui/MainWindow.glade:4140
+#: ui/MainWindow.glade:4010
 msgid "Couldn't generate languages."
 msgstr "Diller oluşturulamadı."
 
-#: ui/MainWindow.glade:4156
+#: ui/MainWindow.glade:4026
 msgid "Close"
 msgstr "Kapat"
 
-#: ui/MainWindow.glade:4187
+#: ui/MainWindow.glade:4057
 msgid "Success"
 msgstr "Başarılı"
 
-#: ui/MainWindow.glade:4188
+#: ui/MainWindow.glade:4058
 msgid "You need to log out and log in again to see the changes."
 msgstr "Değişiklikleri görmek için oturumu kapatıp açmalısınız."
 
-#: ui/MainWindow.glade:4204
+#: ui/MainWindow.glade:4074
 msgid "OK"
 msgstr "Tamam"
 
-#: ui/MainWindow.glade:4235
+#: ui/MainWindow.glade:4105
 msgid "Attention"
 msgstr "Dikkat"
 
-#: ui/MainWindow.glade:4236
+#: ui/MainWindow.glade:4106
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
@@ -418,9 +410,21 @@ msgstr ""
 "Sonradan yapılmış tüm ayarlar varsayılana geri döndürülecek. Devam etmek "
 "istiyor musunuz?"
 
-#: ui/MainWindow.glade:4297
+#: ui/MainWindow.glade:4167
 msgid "Tweak Pardus Xfce settings."
 msgstr "Pardus Xfce ayarlarını değiştirin."
+
+#~ msgid "Browser"
+#~ msgstr "Tarayıcı"
+
+#~ msgid "File Manager"
+#~ msgstr "Dosya Yöneticisi"
+
+#~ msgid "E-Mail"
+#~ msgstr "E-Mail"
+
+#~ msgid "Terminal"
+#~ msgstr "Uçbirim"
 
 #~ msgid "Restart to see changes."
 #~ msgstr "Değişiklikleri görmek için Yeniden Başlatın."
