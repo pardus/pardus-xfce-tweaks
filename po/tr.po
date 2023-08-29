@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 18:36+0300\n"
-"PO-Revision-Date: 2023-08-29 18:40+0300\n"
+"POT-Creation-Date: 2023-08-29 18:43+0300\n"
+"PO-Revision-Date: 2023-08-29 18:44+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
 "Language: tr\n"
@@ -339,8 +339,8 @@ msgid "Video"
 msgstr "Video"
 
 #: ui/MainWindow.glade:3634
-msgid "Other"
-msgstr "Diğer"
+msgid "Others"
+msgstr "Diğerleri"
 
 #: ui/MainWindow.glade:3711
 msgid "Other Default Applications"
