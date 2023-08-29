@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 00:36+0300\n"
+"POT-Creation-Date: 2023-08-29 18:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Select Application"
 msgstr ""
 
-#: ui/MainWindow.glade:52 ui/MainWindow.glade:4248
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4118
 msgid "Cancel"
 msgstr ""
 
@@ -283,8 +283,8 @@ msgstr ""
 msgid "Hybrid Sleep"
 msgstr ""
 
-#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3976 ui/MainWindow.glade:3990
-#: ui/MainWindow.glade:4004 ui/MainWindow.glade:4261
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3846 ui/MainWindow.glade:3860
+#: ui/MainWindow.glade:3874 ui/MainWindow.glade:4131
 msgid "Restore to Defaults"
 msgstr ""
 
@@ -321,15 +321,15 @@ msgid "Clear Selection"
 msgstr ""
 
 #: ui/MainWindow.glade:3582
-msgid "Browser"
+msgid "Text Editor"
 msgstr ""
 
 #: ui/MainWindow.glade:3595
-msgid "File Manager"
+msgid "Picture"
 msgstr ""
 
 #: ui/MainWindow.glade:3608
-msgid "E-Mail"
+msgid "Music"
 msgstr ""
 
 #: ui/MainWindow.glade:3621
@@ -337,83 +337,75 @@ msgid "Video"
 msgstr ""
 
 #: ui/MainWindow.glade:3634
-msgid "Music"
+msgid "Other"
 msgstr ""
 
-#: ui/MainWindow.glade:3647
-msgid "Picture"
+#: ui/MainWindow.glade:3711
+msgid "Other Default Applications"
 msgstr ""
 
-#: ui/MainWindow.glade:3660
-msgid "Text Editor"
-msgstr ""
-
-#: ui/MainWindow.glade:3673
-msgid "Terminal"
-msgstr ""
-
-#: ui/MainWindow.glade:3886
+#: ui/MainWindow.glade:3756
 msgid "Restore Default Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3926
+#: ui/MainWindow.glade:3796
 msgid "Panel Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3939
+#: ui/MainWindow.glade:3809
 msgid "File Manager(Thunar) Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3952
+#: ui/MainWindow.glade:3822
 msgid "All Xfce Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:4055
+#: ui/MainWindow.glade:3925
 msgid "Pardus Xfce Tweaks"
 msgstr ""
 
-#: ui/MainWindow.glade:4084
+#: ui/MainWindow.glade:3954
 msgid "Generating Languages"
 msgstr ""
 
-#: ui/MainWindow.glade:4085
+#: ui/MainWindow.glade:3955
 msgid "This may take a while."
 msgstr ""
 
-#: ui/MainWindow.glade:4139
+#: ui/MainWindow.glade:4009
 msgid "Error"
 msgstr ""
 
-#: ui/MainWindow.glade:4140
+#: ui/MainWindow.glade:4010
 msgid "Couldn't generate languages."
 msgstr ""
 
-#: ui/MainWindow.glade:4156
+#: ui/MainWindow.glade:4026
 msgid "Close"
 msgstr ""
 
-#: ui/MainWindow.glade:4187
+#: ui/MainWindow.glade:4057
 msgid "Success"
 msgstr ""
 
-#: ui/MainWindow.glade:4188
+#: ui/MainWindow.glade:4058
 msgid "You need to log out and log in again to see the changes."
 msgstr ""
 
-#: ui/MainWindow.glade:4204
+#: ui/MainWindow.glade:4074
 msgid "OK"
 msgstr ""
 
-#: ui/MainWindow.glade:4235
+#: ui/MainWindow.glade:4105
 msgid "Attention"
 msgstr ""
 
-#: ui/MainWindow.glade:4236
+#: ui/MainWindow.glade:4106
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
 msgstr ""
 
-#: ui/MainWindow.glade:4297
+#: ui/MainWindow.glade:4167
 msgid "Tweak Pardus Xfce settings."
 msgstr ""
