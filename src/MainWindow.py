@@ -95,7 +95,7 @@ class MainWindow:
         self.getStartupApplications()
 
         # Default Applications
-        self.getDefaultApplications()
+        # self.getDefaultApplications()
 
         self.set_show_default_apps()
 
@@ -129,7 +129,7 @@ class MainWindow:
         self.cmb_default_music = UI("cmb_default_music")
         self.cmb_default_image = UI("cmb_default_image")
         self.cmb_default_editor = UI("cmb_default_editor")
-        
+
         self.nb_pages   = UI("nb_pages")
         self.lb_rows    = UI("lb_rows")
 
@@ -198,10 +198,10 @@ class MainWindow:
         self.appchooser_startup             = UI("appchooser_startup")
 
         # Default Applications
-        self.cmb_default_browser        = UI("cmb_default_browser")
-        self.cmb_default_filemanager    = UI("cmb_default_filemanager")
-        self.cmb_default_email          = UI("cmb_default_email")
-        self.cmb_default_terminal       = UI("cmb_default_terminal")
+        # self.cmb_default_browser        = UI("cmb_default_browser")
+        # self.cmb_default_filemanager    = UI("cmb_default_filemanager")
+        # self.cmb_default_email          = UI("cmb_default_email")
+        # self.cmb_default_terminal       = UI("cmb_default_terminal")
 
         self.lst_default_browser        = UI("lst_default_browser")
         self.lst_default_filemanager    = UI("lst_default_filemanager")
@@ -469,10 +469,10 @@ class MainWindow:
         
         
         # set default app
-        self.cmb_default_browser.set_active_id(     ApplicationManager.getDefaultXFCEApp("WebBrowser")["name"])
-        self.cmb_default_filemanager.set_active_id( ApplicationManager.getDefaultXFCEApp("FileManager")["name"])
-        self.cmb_default_email.set_active_id(       ApplicationManager.getDefaultXFCEApp("MailReader")["name"])
-        self.cmb_default_terminal.set_active_id(    ApplicationManager.getDefaultXFCEApp("TerminalEmulator")["name"])
+        # self.cmb_default_browser.set_active_id(     ApplicationManager.getDefaultXFCEApp("WebBrowser")["name"])
+        # self.cmb_default_filemanager.set_active_id( ApplicationManager.getDefaultXFCEApp("FileManager")["name"])
+        # self.cmb_default_email.set_active_id(       ApplicationManager.getDefaultXFCEApp("MailReader")["name"])
+        # self.cmb_default_terminal.set_active_id(    ApplicationManager.getDefaultXFCEApp("TerminalEmulator")["name"])
         
 
         
@@ -805,21 +805,21 @@ class MainWindow:
             return executable
         return None
     
-    def on_cmb_default_browser_changed(self, combobox):
-        exe = self._get_cmb_executable(combobox)
-        ApplicationManager.setDefaultXFCEApp("WebBrowser", exe)
-
-    def on_cmb_default_filemanager_changed(self, combobox):
-        exe = self._get_cmb_executable(combobox)
-        ApplicationManager.setDefaultXFCEApp("FileManager", exe)
-
-    def on_cmb_default_email_changed(self, combobox):
-        exe = self._get_cmb_executable(combobox)
-        ApplicationManager.setDefaultXFCEApp("MailReader", exe)
-            
-    def on_cmb_default_terminal_changed(self, combobox):
-        exe = self._get_cmb_executable(combobox)
-        ApplicationManager.setDefaultXFCEApp("TerminalEmulator", exe)
+    # def on_cmb_default_browser_changed(self, combobox):
+    #     exe = self._get_cmb_executable(combobox)
+    #     ApplicationManager.setDefaultXFCEApp("WebBrowser", exe)
+    #
+    # def on_cmb_default_filemanager_changed(self, combobox):
+    #     exe = self._get_cmb_executable(combobox)
+    #     ApplicationManager.setDefaultXFCEApp("FileManager", exe)
+    #
+    # def on_cmb_default_email_changed(self, combobox):
+    #     exe = self._get_cmb_executable(combobox)
+    #     ApplicationManager.setDefaultXFCEApp("MailReader", exe)
+    #
+    # def on_cmb_default_terminal_changed(self, combobox):
+    #     exe = self._get_cmb_executable(combobox)
+    #     ApplicationManager.setDefaultXFCEApp("TerminalEmulator", exe)
 
     
     def _get_cmb_application(self, combobox):
@@ -928,7 +928,9 @@ class MainWindow:
         ApplicationManager.setDefaultApp("application/x-shellscript", desktop_file)
         ApplicationManager.setDefaultApp("application/xml", desktop_file)
         ApplicationManager.setDefaultApp("application/xml-dtd", desktop_file)
-    
+
+    def on_ui_otherdefaultapps_button_clicked(self, button):
+        subprocess.Popen(["xfce4-mime-settings"])
 
     # Restore Defaults
     def on_btn_restore_panel_clicked(self, button):

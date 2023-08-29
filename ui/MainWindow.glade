@@ -3579,7 +3579,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Browser</property>
+                                <property name="label" translatable="yes">Text Editor</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -3592,7 +3592,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">File Manager</property>
+                                <property name="label" translatable="yes">Picture</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -3605,7 +3605,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">E-Mail</property>
+                                <property name="label" translatable="yes">Music</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -3631,51 +3631,12 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Music</property>
+                                <property name="label" translatable="yes">Other</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Picture</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Text Editor</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">6</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label" translatable="yes">Terminal</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">7</property>
                               </packing>
                             </child>
                           </object>
@@ -3694,108 +3655,16 @@
                             <property name="spacing">11</property>
                             <property name="homogeneous">True</property>
                             <child>
-                              <object class="GtkComboBox" id="cmb_default_browser">
+                              <object class="GtkAppChooserButton" id="cmb_default_editor">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="model">lst_default_browser</property>
-                                <property name="active">0</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_default_browser_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererPixbuf"/>
-                                  <attributes>
-                                    <attribute name="icon-name">2</attribute>
-                                  </attributes>
-                                </child>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
+                                <property name="content-type">text/plain</property>
+                                <signal name="changed" handler="on_cmb_default_editor_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_default_filemanager">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_default_filemanager</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_default_filemanager_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererPixbuf"/>
-                                  <attributes>
-                                    <attribute name="icon-name">2</attribute>
-                                  </attributes>
-                                </child>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkComboBox" id="cmb_default_email">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="model">lst_default_email</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_default_email_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererPixbuf"/>
-                                  <attributes>
-                                    <attribute name="icon-name">2</attribute>
-                                  </attributes>
-                                </child>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="cmb_default_video">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="content-type">video/mp4</property>
-                                <signal name="changed" handler="on_cmb_default_video_changed" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="cmb_default_music">
-                                <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="content-type">audio/mpeg</property>
-                                <signal name="changed" handler="on_cmb_default_music_changed" swapped="no"/>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">4</property>
                               </packing>
                             </child>
                             <child>
@@ -3808,46 +3677,47 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="position">5</property>
+                                <property name="position">1</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkAppChooserButton" id="cmb_default_editor">
+                              <object class="GtkAppChooserButton" id="cmb_default_video">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="content-type">text/plain</property>
-                                <signal name="changed" handler="on_cmb_default_editor_changed" swapped="no"/>
+                                <property name="content-type">video/mp4</property>
+                                <signal name="changed" handler="on_cmb_default_video_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="position">6</property>
+                                <property name="position">2</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkComboBox" id="cmb_default_terminal">
+                              <object class="GtkAppChooserButton" id="cmb_default_music">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="model">lst_default_terminal</property>
-                                <property name="id-column">0</property>
-                                <signal name="changed" handler="on_cmb_default_terminal_changed" swapped="no"/>
-                                <child>
-                                  <object class="GtkCellRendererPixbuf"/>
-                                  <attributes>
-                                    <attribute name="icon-name">2</attribute>
-                                  </attributes>
-                                </child>
-                                <child>
-                                  <object class="GtkCellRendererText"/>
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
+                                <property name="content-type">audio/mpeg</property>
+                                <signal name="changed" handler="on_cmb_default_music_changed" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="position">7</property>
+                                <property name="position">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="ui_otherdefaultapps_button">
+                                <property name="label" translatable="yes">Other Default Applications</property>
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_ui_otherdefaultapps_button_clicked" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
                               </packing>
                             </child>
                           </object>
