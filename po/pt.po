@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# Portuguese translation of pardus-xfce-tweaks.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the pardus-xfce-tweaks package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Hugo Carvalho <hugokarvalho@hotmail.com>, 2023.
 #
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-20 01:33+0300\n"
-"PO-Revision-Date: 2023-08-26 17:09+0100\n"
+"POT-Creation-Date: 2023-08-29 18:43+0300\n"
+"PO-Revision-Date: 2023-08-31 11:35+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Select Application"
 msgstr "Selecionar aplicação"
 
-#: ui/MainWindow.glade:52 ui/MainWindow.glade:4252
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4118
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -116,12 +116,12 @@ msgid "5 Hours"
 msgstr "5 horas"
 
 #: ui/MainWindow.glade:352
-msgid "Wallpapers"
-msgstr "Papéis de parede"
+msgid "Wallpaper"
+msgstr "Papel de parede"
 
 #: ui/MainWindow.glade:393
-msgid "Themes"
-msgstr "Temas"
+msgid "Theme"
+msgstr "Tema"
 
 #: ui/MainWindow.glade:434 ui/MainWindow.glade:1033
 msgid "Display"
@@ -220,8 +220,8 @@ msgstr ""
 "<b>Super + Espaço</b></span>"
 
 #: ui/MainWindow.glade:1607
-msgid "Show Language Indicator on Panel"
-msgstr "Mostrar indicador de idioma no painel"
+msgid "Show Keyboard Indicator on Panel"
+msgstr "Mostrar indicador de teclado no painel"
 
 #: ui/MainWindow.glade:1710
 msgid "System Font"
@@ -287,8 +287,8 @@ msgstr "Terminar sessão"
 msgid "Hybrid Sleep"
 msgstr "Suspensão híbrida"
 
-#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3980 ui/MainWindow.glade:3994
-#: ui/MainWindow.glade:4008 ui/MainWindow.glade:4265
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3846 ui/MainWindow.glade:3860
+#: ui/MainWindow.glade:3874 ui/MainWindow.glade:4131
 msgid "Restore to Defaults"
 msgstr "Repor as predefinições"
 
@@ -325,96 +325,88 @@ msgid "Clear Selection"
 msgstr "Limpar a seleção"
 
 #: ui/MainWindow.glade:3582
-msgid "Browser"
-msgstr "Navegador"
+msgid "Text Editor"
+msgstr "Editor de texto"
 
 #: ui/MainWindow.glade:3595
-msgid "File Manager"
-msgstr "Gestor de ficheiros"
+msgid "Picture"
+msgstr "Imagem"
 
 #: ui/MainWindow.glade:3608
-msgid "E-Mail"
-msgstr "Correio"
+msgid "Music"
+msgstr "Música"
 
 #: ui/MainWindow.glade:3621
 msgid "Video"
 msgstr "Vídeo"
 
 #: ui/MainWindow.glade:3634
-msgid "Music"
-msgstr "Música"
+msgid "Others"
+msgstr "Outros"
 
-#: ui/MainWindow.glade:3647
-msgid "Picture"
-msgstr "Imagem"
+#: ui/MainWindow.glade:3711
+msgid "Other Default Applications"
+msgstr "Outras aplicações predefinidas"
 
-#: ui/MainWindow.glade:3660
-msgid "Text Editor"
-msgstr "Editor de texto"
-
-#: ui/MainWindow.glade:3673
-msgid "Terminal"
-msgstr "Terminal"
-
-#: ui/MainWindow.glade:3890
+#: ui/MainWindow.glade:3756
 msgid "Restore Default Settings"
 msgstr "Restaurar as definições predefinidas"
 
-#: ui/MainWindow.glade:3930
+#: ui/MainWindow.glade:3796
 msgid "Panel Settings"
 msgstr "Definições do painel"
 
-#: ui/MainWindow.glade:3943
+#: ui/MainWindow.glade:3809
 msgid "File Manager(Thunar) Settings"
 msgstr "Definições do gestor de ficheiros(Thunar)"
 
-#: ui/MainWindow.glade:3956
-msgid "All XFCE Settings"
-msgstr "Todas as definições do XFCE"
+#: ui/MainWindow.glade:3822
+msgid "All Xfce Settings"
+msgstr "Todas as definições do Xfce"
 
-#: ui/MainWindow.glade:4059
+#: ui/MainWindow.glade:3925
 msgid "Pardus Xfce Tweaks"
 msgstr "Ajustes do Xfce Pardus"
 
-#: ui/MainWindow.glade:4088
+#: ui/MainWindow.glade:3954
 msgid "Generating Languages"
 msgstr "A gerar idiomas"
 
-#: ui/MainWindow.glade:4089
+#: ui/MainWindow.glade:3955
 msgid "This may take a while."
 msgstr "Isto pode demorar algum tempo."
 
-#: ui/MainWindow.glade:4143
+#: ui/MainWindow.glade:4009
 msgid "Error"
 msgstr "Erro"
 
-#: ui/MainWindow.glade:4144
+#: ui/MainWindow.glade:4010
 msgid "Couldn't generate languages."
 msgstr "Não foi possível gerar idiomas."
 
-#: ui/MainWindow.glade:4160
+#: ui/MainWindow.glade:4026
 msgid "Close"
 msgstr "Fechar"
 
-#: ui/MainWindow.glade:4191
+#: ui/MainWindow.glade:4057
 msgid "Success"
 msgstr "Sucesso"
 
-#: ui/MainWindow.glade:4192
+#: ui/MainWindow.glade:4058
 msgid "You need to log out and log in again to see the changes."
 msgstr ""
 "É necessário terminar a sessão e iniciar sessão novamente para ver as "
 "alterações."
 
-#: ui/MainWindow.glade:4208
+#: ui/MainWindow.glade:4074
 msgid "OK"
 msgstr "Aceitar"
 
-#: ui/MainWindow.glade:4239
+#: ui/MainWindow.glade:4105
 msgid "Attention"
 msgstr "Atenção"
 
-#: ui/MainWindow.glade:4240
+#: ui/MainWindow.glade:4106
 msgid ""
 "All custom configurations will be reverted to defaults. Do you want to "
 "continue?"
@@ -422,6 +414,18 @@ msgstr ""
 "Todas as configurações personalizadas serão revertidas para as "
 "predefinições. Deseja continuar?"
 
-#: ui/MainWindow.glade:4301
+#: ui/MainWindow.glade:4167
 msgid "Tweak Pardus Xfce settings."
 msgstr "Ajustar as definições do Xfce Pardus."
+
+#~ msgid "Browser"
+#~ msgstr "Navegador"
+
+#~ msgid "File Manager"
+#~ msgstr "Gestor de ficheiros"
+
+#~ msgid "E-Mail"
+#~ msgstr "Correio"
+
+#~ msgid "Terminal"
+#~ msgstr "Terminal"
