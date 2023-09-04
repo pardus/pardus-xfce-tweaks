@@ -1,9 +1,12 @@
 [Desktop Entry]
 Name=Pardus Xfce Tweaks
+Name[pt]=Ajustes do Xfce Pardus
 Name[tr]=Pardus Xfce İnce Ayarlar
 GenericName=Xfce Tweaks
+GenericName[pt]=Ajustes do Xfce Pardus
 GenericName[tr]=Xfce İnce Ayarlar
 Comment=Tweak Pardus Xfce settings
+Comment[pt]=Ajustar as definições do Xfce Pardus
 Comment[tr]=Pardus Xfce ayarlarını değiştirin
 Exec=pardus-xfce-tweaks
 Icon=pardus-xfce-tweaks
@@ -12,4 +15,5 @@ Type=Application
 Categories=Settings;XFCE;X-XFCE-SettingsDialog;X-Pardus-Apps;
 StartupNotify=true
 Keywords=xfce;tweaks;settings;pardus;
+Keywords[pt]=xfce;ajustes;definições;pardus;
 Keywords[tr]=xfce;ince;ayarlar;pardus;
