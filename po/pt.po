@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-29 18:43+0300\n"
-"PO-Revision-Date: 2023-08-31 11:35+0100\n"
+"PO-Revision-Date: 2023-09-04 14:53+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: ui/MainWindow.glade:38
 msgid "Select Application"
@@ -189,7 +189,7 @@ msgstr "<b>Tamanho do cursor do rato</b> (px):"
 
 #: ui/MainWindow.glade:1214
 msgid "Add / Remove Keyboard layouts"
-msgstr "Adicionar / Remover esquemas de teclado"
+msgstr "Adicionar / Remover disposições de teclado"
 
 #: ui/MainWindow.glade:1271 ui/MainWindow.glade:1311
 msgid "Turkish - Q Keyboard"
@@ -216,7 +216,8 @@ msgid ""
 "<span size=\"10000\">You can switch between keyboard layouts with:\n"
 "<b>Super + Space</b></span>"
 msgstr ""
-"<span size=\"10000\">É possível alternar entre esquemas de teclado com:\n"
+"<span size=\"10000\">É possível alternar entre disposições de teclado "
+"com:\n"
 "<b>Super + Espaço</b></span>"
 
 #: ui/MainWindow.glade:1607
@@ -298,11 +299,11 @@ msgstr "A usar a bateria"
 
 #: ui/MainWindow.glade:2778 ui/MainWindow.glade:2988
 msgid "When Laptop Screen is Closed:"
-msgstr "Quando fechar o tampa do portátil:"
+msgstr "Quando fechar a tampa do portátil:"
 
 #: ui/MainWindow.glade:2791 ui/MainWindow.glade:3001 ui/MainWindow.glade:3208
 msgid "Screen Off After:"
-msgstr "Desligar ecrã após:"
+msgstr "Desligar o ecrã após:"
 
 #: ui/MainWindow.glade:2804 ui/MainWindow.glade:3014 ui/MainWindow.glade:3221
 msgid "Put to Sleep After:"
