@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAdjustment" id="adj_cursorSize">
@@ -2096,7 +2096,7 @@
                                     <property name="can-focus">False</property>
                                     <property name="label">12:34</property>
                                     <attributes>
-                                      <attribute name="font-desc" value="Quicksand Medium, Bold 14"/>
+                                      <attribute name="font-desc" value="Quicksand Medium, Bold 16"/>
                                     </attributes>
                                   </object>
                                 </child>
@@ -2149,7 +2149,7 @@
                                         <property name="can-focus">False</property>
                                         <property name="label">12:34</property>
                                         <attributes>
-                                          <attribute name="font-desc" value="Quicksand Medium, Bold 14"/>
+                                          <attribute name="font-desc" value="Quicksand Medium, Bold 15"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -2162,9 +2162,9 @@
                                       <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="label">01/01/2023</property>
+                                        <property name="label">30.08.2023</property>
                                         <attributes>
-                                          <attribute name="font-desc" value="Quicksand Medium, Bold 12"/>
+                                          <attribute name="font-desc" value="Quicksand Medium, Bold 10"/>
                                         </attributes>
                                       </object>
                                       <packing>

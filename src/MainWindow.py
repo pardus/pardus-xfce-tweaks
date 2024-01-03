@@ -665,14 +665,14 @@ class MainWindow:
         DatetimeManager.set("layout", "1")
         DatetimeManager.set("date_font", "Quicksand Medium, Bold 8")
         DatetimeManager.set("time_font", "Quicksand Medium, Bold 9")
-        DatetimeManager.set("date_format", "%d/%m/%Y")
+        DatetimeManager.set("date_format", "%d.%m.%Y")
         DatetimeManager.set("time_format", "%H:%M")
 
         DatetimeManager.set_panel_clock("digital-layout", "1")
         DatetimeManager.set_panel_clock("digital-time-font", "Quicksand\ Medium,\ Bold\ 15")
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
         DatetimeManager.set_panel_clock("digital-date-font", "Quicksand\ Medium,\ Bold\ 10")
-        DatetimeManager.set_panel_clock("digital-date-format", "%d/%m/%Y")
+        DatetimeManager.set_panel_clock("digital-date-format", "%d.%m.%Y")
 
         DatetimeManager.saveFile()
     
