@@ -1,3 +1,17 @@
+pardus-xfce-tweaks (0.2.4) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+  * Add Portuguese translations
+  * Update Portuguese translations
+
+  [ Fatih Altun ]
+  * Add time format to clock format for old plugin too
+  * Update date format
+  * Update copyright to 2024
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jan 2024 11:23:49 +0300
+
 pardus-xfce-tweaks (0.2.3) unstable; urgency=medium
 
   * Disable default xfce exo type apps due to buggy work
