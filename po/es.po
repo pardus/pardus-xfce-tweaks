@@ -1,0 +1,415 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <migueldecode@gmail.com>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-29 18:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Miguel Decode <migueldecode@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ui/MainWindow.glade:38
+msgid "Select Application"
+msgstr "Seleccionar aplicación"
+
+#: ui/MainWindow.glade:52 ui/MainWindow.glade:4118
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ui/MainWindow.glade:65
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ui/MainWindow.glade:158
+msgid "Screen Off"
+msgstr "Apagar pantalla"
+
+#: ui/MainWindow.glade:162 ui/MainWindow.glade:2373
+msgid "Suspend"
+msgstr "Suspender"
+
+#: ui/MainWindow.glade:166 ui/MainWindow.glade:2414
+msgid "Hibernate"
+msgstr "Hibernar"
+
+#: ui/MainWindow.glade:170 ui/MainWindow.glade:2291
+msgid "Lock Screen"
+msgstr "Bloquear pantalla"
+
+#: ui/MainWindow.glade:184 ui/MainWindow.glade:262
+msgid "Never"
+msgstr "Nunca"
+
+#: ui/MainWindow.glade:188
+msgid "1 Minute"
+msgstr "1 Minuto"
+
+#: ui/MainWindow.glade:192
+msgid "2 Minutes"
+msgstr "2 Minutos"
+
+#: ui/MainWindow.glade:196
+msgid "3 Minutes"
+msgstr "3 Minutos"
+
+#: ui/MainWindow.glade:200
+msgid "4 Minutes"
+msgstr "4 Minutos"
+
+#: ui/MainWindow.glade:204
+msgid "5 Minutes"
+msgstr "5 Minutos"
+
+#: ui/MainWindow.glade:208
+msgid "10 Minutes"
+msgstr "10 Minutos"
+
+#: ui/MainWindow.glade:212 ui/MainWindow.glade:266
+msgid "15 Minutes"
+msgstr "15 Minutos"
+
+#: ui/MainWindow.glade:216 ui/MainWindow.glade:270
+msgid "20 Minutes"
+msgstr "20 Minutos"
+
+#: ui/MainWindow.glade:220 ui/MainWindow.glade:274
+msgid "25 Minutes"
+msgstr "25 Minutos"
+
+#: ui/MainWindow.glade:224 ui/MainWindow.glade:278
+msgid "30 Minutes"
+msgstr "30 Minutos"
+
+#: ui/MainWindow.glade:228 ui/MainWindow.glade:282
+msgid "45 Minutes"
+msgstr "45 Minutos"
+
+#: ui/MainWindow.glade:232 ui/MainWindow.glade:286
+msgid "1 Hour"
+msgstr "1 Hora"
+
+#: ui/MainWindow.glade:236 ui/MainWindow.glade:290
+msgid "2 Hours"
+msgstr "2 Horas"
+
+#: ui/MainWindow.glade:240 ui/MainWindow.glade:294
+msgid "3 Hours"
+msgstr "3 Horas"
+
+#: ui/MainWindow.glade:244 ui/MainWindow.glade:298
+msgid "4 Hours"
+msgstr "4 Horas"
+
+#: ui/MainWindow.glade:248 ui/MainWindow.glade:302
+msgid "5 Hours"
+msgstr "5 Horas"
+
+#: ui/MainWindow.glade:352
+msgid "Wallpaper"
+msgstr "Fondo de escritorio"
+
+#: ui/MainWindow.glade:393
+msgid "Theme"
+msgstr "Tema"
+
+#: ui/MainWindow.glade:434 ui/MainWindow.glade:1033
+msgid "Display"
+msgstr "Pantalla"
+
+#: ui/MainWindow.glade:475
+msgid "Keyboard"
+msgstr "Teclado"
+
+#: ui/MainWindow.glade:516 ui/MainWindow.glade:1670
+msgid "Fonts"
+msgstr "Fuentes"
+
+#: ui/MainWindow.glade:557 ui/MainWindow.glade:1823
+msgid "Languages"
+msgstr "Idiomas"
+
+#: ui/MainWindow.glade:598 ui/MainWindow.glade:2050
+msgid "Clock"
+msgstr "Reloj"
+
+#: ui/MainWindow.glade:639 ui/MainWindow.glade:2230
+msgid "Panel Preferences"
+msgstr "Panel de Preferencias"
+
+#: ui/MainWindow.glade:680
+msgid "Power Management"
+msgstr "Gestor de energia"
+
+#: ui/MainWindow.glade:721 ui/MainWindow.glade:3345
+msgid "Startup Applications"
+msgstr "Aplicaciones al arranque"
+
+#: ui/MainWindow.glade:762 ui/MainWindow.glade:3542
+msgid "Default Applications"
+msgstr "Aplicaciones por defecto"
+
+#: ui/MainWindow.glade:803
+msgid "Restore Defaults"
+msgstr "Restaurar por defecto"
+
+#: ui/MainWindow.glade:929
+msgid "Light"
+msgstr "Claro"
+
+#: ui/MainWindow.glade:981
+msgid "Dark"
+msgstr "Oscuro"
+
+#: ui/MainWindow.glade:1062
+msgid "<b>Scaling:</b>"
+msgstr "<b>Escalado:</b>"
+
+#: ui/MainWindow.glade:1094
+msgid "<b>Panel Size</b> (px):"
+msgstr "<b>Tamaño panel</b> (px):"
+
+#: ui/MainWindow.glade:1124
+msgid "<b>Desktop Icon Size</b> (px):"
+msgstr "<b>Tamaño icono escritorio</b> (px):"
+
+#: ui/MainWindow.glade:1154
+msgid "<b>Mouse Cursor Size</b> (px):"
+msgstr "<b>Tamaño cursor ratón</b> (px):"
+
+#: ui/MainWindow.glade:1214
+msgid "Add / Remove Keyboard layouts"
+msgstr "Añadir / Quitar disposición teclado"
+
+#: ui/MainWindow.glade:1271 ui/MainWindow.glade:1311
+msgid "Turkish - Q Keyboard"
+msgstr "Turco - Q Teclado"
+
+#: ui/MainWindow.glade:1281 ui/MainWindow.glade:1380 ui/MainWindow.glade:1479
+msgid "Add"
+msgstr "Añadir"
+
+#: ui/MainWindow.glade:1321 ui/MainWindow.glade:1420 ui/MainWindow.glade:1519
+msgid "Remove"
+msgstr "Quitar"
+
+#: ui/MainWindow.glade:1370 ui/MainWindow.glade:1410
+msgid "Turkish - F Keyboard"
+msgstr "Turco - F Teclado"
+
+#: ui/MainWindow.glade:1469 ui/MainWindow.glade:1509
+msgid "English Keyboard"
+msgstr "Teclado Inglés"
+
+#: ui/MainWindow.glade:1562
+msgid ""
+"<span size=\"10000\">You can switch between keyboard layouts with:\n"
+"<b>Super + Space</b></span>"
+msgstr ""
+"<span size=\"10000\">Puedes cambiar entre disposiciones del teclado con:\n"
+"<b>Super + Espacio</b></span>"
+
+#: ui/MainWindow.glade:1607
+msgid "Show Keyboard Indicator on Panel"
+msgstr "Muestra el indicador de teclado en el panel"
+
+#: ui/MainWindow.glade:1710
+msgid "System Font"
+msgstr "Fuente Sistema"
+
+#: ui/MainWindow.glade:1723
+msgid "Monospace Font"
+msgstr "Fuente Monospace"
+
+#: ui/MainWindow.glade:1754 ui/MainWindow.glade:1773
+msgid "Select Font"
+msgstr "Seleccionar fuente"
+
+#: ui/MainWindow.glade:1857
+msgid "Installed"
+msgstr "Instalada"
+
+#: ui/MainWindow.glade:1898
+msgid "Not Installed"
+msgstr "No instalada"
+
+#: ui/MainWindow.glade:1946
+msgid "Set as Default"
+msgstr "Ajustar por defecto"
+
+#: ui/MainWindow.glade:1963
+msgid "Default System Language"
+msgstr "Idioma por defecto del sistema"
+
+#: ui/MainWindow.glade:2001
+msgid "Save Changes"
+msgstr "Guardar Cambios"
+
+#: ui/MainWindow.glade:2114
+msgid "Time Only"
+msgstr "Solo Hora"
+
+#: ui/MainWindow.glade:2189
+msgid "Date & Time"
+msgstr "Fecha y Hora"
+
+#: ui/MainWindow.glade:2332
+msgid "Switch User"
+msgstr "Intercambiar usuario"
+
+#: ui/MainWindow.glade:2455
+msgid "Shutdown"
+msgstr "Apagar"
+
+#: ui/MainWindow.glade:2496
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: ui/MainWindow.glade:2537
+msgid "Log Out (Dialog)"
+msgstr "Cerrar sesión (Dialog)"
+
+#: ui/MainWindow.glade:2578
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+#: ui/MainWindow.glade:2619
+msgid "Hybrid Sleep"
+msgstr "Suspensión híbrida"
+
+#: ui/MainWindow.glade:2664 ui/MainWindow.glade:3846 ui/MainWindow.glade:3860
+#: ui/MainWindow.glade:3874 ui/MainWindow.glade:4131
+msgid "Restore to Defaults"
+msgstr "Restaurar a Defecto"
+
+#: ui/MainWindow.glade:2718
+msgid "On Battery"
+msgstr "En batería"
+
+#: ui/MainWindow.glade:2778 ui/MainWindow.glade:2988
+msgid "When Laptop Screen is Closed:"
+msgstr "Cuando la pantalla del portátil está cerrada:"
+
+#: ui/MainWindow.glade:2791 ui/MainWindow.glade:3001 ui/MainWindow.glade:3208
+msgid "Screen Off After:"
+msgstr "Apagar la pantalla después de:"
+
+#: ui/MainWindow.glade:2804 ui/MainWindow.glade:3014 ui/MainWindow.glade:3221
+msgid "Put to Sleep After:"
+msgstr "Poner en suspensión después de:"
+
+#: ui/MainWindow.glade:2928 ui/MainWindow.glade:3147
+msgid "Plugged in"
+msgstr "Enchufado"
+
+#: ui/MainWindow.glade:3406
+msgid "<b>+</b> New"
+msgstr "<b>+</b> Nuevo"
+
+#: ui/MainWindow.glade:3473
+msgid "Delete"
+msgstr "Borrar"
+
+#: ui/MainWindow.glade:3496
+msgid "Clear Selection"
+msgstr "Borrar selección"
+
+#: ui/MainWindow.glade:3582
+msgid "Text Editor"
+msgstr "Editor de texto"
+
+#: ui/MainWindow.glade:3595
+msgid "Picture"
+msgstr "Imagen"
+
+#: ui/MainWindow.glade:3608
+msgid "Music"
+msgstr "Música"
+
+#: ui/MainWindow.glade:3621
+msgid "Video"
+msgstr "Video"
+
+#: ui/MainWindow.glade:3634
+msgid "Others"
+msgstr "Otros"
+
+#: ui/MainWindow.glade:3711
+msgid "Other Default Applications"
+msgstr "Otras aplicaciones por defecto"
+
+#: ui/MainWindow.glade:3756
+msgid "Restore Default Settings"
+msgstr "Restaurar a ajustes por defecto"
+
+#: ui/MainWindow.glade:3796
+msgid "Panel Settings"
+msgstr "Panel de ajustes"
+
+#: ui/MainWindow.glade:3809
+msgid "File Manager(Thunar) Settings"
+msgstr "Ajuster Gestor Ficheros(Thunar)"
+
+#: ui/MainWindow.glade:3822
+msgid "All Xfce Settings"
+msgstr "Todos los ajustes Xfce"
+
+#: ui/MainWindow.glade:3925
+msgid "Pardus Xfce Tweaks"
+msgstr "Retoques Pardus Xfce"
+
+#: ui/MainWindow.glade:3954
+msgid "Generating Languages"
+msgstr "Generando Idiomas"
+
+#: ui/MainWindow.glade:3955
+msgid "This may take a while."
+msgstr "Esto puede llevar un rato."
+
+#: ui/MainWindow.glade:4009
+msgid "Error"
+msgstr "Error"
+
+#: ui/MainWindow.glade:4010
+msgid "Couldn't generate languages."
+msgstr "No se puede generar los idiomas."
+
+#: ui/MainWindow.glade:4026
+msgid "Close"
+msgstr "Cerrar"
+
+#: ui/MainWindow.glade:4057
+msgid "Success"
+msgstr "Éxito"
+
+#: ui/MainWindow.glade:4058
+msgid "You need to log out and log in again to see the changes."
+msgstr "Es necesario cerrar sesión y volver a loguearse para ver los cambios."
+
+#: ui/MainWindow.glade:4074
+msgid "OK"
+msgstr "OK"
+
+#: ui/MainWindow.glade:4105
+msgid "Attention"
+msgstr "Atención"
+
+#: ui/MainWindow.glade:4106
+msgid ""
+"All custom configurations will be reverted to defaults. Do you want to "
+"continue?"
+msgstr ""
+"Todas las configuraciones serán revertidas a su estado por defecto. ¿Quieres "
+"continuar?"
+
+#: ui/MainWindow.glade:4167
+msgid "Tweak Pardus Xfce settings."
+msgstr "Ajustes de Retoques Pardus Xfce"
