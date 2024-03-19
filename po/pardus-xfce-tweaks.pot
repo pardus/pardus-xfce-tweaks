@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 18:43+0300\n"
+"POT-Creation-Date: 2024-03-19 11:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,11 +239,11 @@ msgstr ""
 msgid "Not Installed"
 msgstr ""
 
-#: ui/MainWindow.glade:1946
+#: ui/MainWindow.glade:1946 src/MainWindow.py:324
 msgid "Set as Default"
 msgstr ""
 
-#: ui/MainWindow.glade:1963
+#: ui/MainWindow.glade:1963 src/MainWindow.py:301
 msgid "Default System Language"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 msgid "All Xfce Settings"
 msgstr ""
 
-#: ui/MainWindow.glade:3925
+#: ui/MainWindow.glade:3925 src/MainWindow.py:118
 msgid "Pardus Xfce Tweaks"
 msgstr ""
 
@@ -408,4 +408,13 @@ msgstr ""
 
 #: ui/MainWindow.glade:4167
 msgid "Tweak Pardus Xfce settings."
+msgstr ""
+
+#. Name Surname <example@examplemail.com>
+#: ui/MainWindow.glade:4171
+msgid "translator-credits"
+msgstr ""
+
+#: src/MainWindow.py:122
+msgid "About Pardus Xfce Tweaks"
 msgstr ""
