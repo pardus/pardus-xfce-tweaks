@@ -10,17 +10,17 @@ gi.require_version('Xfconf', '0')
 from gi.repository import GLib, Gtk, GdkPixbuf, Xfconf
 
 import locale
-from locale import gettext as tr
+from locale import gettext as _
 
 # Translation Constants:
 APPNAME = "pardus-xfce-tweaks"
 TRANSLATIONS_PATH = "/usr/share/locale"
-SYSTEM_LANGUAGE = os.environ.get("LANG")
+# SYSTEM_LANGUAGE = os.environ.get("LANG")
 
 # Translation functions:
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
-locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
+# locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 
 def getenv(str):
@@ -115,11 +115,11 @@ class MainWindow:
             return self.builder.get_object(str)
 
         self.ui_about_dialog   = UI("ui_about_dialog")
-        self.ui_about_dialog.set_program_name(tr("Pardus Xfce Tweaks"))
+        self.ui_about_dialog.set_program_name(_("Pardus Xfce Tweaks"))
         if self.ui_about_dialog.get_titlebar() is None:
             about_headerbar = Gtk.HeaderBar.new()
             about_headerbar.set_show_close_button(True)
-            about_headerbar.set_title(tr("About Pardus Xfce Tweaks"))
+            about_headerbar.set_title(_("About Pardus Xfce Tweaks"))
             about_headerbar.pack_start(Gtk.Image.new_from_icon_name("pardus-xfce-tweaks", Gtk.IconSize.LARGE_TOOLBAR))
             about_headerbar.show_all()
             self.ui_about_dialog.set_titlebar(about_headerbar)
@@ -298,7 +298,7 @@ class MainWindow:
         if isInstalled:
             # Default Indicator
             default_img = Gtk.Image.new_from_icon_name("emblem-default-symbolic", Gtk.IconSize.BUTTON)
-            default_img.set_tooltip_text(tr("Default System Language"))
+            default_img.set_tooltip_text(_("Default System Language"))
             default_img.set_no_show_all(True)
             default_img.set_visible(lang == self.default_locale)
             default_img.set_margin_end(9)
@@ -321,7 +321,7 @@ class MainWindow:
 
             # btn_default.set_relief(Gtk.ReliefStyle.NONE)
             btn_default.set_name(f"{lang} {codeset}")
-            btn_default.set_tooltip_text(tr("Set as Default"))
+            btn_default.set_tooltip_text(_("Set as Default"))
             btn_default.set_no_show_all(True)
             btn_default.set_visible(lang != self.default_locale)
 
