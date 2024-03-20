@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pardus-xfce-tweaks package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 18:43+0300\n"
-"PO-Revision-Date: 2023-09-04 14:53+0100\n"
+"POT-Creation-Date: 2024-03-19 11:15+0300\n"
+"PO-Revision-Date: 2024-03-20 17:55+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ui/MainWindow.glade:38
 msgid "Select Application"
@@ -244,11 +244,11 @@ msgstr "Instalado"
 msgid "Not Installed"
 msgstr "Não instalado"
 
-#: ui/MainWindow.glade:1946
+#: ui/MainWindow.glade:1946 src/MainWindow.py:324
 msgid "Set as Default"
 msgstr "Definir como predefinido"
 
-#: ui/MainWindow.glade:1963
+#: ui/MainWindow.glade:1963 src/MainWindow.py:301
 msgid "Default System Language"
 msgstr "Idioma predefinido do sistema"
 
@@ -359,13 +359,13 @@ msgstr "Definições do painel"
 
 #: ui/MainWindow.glade:3809
 msgid "File Manager(Thunar) Settings"
-msgstr "Definições do gestor de ficheiros(Thunar)"
+msgstr "Definições do Gestor de ficheiros(Thunar)"
 
 #: ui/MainWindow.glade:3822
 msgid "All Xfce Settings"
 msgstr "Todas as definições do Xfce"
 
-#: ui/MainWindow.glade:3925
+#: ui/MainWindow.glade:3925 src/MainWindow.py:118
 msgid "Pardus Xfce Tweaks"
 msgstr "Ajustes do Xfce Pardus"
 
@@ -401,7 +401,7 @@ msgstr ""
 
 #: ui/MainWindow.glade:4074
 msgid "OK"
-msgstr "Aceitar"
+msgstr "OK"
 
 #: ui/MainWindow.glade:4105
 msgid "Attention"
@@ -418,6 +418,15 @@ msgstr ""
 #: ui/MainWindow.glade:4167
 msgid "Tweak Pardus Xfce settings."
 msgstr "Ajustar as definições do Xfce Pardus."
+
+#. Name Surname <example@examplemail.com>
+#: ui/MainWindow.glade:4171
+msgid "translator-credits"
+msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
+
+#: src/MainWindow.py:122
+msgid "About Pardus Xfce Tweaks"
+msgstr "Acerca do Ajustes do Xfce Pardus"
 
 #~ msgid "Browser"
 #~ msgstr "Navegador"
