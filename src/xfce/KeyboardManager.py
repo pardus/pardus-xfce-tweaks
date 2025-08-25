@@ -1,15 +1,16 @@
 import subprocess
 
 import gi
-gi.require_version('Xfconf', '0')
+
+gi.require_version("Xfconf", "0")
 from gi.repository import Xfconf
 
-Xfconf.init()
 keyboard_layout = Xfconf.Channel.new("keyboard-layout")
 xfce4_panel = Xfconf.Channel.new("xfce4-panel")
 
-keyboards = {"tr-":False, "tr-f":False, "us-":False}
+keyboards = {"tr-": False, "tr-f": False, "us-": False}
 keyboardPlugin = ""
+
 
 def initializeSettings():
     # Add Super + Space combination to change layouts
@@ -17,10 +18,11 @@ def initializeSettings():
 
     # Get system settings if disabled
     useSystemKeyboard = keyboard_layout.get_bool("/Default/XkbDisable", False)
-    
+
     if useSystemKeyboard:
         get_system_keyboards()
         set_keyboard_state()
+
 
 def set_keyboard_state():
     layouts = []
@@ -28,7 +30,7 @@ def set_keyboard_state():
 
     for key, value in keyboards.items():
         layout, variant = key.split("-")
-        
+
         if value:
             layouts.append(layout)
             variants.append(variant)
@@ -37,26 +39,38 @@ def set_keyboard_state():
     keyboard_layout.set_string("/Default/XkbVariant", ",".join(variants))
     keyboard_layout.set_bool("/Default/XkbDisable", False)
 
+
 # Add Keyboard Layouts:
 def setTurkishQ(state):
     keyboards["tr-"] = state
     set_keyboard_state()
 
+
 def setTurkishF(state):
     keyboards["tr-f"] = state
     set_keyboard_state()
+
 
 def setEnglish(state):
     keyboards["us-"] = state
     set_keyboard_state()
 
+
 # Get System's Keyboard
 def get_system_keyboards():
     global keyboards
 
-    layoutProcess = subprocess.run("cat /etc/default/keyboard | grep XKBLAYOUT | tr -d '\"'", shell=True, capture_output=True)
-    variantProcess = subprocess.run("cat /etc/default/keyboard | grep XKBVARIANT | tr -d '\"'", shell=True, capture_output=True)
-    
+    layoutProcess = subprocess.run(
+        "cat /etc/default/keyboard | grep XKBLAYOUT | tr -d '\"'",
+        shell=True,
+        capture_output=True,
+    )
+    variantProcess = subprocess.run(
+        "cat /etc/default/keyboard | grep XKBVARIANT | tr -d '\"'",
+        shell=True,
+        capture_output=True,
+    )
+
     layouts = layoutProcess.stdout.decode("utf-8").rstrip().split("=")[1].split(",")
     variants = variantProcess.stdout.decode("utf-8").rstrip().split("=")[1].split(",")
 
@@ -66,6 +80,7 @@ def get_system_keyboards():
             keyboards[key] = True
 
     return keyboards
+
 
 # Get Current Keyboard State
 def getKeyboardState():
@@ -87,28 +102,23 @@ def getKeyboardState():
         key = layouts[i] + "-" + variants[i]
         if key in keyboards:
             keyboards[key] = True
-    
+
     return keyboards
 
 
 def refreshPanel():
-    subprocess.call([
-        "xfce4-panel",
-        "-r"
-    ])
+    subprocess.call(["xfce4-panel", "-r"])
+
 
 # PLUGIN:
 def createKeyboardPlugin():
     global xfce4_panel
     # Add keyboard
-    subprocess.call([
-        "xfce4-panel",
-        "--add=xkb"
-    ])
+    subprocess.call(["xfce4-panel", "--add=xkb"])
 
     getKeyboardPlugin()
     changeKeyboardPluginPlacement()
-    
+
     # Display Language Name (not country)
     xfce4_panel.set_uint(f"/plugins/{keyboardPlugin}/display-name", 1)
 
@@ -121,8 +131,9 @@ def createKeyboardPlugin():
 
 def removeKeyboardPlugin():
     global xfce4_panel
-    if keyboardPlugin == "": return
-    
+    if keyboardPlugin == "":
+        return
+
     # Remove plugin
     xfce4_panel.reset_property(f"/plugins/{keyboardPlugin}", True)
 
@@ -138,22 +149,24 @@ def getKeyboardPlugin():
             keyboardPlugin = key.split("/")[2]
 
             return keyboardPlugin
-    
+
     return ""
+
 
 def changeKeyboardPluginPlacement():
     global xfce4_panel
-    if keyboardPlugin == "": return
-    
+    if keyboardPlugin == "":
+        return
+
     pluginList = xfce4_panel.get_arrayv("/panels/panel-1/plugin-ids")
     pluginID = int(keyboardPlugin.split("-")[1])
     if pluginID not in pluginList:
         pluginList.append(pluginID)
     elif pluginID == pluginList[-2]:
         return
-    
+
     pluginList[-1], pluginList[-2] = pluginList[-2], pluginList[-1]
-    
+
     xfce4_panel.set_arrayv("/panels/panel-1/plugin-ids", pluginList)
-    
+
     refreshPanel()
