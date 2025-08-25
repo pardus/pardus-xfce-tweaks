@@ -2,11 +2,12 @@
 
 import os
 import subprocess
+from gi.repository import Xfconf
 
 wallpaper_dir = "/usr/share/backgrounds/"
 
 
-def getWallpaperList():
+def get_wallpapers():
     wallpapers = []
     # Add wallpapers to list
     for root, dirs, files in os.walk(wallpaper_dir):
@@ -18,13 +19,17 @@ def getWallpaperList():
     return wallpapers
 
 
-def setWallpaper(wallpaper):
-    subprocess.call([
-        "/bin/sh", "-c",
-        f"xfconf-query -c xfce4-desktop -l | grep last-image | while read path; do xfconf-query -c xfce4-desktop -p $path -s {wallpaper}; done"
-    ])
+def set_wallpaper(wallpaper):
+    desktop = Xfconf.Channel.new("xfce4-desktop")
+    properties = desktop.get_properties("/backdrop")
+
+    for p in properties:
+        if "workspace" in p and "last-image" in p:
+            print("Wallpaper changed:")
+            print(p, " is set:", wallpaper)
+            desktop.set_string(p, wallpaper)
 
 
-def getResolution():
+def get_resolution():
     output = subprocess.check_output("xrandr | grep '*'", shell=True).decode("utf-8")
     return output.strip().split(" ")[0]

@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os, threading, subprocess
+import os
+import subprocess
 import shutil
 
 import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('Xfconf', '0')
-from gi.repository import GLib, Gtk, GdkPixbuf, Xfconf
+
+gi.require_version("Gtk", "3.0")
+gi.require_version("Xfconf", "0")
+from gi.repository import GLib, Gtk, GdkPixbuf, Gio, Xfconf
 
 import locale
 from locale import gettext as _
@@ -15,19 +17,23 @@ from locale import gettext as _
 # Translation Constants:
 APPNAME = "pardus-xfce-tweaks"
 TRANSLATIONS_PATH = "/usr/share/locale"
-# SYSTEM_LANGUAGE = os.environ.get("LANG")
 
 # Translation functions:
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
-# locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 
 def getenv(str):
     env = os.environ.get(str)
     return env if env else ""
-    
-if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP").lower():
+
+
+if (
+    "xfce" in getenv("SESSION").lower()
+    or "xfce" in getenv("XDG_CURRENT_DESKTOP").lower()
+):
+    Xfconf.init()
+
     import xfce.WallpaperManager as WallpaperManager
     import xfce.ThemeManager as ThemeManager
     import xfce.ScaleManager as ScaleManager
@@ -39,9 +45,11 @@ if "xfce" in getenv("SESSION").lower() or "xfce" in getenv("XDG_CURRENT_DESKTOP"
     import xfce.LocaleManager as LocaleManager
     import xfce.PanelManager as PanelManager
     import xfce.ThunarManager as ThunarManager
+
 else:
     print("This program requires XFCE desktop.")
     exit(0)
+
 
 class MainWindow:
     def __init__(self, application):
@@ -52,47 +60,47 @@ class MainWindow:
         self.builder.set_translation_domain(APPNAME)
 
         # Import UI file:
-        self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade")
+        self.builder.add_from_file(
+            os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
+        )
         self.builder.connect_signals(self)
 
         # Window
         self.window = self.builder.get_object("window")
         self.window.set_position(Gtk.WindowPosition.CENTER)
         self.window.set_application(application)
-        self.window.connect("destroy", self.onDestroy)
-        self.defineComponents()
-        
+        self.window.connect("destroy", self.on_destroy)
+        self.define_components()
+
         # Set application:
         self.application = application
 
         # Put Wallpapers on a Grid
-        thread = threading.Thread(target=self.addWallpapers, args=(WallpaperManager.getWallpaperList(),))
-        thread.daemon = True
-        thread.start()
+        self.get_wallpapers()
 
         # Set theme to system-default:
-        self.getThemeDefaults()
+        self.get_theme_defaults()
 
         # Set scales to system-default:
-        self.getScalingDefaults()
+        self.get_scaling_defaults()
 
         # Keyboard
-        self.getKeyboardDefaults()
+        self.get_keyboard_defaults()
 
         # Fonts
-        self.getFontDefaults()
+        self.get_font_defaults()
 
         # Languages
-        self.getLocales()
+        self.get_locales()
 
         # Panel
-        self.getPanelPreferences()
+        self.get_panel_preferences()
 
         # Power Management
-        self.getPowerDefaults()
+        self.get_power_defaults()
 
         # Startup Applications
-        self.getStartupApplications()
+        self.get_startup_applications()
 
         # Default Applications
         # self.getDefaultApplications()
@@ -101,32 +109,38 @@ class MainWindow:
 
         # Show Screen:
         self.window.show_all()
-    
+
     # Window methods:
-    def onDestroy(self, action):
+    def on_destroy(self, action):
         self.window.get_application().quit()
 
     def on_ui_about_button_clicked(self, button):
         self.ui_about_dialog.run()
         self.ui_about_dialog.hide()
 
-    def defineComponents(self):
+    def define_components(self):
         def UI(str):
             return self.builder.get_object(str)
 
-        self.ui_about_dialog   = UI("ui_about_dialog")
+        self.ui_about_dialog = UI("ui_about_dialog")
         self.ui_about_dialog.set_program_name(_("Pardus Xfce Tweaks"))
         if self.ui_about_dialog.get_titlebar() is None:
             about_headerbar = Gtk.HeaderBar.new()
             about_headerbar.set_show_close_button(True)
             about_headerbar.set_title(_("About Pardus Xfce Tweaks"))
-            about_headerbar.pack_start(Gtk.Image.new_from_icon_name("pardus-xfce-tweaks", Gtk.IconSize.LARGE_TOOLBAR))
+            about_headerbar.pack_start(
+                Gtk.Image.new_from_icon_name(
+                    "pardus-xfce-tweaks", Gtk.IconSize.LARGE_TOOLBAR
+                )
+            )
             about_headerbar.show_all()
             self.ui_about_dialog.set_titlebar(about_headerbar)
         # Set version
         # If not getted from __version__ file then accept version in MainWindow.glade file
         try:
-            version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
+            version = open(
+                os.path.dirname(os.path.abspath(__file__)) + "/__version__"
+            ).readline()
             self.ui_about_dialog.set_version(version)
         except:
             pass
@@ -137,44 +151,44 @@ class MainWindow:
         self.cmb_default_image = UI("cmb_default_image")
         self.cmb_default_editor = UI("cmb_default_editor")
 
-        self.nb_pages   = UI("nb_pages")
-        self.lb_rows    = UI("lb_rows")
+        self.nb_pages = UI("nb_pages")
+        self.lb_rows = UI("lb_rows")
 
         # Wallpapers
         self.flow_wallpapers = UI("flow_wallpapers")
 
         # Theme
-        self.rb_darkTheme   = UI("rb_darkTheme")
-        self.rb_lightTheme  = UI("rb_lightTheme")
+        self.rb_darkTheme = UI("rb_darkTheme")
+        self.rb_lightTheme = UI("rb_lightTheme")
 
         # Display
-        self.sli_cursor         = UI("sli_cursor")
-        self.sli_scaling        = UI("sli_scaling")
-        self.sli_desktopIcon    = UI("sli_desktopIcon")
-        self.sli_panel          = UI("sli_panel")
+        self.sli_cursor = UI("sli_cursor")
+        self.sli_scaling = UI("sli_scaling")
+        self.sli_desktopIcon = UI("sli_desktopIcon")
+        self.sli_panel = UI("sli_panel")
 
         # Keyboard
-        self.stk_trf            = UI("stk_trf")
-        self.stk_trq            = UI("stk_trq")
-        self.stk_en             = UI("stk_en")
-        self.btn_trf_remove     = UI("btn_trf_remove")
-        self.btn_trq_remove     = UI("btn_trq_remove")
-        self.btn_en_remove      = UI("btn_en_remove")
-        self.sw_lang_indicator  = UI("sw_lang_indicator")
+        self.stk_trf = UI("stk_trf")
+        self.stk_trq = UI("stk_trq")
+        self.stk_en = UI("stk_en")
+        self.btn_trf_remove = UI("btn_trf_remove")
+        self.btn_trq_remove = UI("btn_trq_remove")
+        self.btn_en_remove = UI("btn_en_remove")
+        self.sw_lang_indicator = UI("sw_lang_indicator")
 
         # Fonts
-        self.font_system        = UI("font_system")
-        self.font_monospace     = UI("font_monospace")
+        self.font_system = UI("font_system")
+        self.font_monospace = UI("font_monospace")
 
         # Languages
-        self.dialog_languages_generate          = UI("dialog_languages_generate")
-        self.dialog_languages_generate_failed   = UI("dialog_languages_generate_failed")
-        self.dialog_languages_generate_success   = UI("dialog_languages_generate_success")
-        self.revealer_languages                 = UI("revealer_languages")
-        self.box_languages                      = UI("box_languages")
-        self.btn_languages_lock                 = UI("btn_languages_lock")
-        self.lb_langs_installed                 = UI("lb_langs_installed")
-        self.lb_langs_not_installed             = UI("lb_langs_not_installed")
+        self.dialog_languages_generate = UI("dialog_languages_generate")
+        self.dialog_languages_generate_failed = UI("dialog_languages_generate_failed")
+        self.dialog_languages_generate_success = UI("dialog_languages_generate_success")
+        self.revealer_languages = UI("revealer_languages")
+        self.box_languages = UI("box_languages")
+        self.btn_languages_lock = UI("btn_languages_lock")
+        self.lb_langs_installed = UI("lb_langs_installed")
+        self.lb_langs_not_installed = UI("lb_langs_not_installed")
 
         # Panel Preferences
         self.cb_panel_action_lockscreen = UI("cb_panel_action_lockscreen")
@@ -188,21 +202,21 @@ class MainWindow:
         self.cb_panel_action_hybridsleep = UI("cb_panel_action_hybridsleep")
 
         # Power Management
-        self.stk_power_management         = UI("stk_power_management")
+        self.stk_power_management = UI("stk_power_management")
         self.cmb_laptop_screen_closed_bat = UI("cmb_laptop_screen_closed_bat")
-        self.cmb_screen_off_after_bat     = UI("cmb_screen_off_after_bat")
-        self.cmb_put_to_sleep_after_bat   = UI("cmb_put_to_sleep_after_bat")
-        self.cmb_laptop_screen_closed     = UI("cmb_laptop_screen_closed")
-        self.cmb_screen_off_after         = UI("cmb_screen_off_after")
-        self.cmb_put_to_sleep_after       = UI("cmb_put_to_sleep_after")
-        self.cmb_screen_off_after2        = UI("cmb_screen_off_after2")
-        self.cmb_put_to_sleep_after2      = UI("cmb_put_to_sleep_after2")
+        self.cmb_screen_off_after_bat = UI("cmb_screen_off_after_bat")
+        self.cmb_put_to_sleep_after_bat = UI("cmb_put_to_sleep_after_bat")
+        self.cmb_laptop_screen_closed = UI("cmb_laptop_screen_closed")
+        self.cmb_screen_off_after = UI("cmb_screen_off_after")
+        self.cmb_put_to_sleep_after = UI("cmb_put_to_sleep_after")
+        self.cmb_screen_off_after2 = UI("cmb_screen_off_after2")
+        self.cmb_put_to_sleep_after2 = UI("cmb_put_to_sleep_after2")
 
         # Startup Applications
-        self.lb_startup_applications        = UI("lb_startup_applications")
-        self.revealer_startup_applications  = UI("revealer_startup_applications")
-        self.dialog_applications            = UI("dialog_applications")
-        self.appchooser_startup             = UI("appchooser_startup")
+        self.lb_startup_applications = UI("lb_startup_applications")
+        self.revealer_startup_applications = UI("revealer_startup_applications")
+        self.dialog_applications = UI("dialog_applications")
+        self.appchooser_startup = UI("appchooser_startup")
 
         # Default Applications
         # self.cmb_default_browser        = UI("cmb_default_browser")
@@ -210,28 +224,37 @@ class MainWindow:
         # self.cmb_default_email          = UI("cmb_default_email")
         # self.cmb_default_terminal       = UI("cmb_default_terminal")
 
-        self.lst_default_browser        = UI("lst_default_browser")
-        self.lst_default_filemanager    = UI("lst_default_filemanager")
-        self.lst_default_email          = UI("lst_default_email")
-        self.lst_default_terminal       = UI("lst_default_terminal")
+        self.lst_default_browser = UI("lst_default_browser")
+        self.lst_default_filemanager = UI("lst_default_filemanager")
+        self.lst_default_email = UI("lst_default_email")
+        self.lst_default_terminal = UI("lst_default_terminal")
 
-
-        self.dialog_restore_defaults      = UI("dialog_restore_defaults")
+        self.dialog_restore_defaults = UI("dialog_restore_defaults")
 
     def set_show_default_apps(self):
         self.cmb_default_video.set_show_default_item(True)
         self.cmb_default_music.set_show_default_item(True)
         self.cmb_default_image.set_show_default_item(True)
         self.cmb_default_editor.set_show_default_item(True)
-    
-    def addSliderMarks(self):        
+
+    def addSliderMarks(self):
         self.sli_scaling.add_mark(0, Gtk.PositionType.BOTTOM, "%100")
         self.sli_scaling.add_mark(1, Gtk.PositionType.BOTTOM, "%125")
         self.sli_scaling.add_mark(2, Gtk.PositionType.BOTTOM, "%150")
         self.sli_scaling.add_mark(3, Gtk.PositionType.BOTTOM, "%175")
         self.sli_scaling.add_mark(4, Gtk.PositionType.BOTTOM, "%200")
 
-    def getThemeDefaults(self):
+    def get_wallpapers(self):
+        task = Gio.Task.new()
+        task.run_in_thread(self.get_wallpapers_async)
+
+    def get_wallpapers_async(self, task, source_object, task_data, cancellable):
+        wallpaper_paths = WallpaperManager.get_wallpapers()
+
+        for w in wallpaper_paths:
+            self.append_wallpaper(w)
+
+    def get_theme_defaults(self):
         theme = ThemeManager.getTheme()
 
         if theme == "pardus-xfce":
@@ -239,16 +262,16 @@ class MainWindow:
         elif theme == "pardus-xfce-dark":
             self.rb_darkTheme.set_active(True)
 
-    def getScalingDefaults(self):
+    def get_scaling_defaults(self):
         self.sli_panel.set_value(ScaleManager.getPanelSize())
         self.sli_desktopIcon.set_value(ScaleManager.getDesktopIconSize())
-        
+
         currentScale = int((ScaleManager.getScale() / 0.25) - 4)
         self.sli_scaling.set_value(currentScale)
-        self.sli_cursor.set_value((ScaleManager.getPointerSize()/16)-1)
-    
+        self.sli_cursor.set_value((ScaleManager.getPointerSize() / 16) - 1)
+
     # Keyboard Settings:
-    def getKeyboardDefaults(self):
+    def get_keyboard_defaults(self):
         # We can choose the layout:
         KeyboardManager.initializeSettings()
 
@@ -258,38 +281,46 @@ class MainWindow:
             self.stk_trq.set_visible_child_name("remove")
         else:
             self.stk_trq.set_visible_child_name("add")
-        
+
         if states["tr-f"] == True:
             self.stk_trf.set_visible_child_name("remove")
         else:
             self.stk_trf.set_visible_child_name("add")
-        
+
         if states["us-"] == True:
             self.stk_en.set_visible_child_name("remove")
         else:
             self.stk_en.set_visible_child_name("add")
 
         self.keyboardSelectionDisablingCheck()
-        
+
         keyboardPlugin = KeyboardManager.getKeyboardPlugin()
         self.sw_lang_indicator.set_active(len(keyboardPlugin) > 0)
-    
-    def keyboardSelectionDisablingCheck(self):
-        self.btn_trf_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
-        self.btn_trq_remove.set_sensitive(self.stk_trf.get_visible_child_name() == "remove" or self.stk_en.get_visible_child_name() == "remove")
-        self.btn_en_remove.set_sensitive(self.stk_trq.get_visible_child_name() == "remove" or self.stk_trf.get_visible_child_name() == "remove")
-    
 
-    def getFontDefaults(self):
+    def keyboardSelectionDisablingCheck(self):
+        self.btn_trf_remove.set_sensitive(
+            self.stk_trq.get_visible_child_name() == "remove"
+            or self.stk_en.get_visible_child_name() == "remove"
+        )
+        self.btn_trq_remove.set_sensitive(
+            self.stk_trf.get_visible_child_name() == "remove"
+            or self.stk_en.get_visible_child_name() == "remove"
+        )
+        self.btn_en_remove.set_sensitive(
+            self.stk_trq.get_visible_child_name() == "remove"
+            or self.stk_trf.get_visible_child_name() == "remove"
+        )
+
+    def get_font_defaults(self):
         system_font = FontManager.getSystemFont()
         monospace_font = FontManager.getMonospaceFont()
 
         if system_font != "":
             self.font_system.set_font(system_font)
-        
+
         if monospace_font != "":
             self.font_monospace.set_font(monospace_font)
-    
+
     def addLocaleToListBox(self, lang, codeset, isInstalled):
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
         box.set_margin_start(7)
@@ -297,7 +328,9 @@ class MainWindow:
 
         if isInstalled:
             # Default Indicator
-            default_img = Gtk.Image.new_from_icon_name("emblem-default-symbolic", Gtk.IconSize.BUTTON)
+            default_img = Gtk.Image.new_from_icon_name(
+                "emblem-default-symbolic", Gtk.IconSize.BUTTON
+            )
             default_img.set_tooltip_text(_("Default System Language"))
             default_img.set_no_show_all(True)
             default_img.set_visible(lang == self.default_locale)
@@ -316,7 +349,9 @@ class MainWindow:
             # box.pack_end(btn, False, False, 5)
 
             # Set as Default button
-            btn_default = Gtk.Button.new_from_icon_name("emblem-ok-symbolic", Gtk.IconSize.BUTTON)
+            btn_default = Gtk.Button.new_from_icon_name(
+                "emblem-ok-symbolic", Gtk.IconSize.BUTTON
+            )
             btn_default.connect("clicked", self.on_locale_set_default)
 
             # btn_default.set_relief(Gtk.ReliefStyle.NONE)
@@ -328,13 +363,14 @@ class MainWindow:
             box.pack_end(btn_default, False, False, 0)
         else:
             # Add button
-            btn = Gtk.Button.new_from_icon_name("list-add-symbolic", Gtk.IconSize.BUTTON)
+            btn = Gtk.Button.new_from_icon_name(
+                "list-add-symbolic", Gtk.IconSize.BUTTON
+            )
             btn.connect("clicked", self.on_locale_add)
-            
+
             btn.set_relief(Gtk.ReliefStyle.NONE)
             btn.set_name(f"{lang} {codeset}")
             box.pack_end(btn, False, False, 0)
-
 
         lbl_name = Gtk.Label.new(lang)
         lbl_name.set_margin_top(8)
@@ -347,15 +383,15 @@ class MainWindow:
         else:
             self.lb_langs_not_installed.add(box)
             self.lb_langs_not_installed.show_all()
-    
-    def getLocales(self):
+
+    def get_locales(self):
         # Set Sorting function for listboxes
         def sortfunc(row1, row2):
             row1_label = row1.get_children()[0].get_children()[0].get_text()
             row2_label = row2.get_children()[0].get_children()[0].get_text()
-            
+
             return locale.strcoll(row1_label, row2_label)
-        
+
         self.lb_langs_installed.set_sort_func(sortfunc)
         self.lb_langs_not_installed.set_sort_func(sortfunc)
 
@@ -365,9 +401,14 @@ class MainWindow:
         self.default_locale = LocaleManager.getDefaultLocale()
 
         for lc in availableLocales:
-            GLib.idle_add(self.addLocaleToListBox, lc[0], lc[1], True if lc in installedLocales else False)
-    
-    def getPanelPreferences(self):
+            GLib.idle_add(
+                self.addLocaleToListBox,
+                lc[0],
+                lc[1],
+                True if lc in installedLocales else False,
+            )
+
+    def get_panel_preferences(self):
         PanelManager.restoreActionsDefault()
         items = PanelManager.getActionsItems()
         self.cb_panel_action_lockscreen.set_active(items["lock-screen"])
@@ -379,39 +420,27 @@ class MainWindow:
         self.cb_panel_action_logout.set_active(items["logout"])
         self.cb_panel_action_logoutdialog.set_active(items["logout-dialog"])
         self.cb_panel_action_hybridsleep.set_active(items["hybrid-sleep"])
-        
 
-    def addWallpapers(self, wallpaperList):
-        for i in range(len(wallpaperList)):
-            # Image
-            bitmap = GdkPixbuf.Pixbuf.new_from_file(wallpaperList[i])
-            bitmap = bitmap.scale_simple(240, 135, GdkPixbuf.InterpType.BILINEAR)
+    def append_wallpaper(self, path):
+        # Image
+        bitmap = GdkPixbuf.Pixbuf.new_from_file(path)
+        bitmap = bitmap.scale_simple(240, 135, GdkPixbuf.InterpType.BILINEAR)
 
-            img_wallpaper = Gtk.Image.new_from_pixbuf(bitmap)
-            img_wallpaper.img_path = wallpaperList[i]
+        img_wallpaper = Gtk.Image.new_from_pixbuf(bitmap)
+        img_wallpaper.img_path = path
 
-            tooltip = wallpaperList[i]
-            try:
-                tooltip = os.path.basename(tooltip)
-                tooltip = os.path.splitext(tooltip)[0]
-                if "pardus23-0_" in tooltip:
-                    tooltip = tooltip.split("pardus23-0_")[1]
-                    tooltip = tooltip.replace("-", " ")
-                elif "pardus23-" in tooltip and "_" in tooltip:
-                    tooltip = tooltip.split("_")[1]
-                    tooltip = tooltip.replace("-", " ")
-            except Exception as e:
-                print("{}".format(e))
-                pass
-            img_wallpaper.set_tooltip_text(tooltip)
+        tooltip = path.split("pardus23-0_")[-1].split("pardus25-0_")[-1]
+        img_wallpaper.set_tooltip_text(tooltip)
 
-            GLib.idle_add(self.flow_wallpapers.insert, img_wallpaper, -1)
-            GLib.idle_add(self.flow_wallpapers.show_all)
-    
+        GLib.idle_add(self.flow_wallpapers.insert, img_wallpaper, -1)
+        GLib.idle_add(self.flow_wallpapers.show_all)
+
     def changeWindowTheme(self, isHdpi, isDark):
         if isHdpi:
             if isDark:
-                GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce-dark-default-hdpi")
+                GLib.idle_add(
+                    ThemeManager.setWindowTheme, "pardus-xfce-dark-default-hdpi"
+                )
             else:
                 GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce-default-hdpi")
         else:
@@ -419,12 +448,20 @@ class MainWindow:
                 GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce-dark")
             else:
                 GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce")
-    
-    def getPowerDefaults(self):
-        self.cmb_laptop_screen_closed_bat.set_active_id(str(PowerManager.getBatteryLaptopScreenClosed()))
-        self.cmb_screen_off_after_bat.set_active_id(str(PowerManager.getBatteryScreenOff()))
-        self.cmb_put_to_sleep_after_bat.set_active_id(str(PowerManager.getBatteryScreenSleep()))
-        self.cmb_laptop_screen_closed.set_active_id(str(PowerManager.getACLaptopScreenClosed()))
+
+    def get_power_defaults(self):
+        self.cmb_laptop_screen_closed_bat.set_active_id(
+            str(PowerManager.getBatteryLaptopScreenClosed())
+        )
+        self.cmb_screen_off_after_bat.set_active_id(
+            str(PowerManager.getBatteryScreenOff())
+        )
+        self.cmb_put_to_sleep_after_bat.set_active_id(
+            str(PowerManager.getBatteryScreenSleep())
+        )
+        self.cmb_laptop_screen_closed.set_active_id(
+            str(PowerManager.getACLaptopScreenClosed())
+        )
         self.cmb_screen_off_after.set_active_id(str(PowerManager.getACScreenOff()))
         self.cmb_put_to_sleep_after.set_active_id(str(PowerManager.getACScreenSleep()))
         self.cmb_screen_off_after2.set_active_id(str(PowerManager.getACScreenOff()))
@@ -432,12 +469,11 @@ class MainWindow:
 
         pageName = "laptop" if PowerManager.isLaptop() else "pc"
         self.stk_power_management.set_visible_child_name(pageName)
-    
 
     def addStartupApplication(self, name, application_file, icon):
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 7)
         box.props.margin = 7
-        
+
         img_icon = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DND)
         box.add(img_icon)
 
@@ -449,40 +485,40 @@ class MainWindow:
         self.lb_startup_applications.add(box)
         self.lb_startup_applications.show_all()
 
-    def getStartupApplications(self):
+    def get_startup_applications(self):
         startup_list = ApplicationManager.getStartupTupleList()
-        
-        for (exec, name, application_file, icon, categories) in startup_list:
+
+        for exec, name, application_file, icon, categories in startup_list:
             self.addStartupApplication(name, application_file, icon)
-    
+
     def getDefaultApplications(self):
         browser_list = ApplicationManager.getApplicationListFromCategory("webbrowser")
-        filemanager_list = ApplicationManager.getApplicationListFromCategory("filemanager")
+        filemanager_list = ApplicationManager.getApplicationListFromCategory(
+            "filemanager"
+        )
         email_list = ApplicationManager.getApplicationListFromCategory("email")
-        terminal_list = ApplicationManager.getApplicationListFromCategory("terminalemulator")
+        terminal_list = ApplicationManager.getApplicationListFromCategory(
+            "terminalemulator"
+        )
 
         # name, executable, icon
         for a in browser_list:
-            self.lst_default_browser.append( [a["name"], a["executable"], a["icon"]] )
-        
+            self.lst_default_browser.append([a["name"], a["executable"], a["icon"]])
+
         for a in filemanager_list:
-            self.lst_default_filemanager.append( [a["name"], a["executable"], a["icon"]] )
+            self.lst_default_filemanager.append([a["name"], a["executable"], a["icon"]])
 
         for a in email_list:
-            self.lst_default_email.append( [a["name"], a["executable"], a["icon"]] )
+            self.lst_default_email.append([a["name"], a["executable"], a["icon"]])
 
         for a in terminal_list:
-            self.lst_default_terminal.append( [a["name"], a["executable"], a["icon"]] )
-        
-        
+            self.lst_default_terminal.append([a["name"], a["executable"], a["icon"]])
+
         # set default app
         # self.cmb_default_browser.set_active_id(     ApplicationManager.getDefaultXFCEApp("WebBrowser")["name"])
         # self.cmb_default_filemanager.set_active_id( ApplicationManager.getDefaultXFCEApp("FileManager")["name"])
         # self.cmb_default_email.set_active_id(       ApplicationManager.getDefaultXFCEApp("MailReader")["name"])
         # self.cmb_default_terminal.set_active_id(    ApplicationManager.getDefaultXFCEApp("TerminalEmulator")["name"])
-        
-
-        
 
     # SIGNALS
     def on_lb_rows_row_activated(self, rows, a):
@@ -492,8 +528,7 @@ class MainWindow:
     # - Wallpaper Select:
     def on_wallpaper_selected(self, flowbox, wallpaper):
         filename = str(wallpaper.get_children()[0].img_path)
-        WallpaperManager.setWallpaper(filename)
-
+        WallpaperManager.set_wallpaper(filename)
 
     # - Theme Selection:
     def on_rb_lightTheme_clicked(self, rb):
@@ -503,7 +538,7 @@ class MainWindow:
 
             # Window Theme
             self.changeWindowTheme(ScaleManager.getScale() == 2.0, False)
-    
+
     def on_rb_darkTheme_clicked(self, rb):
         if rb.get_active():
             GLib.idle_add(ThemeManager.setTheme, "pardus-xfce-dark")
@@ -511,29 +546,29 @@ class MainWindow:
 
             # Window Theme
             self.changeWindowTheme(ScaleManager.getScale() == 2.0, True)
-    
-    
+
     # - Scale Changed:
     def on_sli_scaling_button_release(self, slider, b):
         value = int(slider.get_value()) * 0.25 + 1
-        self.changeWindowTheme(value == 2.0, ThemeManager.getTheme() == "pardus-xfce-dark")
+        self.changeWindowTheme(
+            value == 2.0, ThemeManager.getTheme() == "pardus-xfce-dark"
+        )
         ScaleManager.setScale(value)
-    
+
     def on_sli_scaling_format_value(self, sli, value):
         return f"%{int(value * 25 + 100)}"
-    
+
     def on_sli_panel_value_changed(self, sli):
         ScaleManager.setPanelSize(int(sli.get_value()))
-    
+
     def on_sli_desktopIcon_value_changed(self, sli):
         ScaleManager.setDesktopIconSize(int(sli.get_value()))
-    
+
     def on_sli_cursor_format_value(self, sli, value):
-        return f"{int(value+1)*16}"
-    
+        return f"{int(value + 1) * 16}"
+
     def on_sli_cursor_value_changed(self, sli):
-        ScaleManager.setPointerSize(int(sli.get_value()+1)*16)
-    
+        ScaleManager.setPointerSize(int(sli.get_value() + 1) * 16)
 
     # - Keyboard Layout Changed:
     def on_btn_trf_add_clicked(self, button):
@@ -545,7 +580,7 @@ class MainWindow:
         KeyboardManager.setTurkishF(False)
         self.stk_trf.set_visible_child_name("add")
         self.keyboardSelectionDisablingCheck()
-    
+
     def on_btn_trq_add_clicked(self, button):
         KeyboardManager.setTurkishQ(True)
         self.stk_trq.set_visible_child_name("remove")
@@ -555,7 +590,7 @@ class MainWindow:
         KeyboardManager.setTurkishQ(False)
         self.stk_trq.set_visible_child_name("add")
         self.keyboardSelectionDisablingCheck()
-    
+
     def on_btn_en_add_clicked(self, button):
         KeyboardManager.setEnglish(True)
         self.stk_en.set_visible_child_name("remove")
@@ -571,19 +606,19 @@ class MainWindow:
             KeyboardManager.createKeyboardPlugin()
         else:
             KeyboardManager.removeKeyboardPlugin()
-    
+
     # Fonts
     def on_font_system_font_set(self, fontbutton):
         FontManager.setSystemFont(fontbutton.get_font())
 
     def on_font_monospace_font_set(self, fontbutton):
         FontManager.setMonospaceFont(fontbutton.get_font())
-    
+
     # Language
     def on_locale_add(self, btn):
         lang, codeset = btn.get_name().split(" ")
         self.addLocaleToListBox(lang, codeset, True)
-        
+
         parent_row = btn.get_parent().get_parent()
         parent_row.destroy()
 
@@ -595,10 +630,10 @@ class MainWindow:
     def on_locale_remove(self, btn):
         if len(self.lb_langs_installed.get_children()) <= 1:
             return
-        
+
         lang, codeset = btn.get_name().split(" ")
         self.addLocaleToListBox(lang, codeset, False)
-        
+
         parent_row = btn.get_parent().get_parent()
         parent_row.destroy()
 
@@ -606,7 +641,7 @@ class MainWindow:
         self.lb_langs_not_installed.invalidate_sort()
 
         self.revealer_languages.set_reveal_child(True)
-    
+
     def on_locale_set_default(self, btn):
         self.default_locale = btn.get_name().split(" ")[0]
 
@@ -635,26 +670,34 @@ class MainWindow:
                 default_img.set_visible(False)
                 default_btn.set_visible(True)
                 # trash_btn.set_visible(True)
-    
+
     def on_language_changes_saved(self, pid, status):
         self.dialog_languages_generate.hide()
-        
-        if status == 0:          
+
+        if status == 0:
             self.revealer_languages.set_reveal_child(False)
             self.dialog_languages_generate_success.run()
             self.dialog_languages_generate_success.hide()
         else:
             self.dialog_languages_generate_failed.run()
-            self.dialog_languages_generate_failed.hide()        
-    
+            self.dialog_languages_generate_failed.hide()
+
     def on_btn_languages_save_changes_clicked(self, btn):
         installed_languages = []
 
-        self.lb_langs_installed.foreach(lambda x: installed_languages.append(x.get_children()[0].get_children()[-2].get_name()))
+        self.lb_langs_installed.foreach(
+            lambda x: installed_languages.append(
+                x.get_children()[0].get_children()[-2].get_name()
+            )
+        )
 
-        LocaleManager.saveLocaleSettings("\|".join(installed_languages), self.default_locale, self.on_language_changes_saved)
+        LocaleManager.saveLocaleSettings(
+            "\|".join(installed_languages),
+            self.default_locale,
+            self.on_language_changes_saved,
+        )
         self.dialog_languages_generate.show_all()
-    
+
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
         DatetimeManager.set("layout", "3")
@@ -662,9 +705,10 @@ class MainWindow:
         DatetimeManager.set("time_format", "%H:%M")
 
         DatetimeManager.set_panel_clock("digital-layout", "3")
-        DatetimeManager.set_panel_clock("digital-time-font", "Quicksand\ Medium,\ Bold\ 16")
+        DatetimeManager.set_panel_clock(
+            "digital-time-font", "Quicksand\ Medium,\ Bold\ 16"
+        )
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
-
 
         DatetimeManager.saveFile()
 
@@ -676,31 +720,36 @@ class MainWindow:
         DatetimeManager.set("time_format", "%H:%M")
 
         DatetimeManager.set_panel_clock("digital-layout", "1")
-        DatetimeManager.set_panel_clock("digital-time-font", "Quicksand\ Medium,\ Bold\ 15")
+        DatetimeManager.set_panel_clock(
+            "digital-time-font", "Quicksand\ Medium,\ Bold\ 15"
+        )
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
-        DatetimeManager.set_panel_clock("digital-date-font", "Quicksand\ Medium,\ Bold\ 10")
+        DatetimeManager.set_panel_clock(
+            "digital-date-font", "Quicksand\ Medium,\ Bold\ 10"
+        )
         DatetimeManager.set_panel_clock("digital-date-format", "%d.%m.%Y")
 
         DatetimeManager.saveFile()
-    
 
     # Panel Preferences
     def on_panel_action_icon_clicked(self, btn):
         PanelManager.setActionsItem(btn.get_name(), "+" if btn.get_active() else "-")
-    
+
     def on_btn_panel_actions_reset_clicked(self, btn):
         PanelManager.restoreActionsDefault()
-        self.getPanelPreferences()
+        self.get_panel_preferences()
 
     # Power Management
     def on_cmb_laptop_screen_closed_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
             model = combobox.get_model()
-            value = int(model[tree_iter][0])  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
-            
+            value = int(
+                model[tree_iter][0]
+            )  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
+
             PowerManager.setBatteryLaptopScreenClosed(value)
-    
+
     def on_cmb_screen_off_after_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
@@ -708,7 +757,7 @@ class MainWindow:
             value = int(model[tree_iter][0])
 
             PowerManager.setBatteryScreenOff(value)
-    
+
     def on_cmb_put_to_sleep_after_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
@@ -716,15 +765,17 @@ class MainWindow:
             value = int(model[tree_iter][0])
 
             PowerManager.setBatteryScreenSleep(value)
-    
+
     def on_cmb_laptop_screen_closed_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
             model = combobox.get_model()
-            value = int(model[tree_iter][0])  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
+            value = int(
+                model[tree_iter][0]
+            )  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
 
             PowerManager.setACLaptopScreenClosed(value)
-    
+
     def on_cmb_screen_off_after_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
@@ -732,7 +783,7 @@ class MainWindow:
             value = int(model[tree_iter][0])
 
             PowerManager.setACScreenOff(value)
-    
+
     def on_cmb_put_to_sleep_after_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
@@ -740,7 +791,6 @@ class MainWindow:
             value = int(model[tree_iter][0])
 
             PowerManager.setACScreenSleep(value)
-    
 
     # Startup Applications
     def on_lb_startup_applications_selected_rows_changed(self, listbox):
@@ -749,11 +799,10 @@ class MainWindow:
             self.revealer_startup_applications.set_reveal_child(True)
         else:
             self.revealer_startup_applications.set_reveal_child(False)
-        
-    
+
     def on_btn_startup_clear_clicked(self, button):
         self.lb_startup_applications.unselect_all()
-    
+
     def on_btn_startup_delete_clicked(self, button):
         rows = self.lb_startup_applications.get_selected_rows()
         for row in rows:
@@ -762,7 +811,7 @@ class MainWindow:
                 os.remove(application_path)
 
             self.lb_startup_applications.remove(row)
-    
+
     def on_btn_startup_add_application_clicked(self, button):
         self.lb_startup_applications.unselect_all()
         self.dialog_applications_selected_app = None
@@ -773,7 +822,11 @@ class MainWindow:
         if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app != None:
             app_info = self.dialog_applications_selected_app
             app_name = app_info.get_name()
-            app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else "image-missing"
+            app_icon = (
+                app_info.get_icon().to_string()
+                if app_info.get_icon() != None
+                else "image-missing"
+            )
             app_path = app_info.get_filename()
             app_id = app_info.get_id()
             app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
@@ -784,14 +837,18 @@ class MainWindow:
                     self.addStartupApplication(app_name, app_new_path, app_icon)
             except:
                 pass
-    
+
     def on_appchooser_startup_application_selected(self, widget, appinfo):
         self.dialog_applications_selected_app = appinfo
 
     def on_appchooser_startup_application_activated(self, widget, appinfo):
         app_info = appinfo
         app_name = app_info.get_name()
-        app_icon = app_info.get_icon().to_string() if app_info.get_icon() != None else "image-missing"
+        app_icon = (
+            app_info.get_icon().to_string()
+            if app_info.get_icon() != None
+            else "image-missing"
+        )
         app_path = app_info.get_filename()
         app_id = app_info.get_id()
         app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
@@ -813,7 +870,7 @@ class MainWindow:
             executable = model[tree_iter][1]
             return executable
         return None
-    
+
     # def on_cmb_default_browser_changed(self, combobox):
     #     exe = self._get_cmb_executable(combobox)
     #     ApplicationManager.setDefaultXFCEApp("WebBrowser", exe)
@@ -830,7 +887,6 @@ class MainWindow:
     #     exe = self._get_cmb_executable(combobox)
     #     ApplicationManager.setDefaultXFCEApp("TerminalEmulator", exe)
 
-    
     def _get_cmb_application(self, combobox):
         tree_iter = combobox.get_active_iter()
         if tree_iter:
@@ -838,7 +894,7 @@ class MainWindow:
             desktop_file = model[tree_iter][0].get_filename().split("/")[-1]
             return desktop_file
         return None
-    
+
     def on_cmb_default_video_changed(self, combobox):
         if combobox.get_active_iter() is None:
             return
@@ -852,7 +908,7 @@ class MainWindow:
         ApplicationManager.setDefaultApp("video/msvideo", desktop_file)
         ApplicationManager.setDefaultApp("video/x-msvideo", desktop_file)
         ApplicationManager.setDefaultApp("video/flv", desktop_file)
-    
+
     def on_cmb_default_music_changed(self, combobox):
         if combobox.get_active_iter() is None:
             return
@@ -868,7 +924,6 @@ class MainWindow:
         ApplicationManager.setDefaultApp("audio/x-mpeg", desktop_file)
         ApplicationManager.setDefaultApp("audio/x-m4a", desktop_file)
 
-    
     def on_cmb_default_image_changed(self, combobox):
         if combobox.get_active_iter() is None:
             return
@@ -898,7 +953,6 @@ class MainWindow:
         ApplicationManager.setDefaultApp("image/vnd.wap.wbmp", desktop_file)
         ApplicationManager.setDefaultApp("image/webp", desktop_file)
 
-    
     def on_cmb_default_editor_changed(self, combobox):
         if combobox.get_active_iter() is None:
             return
@@ -947,15 +1001,17 @@ class MainWindow:
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
             PanelManager.restoreDefaultSettings()
-    
+
     def on_btn_restore_thunar_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
             ThunarManager.restoreDefaultSettings()
-    
+
     def on_btn_restore_allxfce_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            subprocess.Popen(os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh")
+            subprocess.Popen(
+                os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh"
+            )
