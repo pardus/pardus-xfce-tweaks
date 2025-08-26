@@ -871,10 +871,12 @@ class MainWindow:
             return executable
         return None
 
-    # def on_cmb_default_browser_changed(self, combobox):
-    #     exe = self._get_cmb_executable(combobox)
-    #     ApplicationManager.setDefaultXFCEApp("WebBrowser", exe)
-    #
+    def on_cmb_default_browser_changed(self, combobox):
+        app = combobox.get_app_info()
+        executable = app.get_executable().split("/")[-1]
+
+        ApplicationManager.setDefaultXFCEApp("WebBrowser", executable)
+
     # def on_cmb_default_filemanager_changed(self, combobox):
     #     exe = self._get_cmb_executable(combobox)
     #     ApplicationManager.setDefaultXFCEApp("FileManager", exe)

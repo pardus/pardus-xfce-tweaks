@@ -3631,12 +3631,25 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Others</property>
+                                <property name="label" translatable="yes">Web Browser</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Others</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                           </object>
@@ -3707,6 +3720,19 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkAppChooserButton" id="cmb_default_browser">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="content-type">text/html</property>
+                                <signal name="changed" handler="on_cmb_default_browser_changed" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">4</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkButton" id="ui_otherdefaultapps_button">
                                 <property name="label" translatable="yes">Other Default Applications</property>
                                 <property name="visible">True</property>
@@ -3717,7 +3743,7 @@
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="position">4</property>
+                                <property name="position">5</property>
                               </packing>
                             </child>
                           </object>
