@@ -272,32 +272,31 @@ class MainWindow:
 
     # Keyboard Settings:
     def get_keyboard_defaults(self):
-        # We can choose the layout:
-        KeyboardManager.initializeSettings()
+        KeyboardManager.init()
 
-        states = KeyboardManager.getKeyboardState()
+        layouts = KeyboardManager.get_layouts()
 
-        if states["tr-"] == True:
+        if "tr-" in layouts:
             self.stk_trq.set_visible_child_name("remove")
         else:
             self.stk_trq.set_visible_child_name("add")
 
-        if states["tr-f"] == True:
+        if "tr-f" in layouts:
             self.stk_trf.set_visible_child_name("remove")
         else:
             self.stk_trf.set_visible_child_name("add")
 
-        if states["us-"] == True:
+        if "us-" in layouts:
             self.stk_en.set_visible_child_name("remove")
         else:
             self.stk_en.set_visible_child_name("add")
 
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
-        keyboardPlugin = KeyboardManager.getKeyboardPlugin()
-        self.sw_lang_indicator.set_active(len(keyboardPlugin) > 0)
+        keyboard_plugin = KeyboardManager.get_keyboard_plugin()
+        self.sw_lang_indicator.set_active(len(keyboard_plugin) > 0)
 
-    def keyboardSelectionDisablingCheck(self):
+    def keyboard_selection_disabling_check(self):
         self.btn_trf_remove.set_sensitive(
             self.stk_trq.get_visible_child_name() == "remove"
             or self.stk_en.get_visible_child_name() == "remove"
@@ -572,40 +571,46 @@ class MainWindow:
 
     # - Keyboard Layout Changed:
     def on_btn_trf_add_clicked(self, button):
-        KeyboardManager.setTurkishF(True)
+        KeyboardManager.add_layout("tr-f")
+
         self.stk_trf.set_visible_child_name("remove")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_btn_trf_remove_clicked(self, button):
-        KeyboardManager.setTurkishF(False)
+        KeyboardManager.remove_layout("tr-f")
+
         self.stk_trf.set_visible_child_name("add")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_btn_trq_add_clicked(self, button):
-        KeyboardManager.setTurkishQ(True)
+        KeyboardManager.add_layout("tr-")
+
         self.stk_trq.set_visible_child_name("remove")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_btn_trq_remove_clicked(self, button):
-        KeyboardManager.setTurkishQ(False)
+        KeyboardManager.remove_layout("tr-")
+
         self.stk_trq.set_visible_child_name("add")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_btn_en_add_clicked(self, button):
-        KeyboardManager.setEnglish(True)
+        KeyboardManager.add_layout("us-")
+
         self.stk_en.set_visible_child_name("remove")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_btn_en_remove_clicked(self, button):
-        KeyboardManager.setEnglish(False)
+        KeyboardManager.remove_layout("us-")
+
         self.stk_en.set_visible_child_name("add")
-        self.keyboardSelectionDisablingCheck()
+        self.keyboard_selection_disabling_check()
 
     def on_sw_lang_indicator_state_set(self, switch, state):
         if state:
-            KeyboardManager.createKeyboardPlugin()
+            KeyboardManager.create_keyboard_plugin()
         else:
-            KeyboardManager.removeKeyboardPlugin()
+            KeyboardManager.remove_keyboard_plugin()
 
     # Fonts
     def on_font_system_font_set(self, fontbutton):
