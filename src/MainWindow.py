@@ -688,7 +688,7 @@ class MainWindow:
         )
 
         LocaleManager.saveLocaleSettings(
-            "\|".join(installed_languages),
+            "|".join(installed_languages),
             self.default_locale,
             self.on_language_changes_saved,
         )
@@ -702,7 +702,7 @@ class MainWindow:
 
         DatetimeManager.set_panel_clock("digital-layout", "3")
         DatetimeManager.set_panel_clock(
-            "digital-time-font", "Quicksand\ Medium,\ Bold\ 16"
+            "digital-time-font", "Quicksand Medium, Bold 16"
         )
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
 
@@ -717,11 +717,11 @@ class MainWindow:
 
         DatetimeManager.set_panel_clock("digital-layout", "1")
         DatetimeManager.set_panel_clock(
-            "digital-time-font", "Quicksand\ Medium,\ Bold\ 15"
+            "digital-time-font", "Quicksand Medium, Bold 15"
         )
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
         DatetimeManager.set_panel_clock(
-            "digital-date-font", "Quicksand\ Medium,\ Bold\ 10"
+            "digital-date-font", "Quicksand Medium, Bold 10"
         )
         DatetimeManager.set_panel_clock("digital-date-format", "%d.%m.%Y")
 
