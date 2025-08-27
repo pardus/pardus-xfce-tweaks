@@ -135,15 +135,6 @@ class MainWindow:
             )
             about_headerbar.show_all()
             self.ui_about_dialog.set_titlebar(about_headerbar)
-        # Set version
-        # If not getted from __version__ file then accept version in MainWindow.glade file
-        try:
-            version = open(
-                os.path.dirname(os.path.abspath(__file__)) + "/__version__"
-            ).readline()
-            self.ui_about_dialog.set_version(version)
-        except:
-            pass
 
         # default apps appchoser
         self.cmb_default_video = UI("cmb_default_video")
