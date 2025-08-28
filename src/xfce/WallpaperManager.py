@@ -24,9 +24,7 @@ def set_wallpaper(wallpaper):
     properties = desktop.get_properties("/backdrop")
 
     for p in properties:
-        if "workspace" in p and "last-image" in p:
-            print("Wallpaper changed:")
-            print(p, " is set:", wallpaper)
+        if "screen" in p and ("last-image" in p or "last-single-image" in p):
             desktop.set_string(p, wallpaper)
 
 
