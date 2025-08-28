@@ -460,26 +460,42 @@ class MainWindow:
         pageName = "laptop" if PowerManager.isLaptop() else "pc"
         self.stk_power_management.set_visible_child_name(pageName)
 
-    def addStartupApplication(self, name, application_file, icon):
+    def append_startup_application_to_list(self, app):
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 7)
         box.props.margin = 7
 
+        icon = app.get_icon().to_string() if app.get_icon() else "image-missing"
         img_icon = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DND)
         box.add(img_icon)
 
-        lbl_name = Gtk.Label.new(name)
+        lbl_name = Gtk.Label.new(app.get_name())
         box.add(lbl_name)
 
-        box.set_name(application_file)
+        app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app.get_id()}"
+        box.set_name(app_new_path)
 
         self.lb_startup_applications.add(box)
         self.lb_startup_applications.show_all()
 
-    def get_startup_applications(self):
-        startup_list = ApplicationManager.getStartupTupleList()
+    def add_application_to_autostart(self, app):
+        app_path = app.get_filename()
+        app_id = app.get_id()
+        app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
 
-        for exec, name, application_file, icon, categories in startup_list:
-            self.addStartupApplication(name, application_file, icon)
+        try:
+            if not os.path.exists(app_new_path):
+                shutil.copy2(app_path, app_new_path)
+                return True
+        except Exception as e:
+            print("app copy to autostart error:", e)
+
+        return False
+
+    def get_startup_applications(self):
+        startup_list = ApplicationManager.get_startup_applications()
+
+        for app in startup_list:
+            self.append_startup_application_to_list(app)
 
     def getDefaultApplications(self):
         browser_list = ApplicationManager.getApplicationListFromCategory("webbrowser")
@@ -802,60 +818,37 @@ class MainWindow:
     def on_btn_startup_delete_clicked(self, button):
         rows = self.lb_startup_applications.get_selected_rows()
         for row in rows:
+            # name of the widget is the application path
             application_path = row.get_children()[0].get_name()
+
             if os.path.exists(application_path):
                 os.remove(application_path)
 
             self.lb_startup_applications.remove(row)
 
+    # Add Startup Applications
     def on_btn_startup_add_application_clicked(self, button):
         self.lb_startup_applications.unselect_all()
         self.dialog_applications_selected_app = None
 
         res = self.dialog_applications.run()
+
+        if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app:
+            app_info = self.dialog_applications_selected_app
+
+            if self.add_application_to_autostart(app_info):
+                self.append_startup_application_to_list(app_info)
+
         self.dialog_applications.hide()
 
-        if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app != None:
-            app_info = self.dialog_applications_selected_app
-            app_name = app_info.get_name()
-            app_icon = (
-                app_info.get_icon().to_string()
-                if app_info.get_icon() != None
-                else "image-missing"
-            )
-            app_path = app_info.get_filename()
-            app_id = app_info.get_id()
-            app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
+    def on_appchooser_startup_application_selected(self, widget, app_info):
+        self.dialog_applications_selected_app = app_info
 
-            try:
-                if not os.path.exists(app_new_path):
-                    shutil.copy2(app_path, app_new_path)
-                    self.addStartupApplication(app_name, app_new_path, app_icon)
-            except:
-                pass
+    def on_appchooser_startup_application_activated(self, widget, app_info):
+        if self.add_application_to_autostart(app_info):
+            self.append_startup_application_to_list(app_info)
 
-    def on_appchooser_startup_application_selected(self, widget, appinfo):
-        self.dialog_applications_selected_app = appinfo
-
-    def on_appchooser_startup_application_activated(self, widget, appinfo):
-        app_info = appinfo
-        app_name = app_info.get_name()
-        app_icon = (
-            app_info.get_icon().to_string()
-            if app_info.get_icon() != None
-            else "image-missing"
-        )
-        app_path = app_info.get_filename()
-        app_id = app_info.get_id()
-        app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
-        try:
-            if not os.path.exists(app_new_path):
-                shutil.copy2(app_path, app_new_path)
-                self.addStartupApplication(app_name, app_new_path, app_icon)
-        except:
-            pass
         self.lb_startup_applications.unselect_all()
-        self.dialog_applications_selected_app = None
         self.dialog_applications.hide()
 
     # Default Applications:
