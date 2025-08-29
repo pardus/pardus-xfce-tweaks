@@ -55,6 +55,7 @@ data_files = [
          "src/xfce/WhiskerManager.py",
      ]),
      (f"{APPLICATION_FOLDER}/ui", ["ui/MainWindow.glade"]),
+     (f"{APPLICATION_FOLDER}/css", ["css/style.css"]),
      ("/usr/bin/", ["pardus-xfce-tweaks"]),
      ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-xfce-tweaks.svg"]),
      ("/usr/share/polkit-1/actions/", ["tr.org.pardus.xfce-tweaks.policy"])
