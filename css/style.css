@@ -1,0 +1,24 @@
+.left-box{
+    background-color:alpha(@unfocused_borders, 0.3);
+}
+
+.left-box:backdrop{
+    background-color:alpha(@unfocused_borders, 0.1);
+}
+
+.left-listbox{
+    background-color:transparent;
+    border-radius:8px;
+}
+
+.left-listbox row{
+    margin-bottom: 8px;
+}
+
+.left-listbox row:hover, row:selected{
+    border-radius:8px;
+}
+
+.left-listbox row:backdrop:hover:not(:selected) {
+    background-color:alpha(@unfocused_borders, 0.23);
+}

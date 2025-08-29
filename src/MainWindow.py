@@ -9,7 +9,7 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Xfconf", "0")
-from gi.repository import GLib, Gtk, GdkPixbuf, Gio, Xfconf
+from gi.repository import GLib, Gtk, GdkPixbuf, Gio, Xfconf, Gdk
 
 import locale
 from locale import gettext as _
@@ -75,6 +75,9 @@ class MainWindow:
         # Set application:
         self.application = application
 
+        # Custom css
+        self.set_css()
+
         # Put Wallpapers on a Grid
         self.get_wallpapers()
 
@@ -109,6 +112,14 @@ class MainWindow:
 
         # Show Screen:
         self.window.show_all()
+
+    # Custom css
+    def set_css(self):
+        cssProvider = Gtk.CssProvider()
+        cssProvider.load_from_path(os.path.dirname(os.path.abspath(__file__)) + "/../css/style.css")
+        screen = Gdk.Screen.get_default()
+        styleContext = Gtk.StyleContext()
+        styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
     # Window methods:
     def on_destroy(self, action):
