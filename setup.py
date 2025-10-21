@@ -44,6 +44,7 @@ data_files = [
     (
         f"{APPLICATION_FOLDER}/src/xfce",
         [
+            "src/xfce/locale_changer.py",
             "src/xfce/resetall.sh",
         ],
     ),

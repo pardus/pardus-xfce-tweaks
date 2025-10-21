@@ -24,6 +24,8 @@ TRANSLATIONS_PATH = "/usr/share/locale"
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
 
+LOCALE_CHANGER_PY = "/usr/share/pardus/pardus-xfce-tweaks/src/xfce/locale_changer.py"
+
 
 def getenv(str):
     env = os.environ.get(str)
@@ -406,17 +408,18 @@ class MainWindow:
         self.lb_langs_not_installed.set_sort_func(sortfunc)
 
         # Get Available Locales
-        availableLocales = LocaleManager.get_available_locales()
-        installedLocales = LocaleManager.get_installed_locales()
+        available_locales = LocaleManager.get_available_locales()
+        installed_locales = LocaleManager.get_installed_locales()
         self.default_locale = LocaleManager.get_default_locale()
 
-        for lc in availableLocales:
-            GLib.idle_add(
-                self.addLocaleToListBox,
-                lc[0],
-                lc[1],
-                True if lc in installedLocales else False,
-            )
+        for lc in available_locales:
+            if lc[1] == "UTF-8":
+                GLib.idle_add(
+                    self.addLocaleToListBox,
+                    lc[0],
+                    lc[1],
+                    True if lc in installed_locales else False,
+                )
 
     def get_panel_preferences(self):
         PanelManager.restore_default_actions()
@@ -682,6 +685,7 @@ class MainWindow:
 
     def on_locale_set_default(self, btn):
         self.default_locale = btn.get_name().split(" ")[0]
+        print(self.default_locale)
 
         # Show default icon
         default_btn = btn.get_parent().get_children()[1]
@@ -709,17 +713,6 @@ class MainWindow:
                 default_btn.set_visible(True)
                 # trash_btn.set_visible(True)
 
-    def on_language_changes_saved(self, pid, status):
-        self.dialog_languages_generate.hide()
-
-        if status == 0:
-            self.revealer_languages.set_reveal_child(False)
-            self.dialog_languages_generate_success.run()
-            self.dialog_languages_generate_success.hide()
-        else:
-            self.dialog_languages_generate_failed.run()
-            self.dialog_languages_generate_failed.hide()
-
     def on_btn_languages_save_changes_clicked(self, btn):
         installed_languages = []
 
@@ -729,12 +722,28 @@ class MainWindow:
             )
         )
 
-        LocaleManager.save_locale_settings(
-            "|".join(installed_languages),
-            self.default_locale,
-            self.on_language_changes_saved,
-        )
+        new_locales = "|".join(installed_languages)
+
         self.dialog_languages_generate.show_all()
+
+        process = subprocess.run(
+            [
+                "pkexec",
+                LOCALE_CHANGER_PY,
+                "setlocales",
+                new_locales,
+                self.default_locale,
+            ]
+        )
+        self.dialog_languages_generate.hide()
+
+        if process.returncode == 0:
+            self.revealer_languages.set_reveal_child(False)
+            self.dialog_languages_generate_success.run()
+            self.dialog_languages_generate_success.hide()
+        else:
+            self.dialog_languages_generate_failed.run()
+            self.dialog_languages_generate_failed.hide()
 
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
