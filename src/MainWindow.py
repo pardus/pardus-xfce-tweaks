@@ -11,6 +11,8 @@ gi.require_version("Gtk", "3.0")
 gi.require_version("Xfconf", "0")
 from gi.repository import GLib, Gtk, GdkPixbuf, Gio, Xfconf, Gdk
 
+import version
+
 import locale
 from locale import gettext as _
 
@@ -34,17 +36,17 @@ if (
 ):
     Xfconf.init()
 
-    import xfce.WallpaperManager as WallpaperManager
-    import xfce.ThemeManager as ThemeManager
-    import xfce.ScaleManager as ScaleManager
-    import xfce.KeyboardManager as KeyboardManager
-    import xfce.PowerManager as PowerManager
-    import xfce.ApplicationManager as ApplicationManager
-    import xfce.FontManager as FontManager
-    import xfce.DatetimeManager as DatetimeManager
-    import xfce.LocaleManager as LocaleManager
-    import xfce.PanelManager as PanelManager
-    import xfce.ThunarManager as ThunarManager
+    import pardus_lib_xfce.WallpaperManager as WallpaperManager
+    import pardus_lib_xfce.ThemeManager as ThemeManager
+    import pardus_lib_xfce.ScaleManager as ScaleManager
+    import pardus_lib_xfce.KeyboardManager as KeyboardManager
+    import pardus_lib_xfce.PowerManager as PowerManager
+    import pardus_lib_xfce.ApplicationManager as ApplicationManager
+    import pardus_lib_xfce.FontManager as FontManager
+    import pardus_lib_xfce.DatetimeManager as DatetimeManager
+    import pardus_lib_xfce.LocaleManager as LocaleManager
+    import pardus_lib_xfce.PanelManager as PanelManager
+    import pardus_lib_xfce.ThunarManager as ThunarManager
 
 else:
     print("This program requires XFCE desktop.")
@@ -116,10 +118,14 @@ class MainWindow:
     # Custom css
     def set_css(self):
         cssProvider = Gtk.CssProvider()
-        cssProvider.load_from_path(os.path.dirname(os.path.abspath(__file__)) + "/../css/style.css")
+        cssProvider.load_from_path(
+            os.path.dirname(os.path.abspath(__file__)) + "/../css/style.css"
+        )
         screen = Gdk.Screen.get_default()
         styleContext = Gtk.StyleContext()
-        styleContext.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+        styleContext.add_provider_for_screen(
+            screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+        )
 
     # Window methods:
     def on_destroy(self, action):
@@ -135,6 +141,8 @@ class MainWindow:
 
         self.ui_about_dialog = UI("ui_about_dialog")
         self.ui_about_dialog.set_program_name(_("Pardus Xfce Tweaks"))
+        self.ui_about_dialog.set_version(version.VERSION)
+
         if self.ui_about_dialog.get_titlebar() is None:
             about_headerbar = Gtk.HeaderBar.new()
             about_headerbar.set_show_close_button(True)
