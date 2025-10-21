@@ -491,15 +491,13 @@ class MainWindow:
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 7)
         box.props.margin = 7
 
-        icon = app.get_icon().to_string() if app.get_icon() else "image-missing"
-        img_icon = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DND)
+        img_icon = Gtk.Image.new_from_icon_name(app["icon"], Gtk.IconSize.DND)
         box.add(img_icon)
 
-        lbl_name = Gtk.Label.new(app.get_name())
+        lbl_name = Gtk.Label.new(app["name"])
         box.add(lbl_name)
 
-        app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app.get_id()}"
-        box.set_name(app_new_path)
+        box.set_name(app["application_file"])
 
         self.lb_startup_applications.add(box)
         self.lb_startup_applications.show_all()
@@ -869,18 +867,25 @@ class MainWindow:
         res = self.dialog_applications.run()
 
         if res == Gtk.ResponseType.OK and self.dialog_applications_selected_app:
-            app_info = self.dialog_applications_selected_app
+            app = self.dialog_applications_selected_app
 
-            if self.add_application_to_autostart(app_info):
+            if self.add_application_to_autostart(app):
+                app_id = app.get_id()
+                app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
+                app_info = ApplicationManager.get_application_info(app_new_path)
+
                 self.append_startup_application_to_list(app_info)
 
         self.dialog_applications.hide()
 
-    def on_appchooser_startup_application_selected(self, widget, app_info):
-        self.dialog_applications_selected_app = app_info
+    def on_appchooser_startup_application_selected(self, widget, app):
+        self.dialog_applications_selected_app = app
 
-    def on_appchooser_startup_application_activated(self, widget, app_info):
-        if self.add_application_to_autostart(app_info):
+    def on_appchooser_startup_application_activated(self, widget, app):
+        if self.add_application_to_autostart(app):
+            app_id = app.get_id()
+            app_new_path = f"{ApplicationManager.STARTUP_PATH}/{app_id}"
+            app_info = ApplicationManager.get_application_info(app_new_path)
             self.append_startup_application_to_list(app_info)
 
         self.lb_startup_applications.unselect_all()
