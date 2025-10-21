@@ -265,7 +265,7 @@ class MainWindow:
             self.append_wallpaper(w)
 
     def get_theme_defaults(self):
-        theme = ThemeManager.getTheme()
+        theme = ThemeManager.get_theme()
 
         if theme == "pardus-xfce":
             self.rb_lightTheme.set_active(True)
@@ -273,12 +273,12 @@ class MainWindow:
             self.rb_darkTheme.set_active(True)
 
     def get_scaling_defaults(self):
-        self.sli_panel.set_value(ScaleManager.getPanelSize())
-        self.sli_desktopIcon.set_value(ScaleManager.getDesktopIconSize())
+        self.sli_panel.set_value(ScaleManager.get_panel_size())
+        self.sli_desktopIcon.set_value(ScaleManager.get_desktop_icon_size())
 
-        currentScale = int((ScaleManager.getScale() / 0.25) - 4)
-        self.sli_scaling.set_value(currentScale)
-        self.sli_cursor.set_value((ScaleManager.getPointerSize() / 16) - 1)
+        current_scale = int((ScaleManager.get_scale() / 0.25) - 4)
+        self.sli_scaling.set_value(current_scale)
+        self.sli_cursor.set_value((ScaleManager.get_pointer_size() / 16) - 1)
 
     # Keyboard Settings:
     def get_keyboard_defaults(self):
@@ -303,8 +303,8 @@ class MainWindow:
 
         self.keyboard_selection_disabling_check()
 
-        keyboard_plugin = KeyboardManager.get_keyboard_plugin()
-        self.sw_lang_indicator.set_active(len(keyboard_plugin) > 0)
+        keyboard_plugin = PanelManager.find_plugin("xkb")
+        self.sw_lang_indicator.set_active(True if keyboard_plugin else False)
 
     def keyboard_selection_disabling_check(self):
         self.btn_trf_remove.set_sensitive(
@@ -321,8 +321,8 @@ class MainWindow:
         )
 
     def get_font_defaults(self):
-        system_font = FontManager.getSystemFont()
-        monospace_font = FontManager.getMonospaceFont()
+        system_font = FontManager.get_system_font()
+        monospace_font = FontManager.get_monospace_font()
 
         if system_font != "":
             self.font_system.set_font(system_font)
@@ -405,9 +405,9 @@ class MainWindow:
         self.lb_langs_not_installed.set_sort_func(sortfunc)
 
         # Get Available Locales
-        availableLocales = LocaleManager.getAvailableLocales()
-        installedLocales = LocaleManager.getInstalledLocales()
-        self.default_locale = LocaleManager.getDefaultLocale()
+        availableLocales = LocaleManager.get_available_locales()
+        installedLocales = LocaleManager.get_installed_locales()
+        self.default_locale = LocaleManager.get_default_locale()
 
         for lc in availableLocales:
             GLib.idle_add(
@@ -418,8 +418,8 @@ class MainWindow:
             )
 
     def get_panel_preferences(self):
-        PanelManager.restoreActionsDefault()
-        items = PanelManager.getActionsItems()
+        PanelManager.restore_default_actions()
+        items = PanelManager.get_actions_items()
         self.cb_panel_action_lockscreen.set_active(items["lock-screen"])
         self.cb_panel_action_switchuser.set_active(items["switch-user"])
         self.cb_panel_action_suspend.set_active(items["suspend"])
@@ -444,39 +444,43 @@ class MainWindow:
         GLib.idle_add(self.flow_wallpapers.insert, img_wallpaper, -1)
         GLib.idle_add(self.flow_wallpapers.show_all)
 
-    def changeWindowTheme(self, isHdpi, isDark):
+    def change_window_theme(self, isHdpi, isDark):
         if isHdpi:
             if isDark:
                 GLib.idle_add(
-                    ThemeManager.setWindowTheme, "pardus-xfce-dark-default-hdpi"
+                    ThemeManager.set_window_theme, "pardus-xfce-dark-default-hdpi"
                 )
             else:
-                GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce-default-hdpi")
+                GLib.idle_add(ThemeManager.set_window_theme, "pardus-xfce-default-hdpi")
         else:
             if isDark:
-                GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce-dark")
+                GLib.idle_add(ThemeManager.set_window_theme, "pardus-xfce-dark")
             else:
-                GLib.idle_add(ThemeManager.setWindowTheme, "pardus-xfce")
+                GLib.idle_add(ThemeManager.set_window_theme, "pardus-xfce")
 
     def get_power_defaults(self):
         self.cmb_laptop_screen_closed_bat.set_active_id(
-            str(PowerManager.getBatteryLaptopScreenClosed())
+            str(PowerManager.get_battery_laptop_screen_closed())
         )
         self.cmb_screen_off_after_bat.set_active_id(
-            str(PowerManager.getBatteryScreenOff())
+            str(PowerManager.get_battery_screen_off())
         )
         self.cmb_put_to_sleep_after_bat.set_active_id(
-            str(PowerManager.getBatteryScreenSleep())
+            str(PowerManager.get_battery_screen_sleep())
         )
         self.cmb_laptop_screen_closed.set_active_id(
-            str(PowerManager.getACLaptopScreenClosed())
+            str(PowerManager.get_ac_laptop_screen_closed())
         )
-        self.cmb_screen_off_after.set_active_id(str(PowerManager.getACScreenOff()))
-        self.cmb_put_to_sleep_after.set_active_id(str(PowerManager.getACScreenSleep()))
-        self.cmb_screen_off_after2.set_active_id(str(PowerManager.getACScreenOff()))
-        self.cmb_put_to_sleep_after2.set_active_id(str(PowerManager.getACScreenSleep()))
+        self.cmb_screen_off_after.set_active_id(str(PowerManager.get_ac_screen_off()))
+        self.cmb_put_to_sleep_after.set_active_id(
+            str(PowerManager.get_ac_screen_sleep())
+        )
+        self.cmb_screen_off_after2.set_active_id(str(PowerManager.get_ac_screen_off()))
+        self.cmb_put_to_sleep_after2.set_active_id(
+            str(PowerManager.get_ac_screen_sleep())
+        )
 
-        pageName = "laptop" if PowerManager.isLaptop() else "pc"
+        pageName = "laptop" if PowerManager.is_laptop() else "pc"
         self.stk_power_management.set_visible_child_name(pageName)
 
     def append_startup_application_to_list(self, app):
@@ -517,12 +521,14 @@ class MainWindow:
             self.append_startup_application_to_list(app)
 
     def getDefaultApplications(self):
-        browser_list = ApplicationManager.getApplicationListFromCategory("webbrowser")
-        filemanager_list = ApplicationManager.getApplicationListFromCategory(
+        browser_list = ApplicationManager.get_application_list_from_category(
+            "webbrowser"
+        )
+        filemanager_list = ApplicationManager.get_application_list_from_category(
             "filemanager"
         )
-        email_list = ApplicationManager.getApplicationListFromCategory("email")
-        terminal_list = ApplicationManager.getApplicationListFromCategory(
+        email_list = ApplicationManager.get_application_list_from_category("email")
+        terminal_list = ApplicationManager.get_application_list_from_category(
             "terminalemulator"
         )
 
@@ -558,42 +564,42 @@ class MainWindow:
     # - Theme Selection:
     def on_rb_lightTheme_clicked(self, rb):
         if rb.get_active():
-            GLib.idle_add(ThemeManager.setTheme, "pardus-xfce")
-            GLib.idle_add(ThemeManager.setIconTheme, "pardus-xfce")
+            GLib.idle_add(ThemeManager.set_theme, "pardus-xfce")
+            GLib.idle_add(ThemeManager.set_icon_theme, "pardus-xfce")
 
             # Window Theme
-            self.changeWindowTheme(ScaleManager.getScale() == 2.0, False)
+            self.change_window_theme(ScaleManager.get_scale() == 2.0, False)
 
     def on_rb_darkTheme_clicked(self, rb):
         if rb.get_active():
-            GLib.idle_add(ThemeManager.setTheme, "pardus-xfce-dark")
-            GLib.idle_add(ThemeManager.setIconTheme, "pardus-xfce-dark")
+            GLib.idle_add(ThemeManager.set_theme, "pardus-xfce-dark")
+            GLib.idle_add(ThemeManager.set_icon_theme, "pardus-xfce-dark")
 
             # Window Theme
-            self.changeWindowTheme(ScaleManager.getScale() == 2.0, True)
+            self.change_window_theme(ScaleManager.get_scale() == 2.0, True)
 
     # - Scale Changed:
     def on_sli_scaling_button_release(self, slider, b):
         value = int(slider.get_value()) * 0.25 + 1
-        self.changeWindowTheme(
-            value == 2.0, ThemeManager.getTheme() == "pardus-xfce-dark"
+        self.change_window_theme(
+            value == 2.0, ThemeManager.get_theme() == "pardus-xfce-dark"
         )
-        ScaleManager.setScale(value)
+        ScaleManager.set_scale(value)
 
     def on_sli_scaling_format_value(self, sli, value):
         return f"%{int(value * 25 + 100)}"
 
     def on_sli_panel_value_changed(self, sli):
-        ScaleManager.setPanelSize(int(sli.get_value()))
+        ScaleManager.set_panel_size(int(sli.get_value()))
 
     def on_sli_desktopIcon_value_changed(self, sli):
-        ScaleManager.setDesktopIconSize(int(sli.get_value()))
+        ScaleManager.set_desktop_icon_size(int(sli.get_value()))
 
     def on_sli_cursor_format_value(self, sli, value):
         return f"{int(value + 1) * 16}"
 
     def on_sli_cursor_value_changed(self, sli):
-        ScaleManager.setPointerSize(int(sli.get_value() + 1) * 16)
+        ScaleManager.set_pointer_size(int(sli.get_value() + 1) * 16)
 
     # - Keyboard Layout Changed:
     def on_btn_trf_add_clicked(self, button):
@@ -640,10 +646,10 @@ class MainWindow:
 
     # Fonts
     def on_font_system_font_set(self, fontbutton):
-        FontManager.setSystemFont(fontbutton.get_font())
+        FontManager.set_system_font(fontbutton.get_font())
 
     def on_font_monospace_font_set(self, fontbutton):
-        FontManager.setMonospaceFont(fontbutton.get_font())
+        FontManager.set_monospace_font(fontbutton.get_font())
 
     # Language
     def on_locale_add(self, btn):
@@ -722,7 +728,7 @@ class MainWindow:
             )
         )
 
-        LocaleManager.saveLocaleSettings(
+        LocaleManager.save_locale_settings(
             "|".join(installed_languages),
             self.default_locale,
             self.on_language_changes_saved,
@@ -741,7 +747,7 @@ class MainWindow:
         )
         DatetimeManager.set_panel_clock("digital-time-format", "%H:%M")
 
-        DatetimeManager.saveFile()
+        DatetimeManager.save_file()
 
     def on_btn_clock_date_time_clicked(self, btn):
         DatetimeManager.set("layout", "1")
@@ -760,14 +766,14 @@ class MainWindow:
         )
         DatetimeManager.set_panel_clock("digital-date-format", "%d.%m.%Y")
 
-        DatetimeManager.saveFile()
+        DatetimeManager.save_file()
 
     # Panel Preferences
     def on_panel_action_icon_clicked(self, btn):
-        PanelManager.setActionsItem(btn.get_name(), "+" if btn.get_active() else "-")
+        PanelManager.set_actions_item(btn.get_name(), "+" if btn.get_active() else "-")
 
     def on_btn_panel_actions_reset_clicked(self, btn):
-        PanelManager.restoreActionsDefault()
+        PanelManager.restore_default_actions()
         self.get_panel_preferences()
 
     # Power Management
@@ -779,7 +785,7 @@ class MainWindow:
                 model[tree_iter][0]
             )  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
 
-            PowerManager.setBatteryLaptopScreenClosed(value)
+            PowerManager.set_battery_laptop_screen_closed(value)
 
     def on_cmb_screen_off_after_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
@@ -787,7 +793,7 @@ class MainWindow:
             model = combobox.get_model()
             value = int(model[tree_iter][0])
 
-            PowerManager.setBatteryScreenOff(value)
+            PowerManager.set_battery_screen_off(value)
 
     def on_cmb_put_to_sleep_after_bat_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
@@ -795,7 +801,7 @@ class MainWindow:
             model = combobox.get_model()
             value = int(model[tree_iter][0])
 
-            PowerManager.setBatteryScreenSleep(value)
+            PowerManager.set_battery_screen_sleep(value)
 
     def on_cmb_laptop_screen_closed_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
@@ -805,7 +811,7 @@ class MainWindow:
                 model[tree_iter][0]
             )  # 0:Switch Off Display, 1:Suspend, 2:Hibernate, 3:Lock Screen
 
-            PowerManager.setACLaptopScreenClosed(value)
+            PowerManager.set_ac_laptop_screen_closed(value)
 
     def on_cmb_screen_off_after_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
@@ -813,7 +819,7 @@ class MainWindow:
             model = combobox.get_model()
             value = int(model[tree_iter][0])
 
-            PowerManager.setACScreenOff(value)
+            PowerManager.set_ac_screen_off(value)
 
     def on_cmb_put_to_sleep_after_changed(self, combobox):
         tree_iter = combobox.get_active_iter()
@@ -821,7 +827,7 @@ class MainWindow:
             model = combobox.get_model()
             value = int(model[tree_iter][0])
 
-            PowerManager.setACScreenSleep(value)
+            PowerManager.set_ac_screen_sleep(value)
 
     # Startup Applications
     def on_lb_startup_applications_selected_rows_changed(self, listbox):
@@ -883,7 +889,7 @@ class MainWindow:
         app = combobox.get_app_info()
         executable = app.get_executable().split("/")[-1]
 
-        ApplicationManager.setDefaultXFCEApp("WebBrowser", executable)
+        ApplicationManager.set_default_xfce_app("WebBrowser", executable)
 
     # def on_cmb_default_filemanager_changed(self, combobox):
     #     exe = self._get_cmb_executable(combobox)
@@ -911,13 +917,13 @@ class MainWindow:
 
         desktop_file = self._get_cmb_application(combobox)
 
-        ApplicationManager.setDefaultApp("video/mp4", desktop_file)
-        ApplicationManager.setDefaultApp("video/quicktime", desktop_file)
-        ApplicationManager.setDefaultApp("video/webm", desktop_file)
-        ApplicationManager.setDefaultApp("video/ogg", desktop_file)
-        ApplicationManager.setDefaultApp("video/msvideo", desktop_file)
-        ApplicationManager.setDefaultApp("video/x-msvideo", desktop_file)
-        ApplicationManager.setDefaultApp("video/flv", desktop_file)
+        ApplicationManager.set_default_app("video/mp4", desktop_file)
+        ApplicationManager.set_default_app("video/quicktime", desktop_file)
+        ApplicationManager.set_default_app("video/webm", desktop_file)
+        ApplicationManager.set_default_app("video/ogg", desktop_file)
+        ApplicationManager.set_default_app("video/msvideo", desktop_file)
+        ApplicationManager.set_default_app("video/x-msvideo", desktop_file)
+        ApplicationManager.set_default_app("video/flv", desktop_file)
 
     def on_cmb_default_music_changed(self, combobox):
         if combobox.get_active_iter() is None:
@@ -925,14 +931,14 @@ class MainWindow:
 
         desktop_file = self._get_cmb_application(combobox)
 
-        ApplicationManager.setDefaultApp("audio/mp4", desktop_file)
-        ApplicationManager.setDefaultApp("audio/mpeg", desktop_file)
-        ApplicationManager.setDefaultApp("audio/acc", desktop_file)
-        ApplicationManager.setDefaultApp("audio/flac", desktop_file)
-        ApplicationManager.setDefaultApp("audio/ogg", desktop_file)
-        ApplicationManager.setDefaultApp("audio/x-mp3", desktop_file)
-        ApplicationManager.setDefaultApp("audio/x-mpeg", desktop_file)
-        ApplicationManager.setDefaultApp("audio/x-m4a", desktop_file)
+        ApplicationManager.set_default_app("audio/mp4", desktop_file)
+        ApplicationManager.set_default_app("audio/mpeg", desktop_file)
+        ApplicationManager.set_default_app("audio/acc", desktop_file)
+        ApplicationManager.set_default_app("audio/flac", desktop_file)
+        ApplicationManager.set_default_app("audio/ogg", desktop_file)
+        ApplicationManager.set_default_app("audio/x-mp3", desktop_file)
+        ApplicationManager.set_default_app("audio/x-mpeg", desktop_file)
+        ApplicationManager.set_default_app("audio/x-m4a", desktop_file)
 
     def on_cmb_default_image_changed(self, combobox):
         if combobox.get_active_iter() is None:
@@ -940,28 +946,28 @@ class MainWindow:
 
         desktop_file = self._get_cmb_application(combobox)
 
-        ApplicationManager.setDefaultApp("image/bmp", desktop_file)
-        ApplicationManager.setDefaultApp("image/gif", desktop_file)
-        ApplicationManager.setDefaultApp("image/jpeg", desktop_file)
-        ApplicationManager.setDefaultApp("image/jpg", desktop_file)
-        ApplicationManager.setDefaultApp("image/pjpeg", desktop_file)
-        ApplicationManager.setDefaultApp("image/png", desktop_file)
-        ApplicationManager.setDefaultApp("image/svg+xml", desktop_file)
-        ApplicationManager.setDefaultApp("image/svg+xml-compressed", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-bmp", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-gray", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-icb", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-ico", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-pcx", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-png", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-portable-anymap", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-portable-bitmap", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-portable-graymap", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-portable-pixmap", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-xbitmap", desktop_file)
-        ApplicationManager.setDefaultApp("image/x-xpixmap", desktop_file)
-        ApplicationManager.setDefaultApp("image/vnd.wap.wbmp", desktop_file)
-        ApplicationManager.setDefaultApp("image/webp", desktop_file)
+        ApplicationManager.set_default_app("image/bmp", desktop_file)
+        ApplicationManager.set_default_app("image/gif", desktop_file)
+        ApplicationManager.set_default_app("image/jpeg", desktop_file)
+        ApplicationManager.set_default_app("image/jpg", desktop_file)
+        ApplicationManager.set_default_app("image/pjpeg", desktop_file)
+        ApplicationManager.set_default_app("image/png", desktop_file)
+        ApplicationManager.set_default_app("image/svg+xml", desktop_file)
+        ApplicationManager.set_default_app("image/svg+xml-compressed", desktop_file)
+        ApplicationManager.set_default_app("image/x-bmp", desktop_file)
+        ApplicationManager.set_default_app("image/x-gray", desktop_file)
+        ApplicationManager.set_default_app("image/x-icb", desktop_file)
+        ApplicationManager.set_default_app("image/x-ico", desktop_file)
+        ApplicationManager.set_default_app("image/x-pcx", desktop_file)
+        ApplicationManager.set_default_app("image/x-png", desktop_file)
+        ApplicationManager.set_default_app("image/x-portable-anymap", desktop_file)
+        ApplicationManager.set_default_app("image/x-portable-bitmap", desktop_file)
+        ApplicationManager.set_default_app("image/x-portable-graymap", desktop_file)
+        ApplicationManager.set_default_app("image/x-portable-pixmap", desktop_file)
+        ApplicationManager.set_default_app("image/x-xbitmap", desktop_file)
+        ApplicationManager.set_default_app("image/x-xpixmap", desktop_file)
+        ApplicationManager.set_default_app("image/vnd.wap.wbmp", desktop_file)
+        ApplicationManager.set_default_app("image/webp", desktop_file)
 
     def on_cmb_default_editor_changed(self, combobox):
         if combobox.get_active_iter() is None:
@@ -969,38 +975,38 @@ class MainWindow:
 
         desktop_file = self._get_cmb_application(combobox)
 
-        ApplicationManager.setDefaultApp("text/plain", desktop_file)
-        ApplicationManager.setDefaultApp("text/css", desktop_file)
-        ApplicationManager.setDefaultApp("text/javascript", desktop_file)
-        ApplicationManager.setDefaultApp("text/mathml", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-c++hdr", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-c++src", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-csrc", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-chdr", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-dtd", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-java", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-javascript", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-makefile", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-moc", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-pascal", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-patch", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-perl", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-php", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-python", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-python3", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-sql", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-tcl", desktop_file)
-        ApplicationManager.setDefaultApp("text/x-tex", desktop_file)
-        ApplicationManager.setDefaultApp("text/xml", desktop_file)
-        ApplicationManager.setDefaultApp("application/javascript", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-cgi", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-javascript", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-perl", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-php", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-python", desktop_file)
-        ApplicationManager.setDefaultApp("application/x-shellscript", desktop_file)
-        ApplicationManager.setDefaultApp("application/xml", desktop_file)
-        ApplicationManager.setDefaultApp("application/xml-dtd", desktop_file)
+        ApplicationManager.set_default_app("text/plain", desktop_file)
+        ApplicationManager.set_default_app("text/css", desktop_file)
+        ApplicationManager.set_default_app("text/javascript", desktop_file)
+        ApplicationManager.set_default_app("text/mathml", desktop_file)
+        ApplicationManager.set_default_app("text/x-c++hdr", desktop_file)
+        ApplicationManager.set_default_app("text/x-c++src", desktop_file)
+        ApplicationManager.set_default_app("text/x-csrc", desktop_file)
+        ApplicationManager.set_default_app("text/x-chdr", desktop_file)
+        ApplicationManager.set_default_app("text/x-dtd", desktop_file)
+        ApplicationManager.set_default_app("text/x-java", desktop_file)
+        ApplicationManager.set_default_app("text/x-javascript", desktop_file)
+        ApplicationManager.set_default_app("text/x-makefile", desktop_file)
+        ApplicationManager.set_default_app("text/x-moc", desktop_file)
+        ApplicationManager.set_default_app("text/x-pascal", desktop_file)
+        ApplicationManager.set_default_app("text/x-patch", desktop_file)
+        ApplicationManager.set_default_app("text/x-perl", desktop_file)
+        ApplicationManager.set_default_app("text/x-php", desktop_file)
+        ApplicationManager.set_default_app("text/x-python", desktop_file)
+        ApplicationManager.set_default_app("text/x-python3", desktop_file)
+        ApplicationManager.set_default_app("text/x-sql", desktop_file)
+        ApplicationManager.set_default_app("text/x-tcl", desktop_file)
+        ApplicationManager.set_default_app("text/x-tex", desktop_file)
+        ApplicationManager.set_default_app("text/xml", desktop_file)
+        ApplicationManager.set_default_app("application/javascript", desktop_file)
+        ApplicationManager.set_default_app("application/x-cgi", desktop_file)
+        ApplicationManager.set_default_app("application/x-javascript", desktop_file)
+        ApplicationManager.set_default_app("application/x-perl", desktop_file)
+        ApplicationManager.set_default_app("application/x-php", desktop_file)
+        ApplicationManager.set_default_app("application/x-python", desktop_file)
+        ApplicationManager.set_default_app("application/x-shellscript", desktop_file)
+        ApplicationManager.set_default_app("application/xml", desktop_file)
+        ApplicationManager.set_default_app("application/xml-dtd", desktop_file)
 
     def on_ui_otherdefaultapps_button_clicked(self, button):
         subprocess.Popen(["xfce4-mime-settings"])
@@ -1010,13 +1016,13 @@ class MainWindow:
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            PanelManager.restoreDefaultSettings()
+            PanelManager.restore_default_settings()
 
     def on_btn_restore_thunar_clicked(self, button):
         response = self.dialog_restore_defaults.run()
         self.dialog_restore_defaults.hide()
         if response == Gtk.ResponseType.YES:
-            ThunarManager.restoreDefaultSettings()
+            ThunarManager.restore_default_settings()
 
     def on_btn_restore_allxfce_clicked(self, button):
         response = self.dialog_restore_defaults.run()
