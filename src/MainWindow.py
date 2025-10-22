@@ -340,7 +340,7 @@ class MainWindow:
         if isInstalled:
             # Default Indicator
             default_img = Gtk.Image.new_from_icon_name(
-                "object-select-symbolic", Gtk.IconSize.BUTTON
+                "selection-mode-symbolic", Gtk.IconSize.BUTTON
             )
             default_img.get_style_context().add_class("success")
             default_img.set_tooltip_text(_("Default System Language"))
@@ -362,7 +362,7 @@ class MainWindow:
 
             # Set as Default button
             btn_default = Gtk.Button.new_from_icon_name(
-                "document-save-symbolic", Gtk.IconSize.BUTTON
+                "object-select-symbolic", Gtk.IconSize.BUTTON
             )
             btn_default.connect("clicked", self.on_locale_set_default)
 
