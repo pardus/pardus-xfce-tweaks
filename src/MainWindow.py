@@ -114,6 +114,9 @@ class MainWindow:
 
         self.set_show_default_apps()
 
+        # Set later signals:
+        self.set_signals_later()
+
         # Show Screen:
         self.window.show_all()
 
@@ -170,8 +173,11 @@ class MainWindow:
         self.flow_wallpapers = UI("flow_wallpapers")
 
         # Theme
-        self.rb_darkTheme = UI("rb_darkTheme")
-        self.rb_lightTheme = UI("rb_lightTheme")
+        self.rb_dark_theme = UI("rb_dark_theme")
+        self.rb_light_theme = UI("rb_light_theme")
+        self.rb_default_icons = UI("rb_default_icons")
+        self.rb_brown_icons = UI("rb_brown_icons")
+        self.rb_gray_icons = UI("rb_gray_icons")
 
         # Display
         self.sli_cursor = UI("sli_cursor")
@@ -243,6 +249,20 @@ class MainWindow:
 
         self.dialog_restore_defaults = UI("dialog_restore_defaults")
 
+    def set_signals_later(self):
+        self.rb_light_theme.connect("toggled", self.on_rb_theme_toggled, "light")
+        self.rb_dark_theme.connect("toggled", self.on_rb_theme_toggled, "dark")
+
+        self.rb_default_icons.connect(
+            "toggled", self.on_rb_icons_toggled, "pardus-xfce"
+        )
+        self.rb_brown_icons.connect(
+            "toggled", self.on_rb_icons_toggled, "pardus-xfce-brown"
+        )
+        self.rb_gray_icons.connect(
+            "toggled", self.on_rb_icons_toggled, "pardus-xfce-gray"
+        )
+
     def set_show_default_apps(self):
         self.cmb_default_video.set_show_default_item(True)
         self.cmb_default_music.set_show_default_item(True)
@@ -270,9 +290,9 @@ class MainWindow:
         theme = ThemeManager.get_theme()
 
         if theme == "pardus-xfce":
-            self.rb_lightTheme.set_active(True)
+            self.rb_light_theme.set_active(True)
         elif theme == "pardus-xfce-dark":
-            self.rb_darkTheme.set_active(True)
+            self.rb_dark_theme.set_active(True)
 
     def get_scaling_defaults(self):
         self.sli_panel.set_value(ScaleManager.get_panel_size())
@@ -553,6 +573,9 @@ class MainWindow:
         # self.cmb_default_email.set_active_id(       ApplicationManager.getDefaultXFCEApp("MailReader")["name"])
         # self.cmb_default_terminal.set_active_id(    ApplicationManager.getDefaultXFCEApp("TerminalEmulator")["name"])
 
+    def refresh_panel(self):
+        subprocess.call(["xfce4-panel", "-r"])
+
     # SIGNALS
     def on_lb_rows_row_activated(self, rows, a):
         page = rows.get_selected_row().get_index()
@@ -564,21 +587,50 @@ class MainWindow:
         WallpaperManager.set_wallpaper(filename)
 
     # - Theme Selection:
-    def on_rb_lightTheme_clicked(self, rb):
-        if rb.get_active():
+    def on_rb_theme_toggled(self, btn, theme):
+        if not btn.get_active():
+            return
+
+        # Icon theme
+        current_icon_theme = ThemeManager.get_icon_theme()
+
+        if theme == "light":
             GLib.idle_add(ThemeManager.set_theme, "pardus-xfce")
-            GLib.idle_add(ThemeManager.set_icon_theme, "pardus-xfce")
+            GLib.idle_add(
+                PanelManager.set_startup_icon,
+                "/usr/share/icons/pardus-xfce/statusbar/start-pardus-25.svg",
+            )
+
+            if "-dark" in current_icon_theme:
+                new_icon_theme = current_icon_theme[:-5]  # remove -dark suffix
+                GLib.idle_add(ThemeManager.set_icon_theme, new_icon_theme)
 
             # Window Theme
             self.change_window_theme(ScaleManager.get_scale() == 2.0, False)
-
-    def on_rb_darkTheme_clicked(self, rb):
-        if rb.get_active():
+        elif theme == "dark":
             GLib.idle_add(ThemeManager.set_theme, "pardus-xfce-dark")
-            GLib.idle_add(ThemeManager.set_icon_theme, "pardus-xfce-dark")
+            GLib.idle_add(
+                PanelManager.set_startup_icon,
+                "/usr/share/icons/pardus-xfce-dark/statusbar/start-pardus-25.svg",
+            )
+
+            if "-dark" not in current_icon_theme:
+                new_icon_theme = current_icon_theme + "-dark"  # remove -dark suffix
+                GLib.idle_add(ThemeManager.set_icon_theme, new_icon_theme)
 
             # Window Theme
             self.change_window_theme(ScaleManager.get_scale() == 2.0, True)
+
+        # self.refresh_panel()
+
+    def on_rb_icons_toggled(self, btn, icon_theme):
+        if btn.get_active():
+            current_theme = ThemeManager.get_icon_theme()
+
+            if "-dark" in current_theme:
+                icon_theme += "-dark"
+
+            GLib.idle_add(ThemeManager.set_icon_theme, icon_theme)
 
     # - Scale Changed:
     def on_sli_scaling_button_release(self, slider, b):
