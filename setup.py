@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import subprocess
-import src.version as Version
 
 from setuptools import setup, find_packages
 
@@ -28,6 +27,21 @@ def create_mo_files():
                 )
             )
     return mo
+
+
+# Generate version on build
+changelog = "debian/changelog"
+version = "0.1.0"
+if os.path.exists("debian/changelog"):
+    head = open(changelog).readline()
+
+    try:
+        version = head.split("(")[1].split(")")[0]
+        with open("src/version.py", "w") as f:
+            f.write(f"VERSION = '{version}'")
+
+    except:
+        print("debian/changelog format is wrong for get version")
 
 
 data_files = [
@@ -57,7 +71,7 @@ data_files = [
 
 setup(
     name="pardus-xfce-tweaks",
-    version=Version.VERSION,
+    version=version,
     packages=find_packages(),
     install_requires=["PyGObject"],
     data_files=data_files,
