@@ -1,12 +1,16 @@
 pardus-xfce-tweaks (0.4.0~beta1) yirmibes; urgency=medium
 
+  [ Emin Fedar ]
   * feat!: depend on pardus-lib-xfce & new version.py
   * fix: pardus-lib-xfce renaming functions
   * fix: locale button icons
   * fix: locale_changer.py & dialogs centered & 0.2.0 lib-xfce dependency
   * fix: startup applications
+  * fix: locale selection icons changed
+  * feat: added icon theme selection to tweaks
+  * fix: setup.py auto version generation on build
 
- -- Emin Fedar <emin.fedar@pardus.org.tr>  Tue, 21 Oct 2025 15:55:18 +0300
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 24 Oct 2025 14:09:30 +0300
 
 pardus-xfce-tweaks (0.4.0~alpha1) yirmibes; urgency=medium
 
