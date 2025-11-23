@@ -1,3 +1,10 @@
+pardus-xfce-tweaks (0.4.0) yirmibes; urgency=medium
+
+  * Update maintainer
+  * Update app icon
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sun, 23 Nov 2025 22:14:52 +0300
+
 pardus-xfce-tweaks (0.4.0~beta2) yirmibes; urgency=medium
 
   * Fix invalid version on setup.py
