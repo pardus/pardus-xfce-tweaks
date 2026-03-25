@@ -2,19 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import os
-import subprocess
 import shutil
+import subprocess
 
 import gi
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Xfconf", "0")
-from gi.repository import GLib, Gtk, GdkPixbuf, Gio, Xfconf, Gdk
-
-import version
-
 import locale
 from locale import gettext as _
+
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Xfconf
+
+import version
 
 # Translation Constants:
 APPNAME = "pardus-xfce-tweaks"
@@ -38,17 +38,17 @@ if (
 ):
     Xfconf.init()
 
-    import pardus_lib_xfce.WallpaperManager as WallpaperManager
-    import pardus_lib_xfce.ThemeManager as ThemeManager
-    import pardus_lib_xfce.ScaleManager as ScaleManager
-    import pardus_lib_xfce.KeyboardManager as KeyboardManager
-    import pardus_lib_xfce.PowerManager as PowerManager
     import pardus_lib_xfce.ApplicationManager as ApplicationManager
-    import pardus_lib_xfce.FontManager as FontManager
     import pardus_lib_xfce.DatetimeManager as DatetimeManager
+    import pardus_lib_xfce.FontManager as FontManager
+    import pardus_lib_xfce.KeyboardManager as KeyboardManager
     import pardus_lib_xfce.LocaleManager as LocaleManager
     import pardus_lib_xfce.PanelManager as PanelManager
+    import pardus_lib_xfce.PowerManager as PowerManager
+    import pardus_lib_xfce.ScaleManager as ScaleManager
+    import pardus_lib_xfce.ThemeManager as ThemeManager
     import pardus_lib_xfce.ThunarManager as ThunarManager
+    import pardus_lib_xfce.WallpaperManager as WallpaperManager
 
 else:
     print("This program requires XFCE desktop.")
@@ -351,12 +351,13 @@ class MainWindow:
         if monospace_font != "":
             self.font_monospace.set_font(monospace_font)
 
-    def addLocaleToListBox(self, lang, codeset, isInstalled):
+    def add_locales_to_listbox(self, lang, lang_native, codeset, is_installed):
         box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
         box.set_margin_start(7)
         box.set_margin_end(1)
+        box._lang = lang
 
-        if isInstalled:
+        if is_installed:
             # Default Indicator
             default_img = Gtk.Image.new_from_icon_name(
                 "selection-mode-symbolic", Gtk.IconSize.BUTTON
@@ -368,24 +369,12 @@ class MainWindow:
             default_img.set_margin_end(9)
             box.pack_end(default_img, False, False, 0)
 
-            # # Remove button
-            # btn = Gtk.Button.new_from_icon_name("user-trash-symbolic", Gtk.IconSize.BUTTON)
-            # # btn.get_style_context().add_class("destructive-action")
-            # btn.set_no_show_all(True)
-            # btn.set_visible(lang != self.default_locale)
-            # btn.connect("clicked", self.on_locale_remove)
-            #
-            # # btn.set_relief(Gtk.ReliefStyle.NONE)
-            # btn.set_name(f"{lang} {codeset}")
-            # box.pack_end(btn, False, False, 5)
-
             # Set as Default button
             btn_default = Gtk.Button.new_from_icon_name(
                 "object-select-symbolic", Gtk.IconSize.BUTTON
             )
             btn_default.connect("clicked", self.on_locale_set_default)
 
-            # btn_default.set_relief(Gtk.ReliefStyle.NONE)
             btn_default.set_name(f"{lang} {codeset}")
             btn_default.set_tooltip_text(_("Set as Default"))
             btn_default.set_no_show_all(True)
@@ -403,12 +392,21 @@ class MainWindow:
             btn.set_name(f"{lang} {codeset}")
             box.pack_end(btn, False, False, 0)
 
-        lbl_name = Gtk.Label.new(lang)
-        lbl_name.set_margin_top(8)
-        lbl_name.set_margin_bottom(8)
-        box.add(lbl_name)
+        # Language native + english name
+        vbox = Gtk.Box(
+            orientation="vertical",
+            spacing=7,
+            margin_top=7,
+            margin_bottom=7,
+            margin_start=7,
+            margin_end=7,
+        )
+        vbox.add(Gtk.Label.new(lang_native))
+        vbox.add(Gtk.Label.new(lang))
 
-        if isInstalled:
+        box.add(vbox)
+
+        if is_installed:
             self.lb_langs_installed.add(box)
             self.lb_langs_installed.show_all()
         else:
@@ -418,8 +416,8 @@ class MainWindow:
     def get_locales(self):
         # Set Sorting function for listboxes
         def sortfunc(row1, row2):
-            row1_label = row1.get_children()[0].get_children()[0].get_text()
-            row2_label = row2.get_children()[0].get_children()[0].get_text()
+            row1_label = row1.get_children()[0]._lang
+            row2_label = row2.get_children()[0]._lang
 
             return locale.strcoll(row1_label, row2_label)
 
@@ -431,13 +429,16 @@ class MainWindow:
         installed_locales = LocaleManager.get_installed_locales()
         self.default_locale = LocaleManager.get_default_locale()
 
-        for lc in available_locales:
-            if lc[1] == "UTF-8":
+        for lang, encode_type in available_locales:
+            if encode_type == "UTF-8":
+                lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
+                lang_info = LocaleManager.get_locale_info(lang_core)
                 GLib.idle_add(
-                    self.addLocaleToListBox,
-                    lc[0],
-                    lc[1],
-                    True if lc in installed_locales else False,
+                    self.add_locales_to_listbox,
+                    lang_info["language"],
+                    lang_info["language_native"],
+                    lang_info["country"],
+                    True if (lang, encode_type) in installed_locales else False,
                 )
 
     def get_panel_preferences(self):
@@ -707,7 +708,14 @@ class MainWindow:
     # Language
     def on_locale_add(self, btn):
         lang, codeset = btn.get_name().split(" ")
-        self.addLocaleToListBox(lang, codeset, True)
+        lang_core = lang.split(".")[0]
+        lang_info = LocaleManager.get_locale_info(lang_core)
+        self.add_locales_to_listbox(
+            lang_info["language"],
+            lang_info["language_native"],
+            lang_info["country"],
+            True,
+        )
 
         parent_row = btn.get_parent().get_parent()
         parent_row.destroy()
@@ -722,7 +730,14 @@ class MainWindow:
             return
 
         lang, codeset = btn.get_name().split(" ")
-        self.addLocaleToListBox(lang, codeset, False)
+        lang_core = lang.split(".")[0]
+        lang_info = LocaleManager.get_locale_info(lang_core)
+        self.add_locales_to_listbox(
+            lang_info["language"],
+            lang_info["language_native"],
+            lang_info["country"],
+            False,
+        )
 
         parent_row = btn.get_parent().get_parent()
         parent_row.destroy()
