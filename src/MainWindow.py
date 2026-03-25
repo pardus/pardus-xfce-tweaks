@@ -169,6 +169,10 @@ class MainWindow:
         self.nb_pages = UI("nb_pages")
         self.lb_rows = UI("lb_rows")
 
+        # Dialogs
+        self.dialogs_window = UI("dialogs_window")
+        self.dialogs_stack = UI("dialogs_stack")
+
         # Wallpapers
         self.flow_wallpapers = UI("flow_wallpapers")
 
@@ -199,9 +203,6 @@ class MainWindow:
         self.font_monospace = UI("font_monospace")
 
         # Languages
-        self.dialog_languages_generate = UI("dialog_languages_generate")
-        self.dialog_languages_generate_failed = UI("dialog_languages_generate_failed")
-        self.dialog_languages_generate_success = UI("dialog_languages_generate_success")
         self.revealer_languages = UI("revealer_languages")
         self.box_languages = UI("box_languages")
         self.btn_languages_lock = UI("btn_languages_lock")
@@ -246,8 +247,6 @@ class MainWindow:
         self.lst_default_filemanager = UI("lst_default_filemanager")
         self.lst_default_email = UI("lst_default_email")
         self.lst_default_terminal = UI("lst_default_terminal")
-
-        self.dialog_restore_defaults = UI("dialog_restore_defaults")
 
     def set_signals_later(self):
         self.rb_light_theme.connect("toggled", self.on_rb_theme_toggled, "light")
@@ -774,7 +773,8 @@ class MainWindow:
 
         new_locales = "|".join(installed_languages)
 
-        self.dialog_languages_generate.show_all()
+        self.dialogs_window.show_all()
+        self.dialogs_stack.set_visible_child_name("generating")
 
         process = subprocess.run(
             [
@@ -785,15 +785,14 @@ class MainWindow:
                 self.default_locale,
             ]
         )
-        self.dialog_languages_generate.hide()
 
+        self.dialogs_window.show_all()
         if process.returncode == 0:
             self.revealer_languages.set_reveal_child(False)
-            self.dialog_languages_generate_success.run()
-            self.dialog_languages_generate_success.hide()
+            self.dialogs_stack.set_visible_child_name("success")
+
         else:
-            self.dialog_languages_generate_failed.run()
-            self.dialog_languages_generate_failed.hide()
+            self.dialogs_stack.set_visible_child_name("error")
 
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
@@ -1079,22 +1078,29 @@ class MainWindow:
         subprocess.Popen(["xfce4-mime-settings"])
 
     # Restore Defaults
+    def on_restore(self, restore_type):
+        self.restore_type = restore_type
+        self.dialogs_window.show_all()
+        self.dialogs_stack.set_visible_child_name("restore")
+
     def on_btn_restore_panel_clicked(self, button):
-        response = self.dialog_restore_defaults.run()
-        self.dialog_restore_defaults.hide()
-        if response == Gtk.ResponseType.YES:
-            PanelManager.restore_default_settings()
+        self.on_restore("panel")
 
     def on_btn_restore_thunar_clicked(self, button):
-        response = self.dialog_restore_defaults.run()
-        self.dialog_restore_defaults.hide()
-        if response == Gtk.ResponseType.YES:
-            ThunarManager.restore_default_settings()
+        self.on_restore("thunar")
 
     def on_btn_restore_allxfce_clicked(self, button):
-        response = self.dialog_restore_defaults.run()
-        self.dialog_restore_defaults.hide()
-        if response == Gtk.ResponseType.YES:
+        self.on_restore("all-xfce")
+
+    def on_dialog_restore_defaults_clicked(self, button):
+        if not self.restore_type:
+            return
+
+        if self.restore_type == "panel":
+            PanelManager.restore_default_settings()
+        elif self.restore_type == "thunar":
+            ThunarManager.restore_default_settings()
+        elif self.restore_type == "all-xfce":
             subprocess.Popen(
                 os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh"
             )
