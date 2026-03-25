@@ -43,6 +43,13 @@ if os.path.exists("debian/changelog"):
     except:
         print("debian/changelog format is wrong for get version")
 
+def pythonic_version(version):
+    return (version
+        .replace("~alpha", "a")
+        .replace("~beta", "b")
+        .replace("~rc", "rc")
+        .replace("~dev", ".dev")
+    )
 
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.xfce-tweaks.desktop"]),
@@ -71,7 +78,7 @@ data_files = [
 
 setup(
     name="pardus-xfce-tweaks",
-    version=version,
+    version=pythonic_version(version),
     packages=find_packages(),
     install_requires=["PyGObject"],
     data_files=data_files,
