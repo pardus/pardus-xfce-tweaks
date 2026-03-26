@@ -1,3 +1,13 @@
+pardus-xfce-tweaks (0.5.0) UNRELEASED; urgency=medium
+
+  * fix: improved dialogs
+  * Merge branch 'master' of git.pardus.net.tr:yirmibes/pardus-xfce-tweaks
+  * feat: better language support
+  * fix: languages ui
+  * fix: remove unused code
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 26 Mar 2026 10:11:58 +0300
+
 pardus-xfce-tweaks (0.4.0) yirmibes; urgency=medium
 
   * Update maintainer
