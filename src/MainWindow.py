@@ -189,7 +189,6 @@ class MainWindow:
         self.cmb_default_editor = UI("cmb_default_editor")
 
         self.nb_pages = UI("nb_pages")
-        self.lb_rows = UI("lb_rows")
 
         # Dialogs
         self.dialogs_window = UI("dialogs_window")
@@ -229,14 +228,10 @@ class MainWindow:
         self.revealer_lang_save_changes = UI("revealer_lang_save_changes")
         self.box_revealer_language = UI("box_revealer_language")
 
-        self.box_languages = UI("box_languages")
-        self.btn_languages_lock = UI("btn_languages_lock")
-
         self.window_languages = UI("window_languages")
         self.lb_languages = UI("lb_languages")
         self.btn_select_language = UI("btn_select_language")
         self.lb_langs_installed = UI("lb_langs_installed")
-        # self.lb_langs_not_installed = UI("lb_langs_not_installed")
 
         # Panel Preferences
         self.cb_panel_action_lockscreen = UI("cb_panel_action_lockscreen")
@@ -267,11 +262,6 @@ class MainWindow:
         self.appchooser_startup = UI("appchooser_startup")
 
         # Default Applications
-        # self.cmb_default_browser        = UI("cmb_default_browser")
-        # self.cmb_default_filemanager    = UI("cmb_default_filemanager")
-        # self.cmb_default_email          = UI("cmb_default_email")
-        # self.cmb_default_terminal       = UI("cmb_default_terminal")
-
         self.lst_default_browser = UI("lst_default_browser")
         self.lst_default_filemanager = UI("lst_default_filemanager")
         self.lst_default_email = UI("lst_default_email")
@@ -480,7 +470,6 @@ class MainWindow:
             )
             default_img.get_style_context().add_class("success")
             default_img.set_tooltip_text(_("Default System Language"))
-            print(f"{item.lang} is_default:{item.is_default}")
             default_img.set_margin_end(7)
 
             hbox.pack_end(default_img, False, False, 0)
@@ -835,14 +824,10 @@ class MainWindow:
 
         self.list_installed_languages.sort(self.sort_langs)
 
-        print(self.default_locale)
         self.default_locale = f"{item.lang} {item.encode_type}"
-        print("New default locale:", self.default_locale)
 
         self.revealer_language.set_reveal_child(False)
         self.revealer_lang_save_changes.set_reveal_child(True)
-
-        self.print_installed_langs()
 
         self.lb_langs_installed.show_all()
 
@@ -862,7 +847,6 @@ class MainWindow:
             installed_languages.append(f"{it.lang} {it.encode_type}")
 
         self.new_locales = "|".join(installed_languages)
-        print("new locales", self.new_locales)
 
         self.dialogs_window.show_all()
         self.dialogs_stack.set_visible_child_name("generating")
@@ -885,13 +869,10 @@ class MainWindow:
     def on_lb_langs_installed_row_selected(self, listbox, row):
         if row:
             item = self.list_installed_languages.get_item(row.get_index())
-            print("is selected item default:", item.is_default)
 
             self.box_revealer_language.set_sensitive(not item.is_default)
 
             self.revealer_language.set_reveal_child(True)
-
-            self.print_installed_langs()
 
     def on_btn_select_language_clicked(self, btn):
         self.window_languages.hide()
@@ -911,8 +892,6 @@ class MainWindow:
             self.revealer_lang_save_changes.set_reveal_child(True)
 
         self.lb_langs_installed.show_all()
-
-        self.print_installed_langs()
 
     def on_btn_close_languages_window_clicked(self, btn):
         self.window_languages.hide()
