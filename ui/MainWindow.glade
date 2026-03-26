@@ -4840,8 +4840,8 @@ Fatih Altun &lt;fatih.altun@pardus.org.tr&gt;</property>
     </child>
   </object>
   <object class="GtkWindow" id="window_languages">
-    <property name="width-request">450</property>
-    <property name="height-request">600</property>
+    <property name="width-request">600</property>
+    <property name="height-request">900</property>
     <property name="can-focus">False</property>
     <property name="transient-for">window</property>
     <property name="attached-to">window</property>

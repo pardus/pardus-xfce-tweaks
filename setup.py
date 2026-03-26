@@ -43,20 +43,26 @@ if os.path.exists("debian/changelog"):
     except:
         print("debian/changelog format is wrong for get version")
 
+
 def pythonic_version(version):
-    return (version
-        .replace("~alpha", "a")
+    return (
+        version.replace("~alpha", "a")
         .replace("~beta", "b")
         .replace("~rc", "rc")
         .replace("~dev", ".dev")
     )
+
 
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.xfce-tweaks.desktop"]),
     (APPLICATION_FOLDER, ["pardus-xfce-tweaks.svg"]),
     (
         f"{APPLICATION_FOLDER}/assets",
-        ["assets/theme-light.png", "assets/theme-dark.png"],
+        [
+            "assets/theme-light.png",
+            "assets/theme-dark.png",
+            "assets/turkish-cyprus-flag.svg",
+        ],
     ),
     (
         f"{APPLICATION_FOLDER}/src",

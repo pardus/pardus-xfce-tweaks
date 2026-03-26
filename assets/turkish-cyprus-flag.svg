@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="26px" height="18px" fill="#e30a17">
+  <path d="M 0 0 L 26 0 L 26 18 L 0 18 L 0 0 Z" fill="#fff" style=""/>
+  <circle cx="15" cy="15" r="7.5" style="" transform="matrix(0.577774, 0, 0, 0.6, 0, 0)"/>
+  <circle cx="16.875" cy="15" r="6" fill="#fff" style="" transform="matrix(0.577774, 0, 0, 0.6, 0, 0)"/>
+  <path d="M 0 1.8 L 26 1.8 L 26 3.6 L 0 3.6 L 0 1.8 Z M 0 14.4 L 26 14.4 L 26 16.2 L 0 16.2 L 0 14.4 Z M 12.061 9 L 15.981 7.678 L 13.558 11.139 L 13.558 6.86 L 15.981 10.322 L 12.061 9 Z" style=""/>
+</svg>

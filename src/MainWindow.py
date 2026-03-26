@@ -24,6 +24,7 @@ locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
 
 LOCALE_CHANGER_PY = "/usr/share/pardus/pardus-xfce-tweaks/src/xfce/locale_changer.py"
+CWD = os.path.dirname(os.path.abspath(__file__))
 
 
 def getenv(str):
@@ -78,9 +79,7 @@ class MainWindow:
         self.builder.set_translation_domain(APPNAME)
 
         # Import UI file:
-        self.builder.add_from_file(
-            os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
-        )
+        self.builder.add_from_file(CWD + "/../ui/MainWindow.glade")
         self.builder.connect_signals(self)
 
         # Window
@@ -145,9 +144,7 @@ class MainWindow:
     # Custom css
     def set_css(self):
         cssProvider = Gtk.CssProvider()
-        cssProvider.load_from_path(
-            os.path.dirname(os.path.abspath(__file__)) + "/../css/style.css"
-        )
+        cssProvider.load_from_path(CWD + "/../css/style.css")
         screen = Gdk.Screen.get_default()
         styleContext = Gtk.StyleContext()
         styleContext.add_provider_for_screen(
@@ -416,7 +413,7 @@ class MainWindow:
         lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
         lang_info = LocaleManager.get_locale_info(lang_core)
 
-        box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 7)
+        box = Gtk.Box(orientation="vertical", spacing=7, tooltip_text=lang_core)
         box._lang = lang_info["language"]
         box._item = item
 
@@ -426,27 +423,33 @@ class MainWindow:
             spacing=5,
         )
 
-        if not lang_info["language"]:
-            lang_info["language"] = lang
+        language = lang_info["language"]
+        language_native = lang_info["language_native"]
 
-        # Name
-        if lang_info["language_native"]:
-            lang_lbl = Gtk.Label(
-                label=f"{lang_info['language_native']} ({lang_info['country_native']})",
-                halign="start",
-            )
-            label_box.add(lang_lbl)
+        if not language or not language_native:
+            return
 
         # Native Name
-        if lang_info["language"]:
-            lang_native_lbl = Gtk.Label(
-                label=f"{lang_info['language']} ({lang_info['country']})",
+        if lang_info["country_native"]:
+            language_native = language_native + f" ({lang_info['country_native']})"
+
+        label_box.add(
+            Gtk.Label(
+                label=language_native,
                 halign="start",
             )
-            lang_native_lbl.get_style_context().add_class("dimmed")
-            lang_native_lbl.get_style_context().add_class("dim-label")
-            lang_native_lbl.get_style_context().add_class("caption")
-            label_box.add(lang_native_lbl)
+        )
+
+        # Name
+        if language:
+            if lang_info["country"]:
+                language = language + f" ({lang_info['country']})"
+
+            lang_lbl = Gtk.Label(label=language, halign="start")
+            lang_lbl.get_style_context().add_class("dimmed")
+            lang_lbl.get_style_context().add_class("dim-label")
+            lang_lbl.get_style_context().add_class("caption")
+            label_box.add(lang_lbl)
 
         hbox = Gtk.Box(
             spacing=7,
@@ -455,12 +458,22 @@ class MainWindow:
             margin_end=7,
         )
         # Country Flag
-        hbox.add(
-            Gtk.Label(
-                label=f'<span size="150%">{self.get_flag_emoji(lang_info["country_ab2"])}</span>',
-                use_markup=True,
+        if lang_core == "tr_CY":
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(
+                f"{CWD}/../assets/turkish-cyprus-flag.svg"
             )
-        )
+            img_cy = Gtk.Image.new_from_pixbuf(pixbuf)
+            hbox.add(img_cy)
+        elif lang_info["country_ab2"]:
+            hbox.add(
+                Gtk.Label(
+                    label=f'<span size="150%">{self.get_flag_emoji(lang_info["country_ab2"])}</span>',
+                    use_markup=True,
+                )
+            )
+        else:
+            hbox.add(Gtk.Image(icon_name="image-missing-symbolic", pixel_size=24))
+
         hbox.add(label_box)
 
         # Default Logo
@@ -490,6 +503,12 @@ class MainWindow:
                 is_installed = (
                     True if (lang, encode_type) in installed_locales else False
                 )
+
+                lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
+                lang_info = LocaleManager.get_locale_info(lang_core)
+                if not lang_info["language"] or not lang_info["language_native"]:
+                    continue
+
                 new_item = Language(
                     lang=lang,
                     encode_type=encode_type,
@@ -505,6 +524,11 @@ class MainWindow:
 
         for lang, encode_type in installed_locales:
             if encode_type == "UTF-8":
+                lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
+                lang_info = LocaleManager.get_locale_info(lang_core)
+                if not lang_info["language"] or not lang_info["language_native"]:
+                    continue
+
                 new_item = Language(
                     lang=lang,
                     encode_type=encode_type,
@@ -1203,9 +1227,7 @@ class MainWindow:
         elif self.restore_type == "thunar":
             ThunarManager.restore_default_settings()
         elif self.restore_type == "all-xfce":
-            subprocess.Popen(
-                os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh"
-            )
+            subprocess.Popen(CWD + "/xfce/resetall.sh")
 
     def on_dialog_close_clicked(self, button):
         self.dialogs_window.hide()
