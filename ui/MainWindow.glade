@@ -1317,7 +1317,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce/places/folder.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce/places/folder.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1354,7 +1354,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce/places/user-home.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce/places/user-home.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1454,7 +1454,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce-brown/places/folder.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce-brown/places/folder.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1491,7 +1491,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce-brown/places/user-home.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce-brown/places/user-home.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1591,7 +1591,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce-gray/places/folder.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce-gray/places/folder.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1628,7 +1628,7 @@ Do you want to continue?</property>
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="pixbuf">usr/share/icons/pardus-xfce-gray/places/user-home.svg</property>
+                                                <property name="pixbuf">/usr/share/icons/pardus-xfce-gray/places/user-home.svg</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
