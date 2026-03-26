@@ -4,7 +4,6 @@
 import os
 import shutil
 import subprocess
-
 import gi
 
 gi.require_version("Gtk", "3.0")
@@ -12,7 +11,7 @@ gi.require_version("Xfconf", "0")
 import locale
 from locale import gettext as _
 
-from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Xfconf
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Xfconf, GObject
 
 import version
 
@@ -55,6 +54,21 @@ else:
     exit(0)
 
 
+class Language(GObject.GObject):
+    lang = GObject.Property(type=str, default="")
+    encode_type = GObject.Property(type=str, default="")
+    is_installed = GObject.Property(type=bool, default=False)
+    is_default = GObject.Property(type=bool, default=False)
+
+    def clone(self):
+        return Language(
+            lang=GObject.Property(type=str, default=self.lang),
+            encode_type=GObject.Property(type=str, default=self.encode_type),
+            is_installed=GObject.Property(type=bool, default=self.is_installed),
+            is_default=GObject.Property(type=bool, default=self.is_default),
+        )
+
+
 class MainWindow:
     def __init__(self, application):
         # Gtk Builder
@@ -78,6 +92,8 @@ class MainWindow:
 
         # Set application:
         self.application = application
+
+        self.define_variables()
 
         # Custom css
         self.set_css()
@@ -119,6 +135,12 @@ class MainWindow:
 
         # Show Screen:
         self.window.show_all()
+
+    def define_variables(self):
+        self.restore_type = ""
+
+        self.list_languages = Gio.ListStore.new(Language)
+        self.list_installed_languages = Gio.ListStore.new(Language)
 
     # Custom css
     def set_css(self):
@@ -203,11 +225,18 @@ class MainWindow:
         self.font_monospace = UI("font_monospace")
 
         # Languages
-        self.revealer_languages = UI("revealer_languages")
+        self.revealer_language = UI("revealer_language")
+        self.revealer_lang_save_changes = UI("revealer_lang_save_changes")
+        self.box_revealer_language = UI("box_revealer_language")
+
         self.box_languages = UI("box_languages")
         self.btn_languages_lock = UI("btn_languages_lock")
+
+        self.window_languages = UI("window_languages")
+        self.lb_languages = UI("lb_languages")
+        self.btn_select_language = UI("btn_select_language")
         self.lb_langs_installed = UI("lb_langs_installed")
-        self.lb_langs_not_installed = UI("lb_langs_not_installed")
+        # self.lb_langs_not_installed = UI("lb_langs_not_installed")
 
         # Panel Preferences
         self.cb_panel_action_lockscreen = UI("cb_panel_action_lockscreen")
@@ -274,6 +303,35 @@ class MainWindow:
         self.sli_scaling.add_mark(2, Gtk.PositionType.BOTTOM, "%150")
         self.sli_scaling.add_mark(3, Gtk.PositionType.BOTTOM, "%175")
         self.sli_scaling.add_mark(4, Gtk.PositionType.BOTTOM, "%200")
+
+    def generate_locales(self, task, source_object, task_data, cancellable):
+        if not self.new_locales:
+            task.return_boolean(False)
+            return
+
+        process = subprocess.run(
+            [
+                "pkexec",
+                LOCALE_CHANGER_PY,
+                "setlocales",
+                self.new_locales,
+                self.default_locale,
+            ]
+        )
+
+        task.return_boolean(process.returncode == 0)
+
+    def on_generate_locales_finished(self, source, task):
+        success = task.propagate_boolean()
+
+        if success:
+            self.revealer_lang_save_changes.set_reveal_child(False)
+            self.dialogs_stack.set_visible_child_name("success")
+        else:
+            self.dialogs_stack.set_visible_child_name("error")
+
+        self.dialogs_window.show_all()
+        self.lb_langs_installed.show_all()
 
     def get_wallpapers(self):
         task = Gio.Task.new()
@@ -351,79 +409,88 @@ class MainWindow:
         if monospace_font != "":
             self.font_monospace.set_font(monospace_font)
 
-    def add_locales_to_listbox(self, lang, lang_native, codeset, is_installed):
-        box = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 0)
-        box.set_margin_start(7)
-        box.set_margin_end(1)
-        box._lang = lang
+    # Set Sorting function for listboxes
+    def sort_langs(self, a, b):
+        return locale.strcoll(a.lang.split(".")[0], b.lang.split(".")[0])
 
-        if is_installed:
-            # Default Indicator
+    def get_flag_emoji(self, country_code):
+        """2 harfli ISO ülke kodunu bayrak emojisine dönüştürür."""
+        if not country_code or len(country_code) != 2:
+            return ""
+        country_code = country_code.upper()
+        # 127397, normal ASCII harfler ile Regional Indicator sembolleri arasındaki farktır
+        return chr(ord(country_code[0]) + 127397) + chr(ord(country_code[1]) + 127397)
+
+    def create_row(self, item):
+        lang = item.lang
+        lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
+        lang_info = LocaleManager.get_locale_info(lang_core)
+
+        box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 7)
+        box._lang = lang_info["language"]
+        box._item = item
+
+        label_box = Gtk.Box(
+            orientation="vertical",
+            hexpand=True,
+            spacing=5,
+        )
+
+        if not lang_info["language"]:
+            lang_info["language"] = lang
+
+        # Name
+        if lang_info["language_native"]:
+            lang_lbl = Gtk.Label(
+                label=f"{lang_info['language_native']} ({lang_info['country_native']})",
+                halign="start",
+            )
+            label_box.add(lang_lbl)
+
+        # Native Name
+        if lang_info["language"]:
+            lang_native_lbl = Gtk.Label(
+                label=f"{lang_info['language']} ({lang_info['country']})",
+                halign="start",
+            )
+            lang_native_lbl.get_style_context().add_class("dimmed")
+            lang_native_lbl.get_style_context().add_class("dim-label")
+            lang_native_lbl.get_style_context().add_class("caption")
+            label_box.add(lang_native_lbl)
+
+        hbox = Gtk.Box(
+            spacing=7,
+            margin_top=7,
+            margin_start=7,
+            margin_end=7,
+        )
+        # Country Flag
+        hbox.add(
+            Gtk.Label(
+                label=f'<span size="150%">{self.get_flag_emoji(lang_info["country_ab2"])}</span>',
+                use_markup=True,
+            )
+        )
+        hbox.add(label_box)
+
+        # Default Logo
+        if item.is_default:
             default_img = Gtk.Image.new_from_icon_name(
                 "selection-mode-symbolic", Gtk.IconSize.BUTTON
             )
             default_img.get_style_context().add_class("success")
             default_img.set_tooltip_text(_("Default System Language"))
-            default_img.set_no_show_all(True)
-            default_img.set_visible(lang == self.default_locale)
-            default_img.set_margin_end(9)
-            box.pack_end(default_img, False, False, 0)
+            print(f"{item.lang} is_default:{item.is_default}")
+            default_img.set_margin_end(7)
 
-            # Set as Default button
-            btn_default = Gtk.Button.new_from_icon_name(
-                "object-select-symbolic", Gtk.IconSize.BUTTON
-            )
-            btn_default.connect("clicked", self.on_locale_set_default)
+            hbox.pack_end(default_img, False, False, 0)
 
-            btn_default.set_name(f"{lang} {codeset}")
-            btn_default.set_tooltip_text(_("Set as Default"))
-            btn_default.set_no_show_all(True)
-            btn_default.set_visible(lang != self.default_locale)
+        box.add(hbox)
+        box.add(Gtk.Separator())
 
-            box.pack_end(btn_default, False, False, 0)
-        else:
-            # Add button
-            btn = Gtk.Button.new_from_icon_name(
-                "list-add-symbolic", Gtk.IconSize.BUTTON
-            )
-            btn.connect("clicked", self.on_locale_add)
-
-            btn.set_relief(Gtk.ReliefStyle.NONE)
-            btn.set_name(f"{lang} {codeset}")
-            box.pack_end(btn, False, False, 0)
-
-        # Language native + english name
-        vbox = Gtk.Box(
-            orientation="vertical",
-            spacing=7,
-            margin_top=7,
-            margin_bottom=7,
-            margin_start=7,
-            margin_end=7,
-        )
-        vbox.add(Gtk.Label.new(lang_native))
-        vbox.add(Gtk.Label.new(lang))
-
-        box.add(vbox)
-
-        if is_installed:
-            self.lb_langs_installed.add(box)
-            self.lb_langs_installed.show_all()
-        else:
-            self.lb_langs_not_installed.add(box)
-            self.lb_langs_not_installed.show_all()
+        return box
 
     def get_locales(self):
-        # Set Sorting function for listboxes
-        def sortfunc(row1, row2):
-            row1_label = row1.get_children()[0]._lang
-            row2_label = row2.get_children()[0]._lang
-
-            return locale.strcoll(row1_label, row2_label)
-
-        self.lb_langs_installed.set_sort_func(sortfunc)
-        self.lb_langs_not_installed.set_sort_func(sortfunc)
-
         # Get Available Locales
         available_locales = LocaleManager.get_available_locales()
         installed_locales = LocaleManager.get_installed_locales()
@@ -431,15 +498,44 @@ class MainWindow:
 
         for lang, encode_type in available_locales:
             if encode_type == "UTF-8":
-                lang_core = lang.split(".")[0]  # tr_TR.UTF-8 -> tr_TR
-                lang_info = LocaleManager.get_locale_info(lang_core)
-                GLib.idle_add(
-                    self.add_locales_to_listbox,
-                    lang_info["language"],
-                    lang_info["language_native"],
-                    lang_info["country"],
-                    True if (lang, encode_type) in installed_locales else False,
+                is_installed = (
+                    True if (lang, encode_type) in installed_locales else False
                 )
+                new_item = Language(
+                    lang=lang,
+                    encode_type=encode_type,
+                    is_installed=is_installed,
+                    is_default=self.default_locale == lang,
+                )
+                already_found, pos = self.list_languages.find_with_equal_func(
+                    new_item, lambda a, b: a.lang == b.lang
+                )
+
+                if not already_found:
+                    self.list_languages.insert_sorted(new_item, self.sort_langs)
+
+        for lang, encode_type in installed_locales:
+            if encode_type == "UTF-8":
+                new_item = Language(
+                    lang=lang,
+                    encode_type=encode_type,
+                    is_installed=True,
+                    is_default=self.default_locale == lang,
+                )
+                already_found, pos = self.list_installed_languages.find_with_equal_func(
+                    new_item, lambda a, b: a.lang == b.lang
+                )
+
+                if not already_found:
+                    self.list_installed_languages.insert_sorted(
+                        new_item, self.sort_langs
+                    )
+
+        # Bind model
+        self.lb_languages.bind_model(self.list_languages, self.create_row)
+        self.lb_langs_installed.bind_model(
+            self.list_installed_languages, self.create_row
+        )
 
     def get_panel_preferences(self):
         PanelManager.restore_default_actions()
@@ -577,6 +673,10 @@ class MainWindow:
         subprocess.call(["xfce4-panel", "-r"])
 
     # SIGNALS
+    def on_window_hide(self, window, e):
+        window.hide()
+        return True
+
     def on_lb_rows_row_activated(self, rows, a):
         page = rows.get_selected_row().get_index()
         self.nb_pages.set_current_page(page)
@@ -706,108 +806,116 @@ class MainWindow:
         FontManager.set_monospace_font(fontbutton.get_font())
 
     # Language
-    def on_locale_add(self, btn):
-        lang, codeset = btn.get_name().split(" ")
-        lang_core = lang.split(".")[0]
-        lang_info = LocaleManager.get_locale_info(lang_core)
-        self.add_locales_to_listbox(
-            lang_info["language"],
-            lang_info["language_native"],
-            lang_info["country"],
-            True,
-        )
-
-        parent_row = btn.get_parent().get_parent()
-        parent_row.destroy()
-
-        self.lb_langs_installed.invalidate_sort()
-        self.lb_langs_not_installed.invalidate_sort()
-
-        self.revealer_languages.set_reveal_child(True)
-
-    def on_locale_remove(self, btn):
+    def on_btn_lang_delete_clicked(self, btn):
         if len(self.lb_langs_installed.get_children()) <= 1:
             return
 
-        lang, codeset = btn.get_name().split(" ")
-        lang_core = lang.split(".")[0]
-        lang_info = LocaleManager.get_locale_info(lang_core)
-        self.add_locales_to_listbox(
-            lang_info["language"],
-            lang_info["language_native"],
-            lang_info["country"],
-            False,
-        )
+        row = self.lb_langs_installed.get_selected_row()
+        if not row:
+            return
 
-        parent_row = btn.get_parent().get_parent()
-        parent_row.destroy()
+        self.list_installed_languages.remove(row.get_index())
 
-        self.lb_langs_installed.invalidate_sort()
-        self.lb_langs_not_installed.invalidate_sort()
+        self.revealer_language.set_reveal_child(False)
+        self.revealer_lang_save_changes.set_reveal_child(True)
 
-        self.revealer_languages.set_reveal_child(True)
+    def on_btn_lang_set_default_clicked(self, btn):
+        row = self.lb_langs_installed.get_selected_row()
+        if not row:
+            return
 
-    def on_locale_set_default(self, btn):
-        self.default_locale = btn.get_name().split(" ")[0]
+        # Remove old default flag
+        item_len = self.list_installed_languages.get_n_items()
+        for i in range(item_len):
+            it = self.list_installed_languages.get_item(i)
+            it.is_default = False
+
+        item = self.list_installed_languages.get_item(row.get_index())
+        item.is_default = True
+
+        self.list_installed_languages.sort(self.sort_langs)
+
         print(self.default_locale)
+        self.default_locale = f"{item.lang} {item.encode_type}"
+        print("New default locale:", self.default_locale)
 
-        # Show default icon
-        default_btn = btn.get_parent().get_children()[1]
-        default_btn.set_visible(False)
+        self.revealer_language.set_reveal_child(False)
+        self.revealer_lang_save_changes.set_reveal_child(True)
 
-        # trash_btn = btn.get_parent().get_children()[2]
-        # trash_btn.set_visible(False)
+        self.print_installed_langs()
 
-        default_img = btn.get_parent().get_children()[2]
-        default_img.set_visible(True)
+        self.lb_langs_installed.show_all()
 
-        self.revealer_languages.set_reveal_child(True)
-
-        # Hide old default icon
-        for rows in self.lb_langs_installed.get_children():
-            box = rows.get_children()[0]
-
-            label = box.get_children()[0]
-            default_btn = box.get_children()[1]
-            # trash_btn = box.get_children()[2]
-            default_img = box.get_children()[2]
-
-            if label.get_text() != self.default_locale:
-                default_img.set_visible(False)
-                default_btn.set_visible(True)
-                # trash_btn.set_visible(True)
+    def print_installed_langs(self):
+        print("installed_languages:")
+        item_len = self.list_installed_languages.get_n_items()
+        for i in range(item_len):
+            it = self.list_installed_languages.get_item(i)
+            print(f"{it.lang} {it.encode_type}, is_default:{it.is_default}")
 
     def on_btn_languages_save_changes_clicked(self, btn):
         installed_languages = []
 
-        self.lb_langs_installed.foreach(
-            lambda x: installed_languages.append(
-                x.get_children()[0].get_children()[-2].get_name()
-            )
-        )
+        item_len = self.list_installed_languages.get_n_items()
+        for i in range(item_len):
+            it = self.list_installed_languages.get_item(i)
+            installed_languages.append(f"{it.lang} {it.encode_type}")
 
-        new_locales = "|".join(installed_languages)
+        self.new_locales = "|".join(installed_languages)
+        print("new locales", self.new_locales)
 
         self.dialogs_window.show_all()
         self.dialogs_stack.set_visible_child_name("generating")
+        self.revealer_language.set_reveal_child(False)
 
-        process = subprocess.run(
-            [
-                "pkexec",
-                LOCALE_CHANGER_PY,
-                "setlocales",
-                new_locales,
-                self.default_locale,
-            ]
+        task = Gio.Task.new(callback=self.on_generate_locales_finished)
+        task.run_in_thread(self.generate_locales)
+
+    def on_btn_show_languages_clicked(self, btn):
+        self.window_languages.show_all()
+
+    def on_lb_languages_row_selected(self, listbox, row):
+        if row:
+            self.btn_select_language.set_sensitive(True)
+
+    def on_lb_languages_row_activated(self, listbox, row):
+        if row:
+            self.on_btn_select_language_clicked(None)
+
+    def on_lb_langs_installed_row_selected(self, listbox, row):
+        if row:
+            item = self.list_installed_languages.get_item(row.get_index())
+            print("is selected item default:", item.is_default)
+
+            self.box_revealer_language.set_sensitive(not item.is_default)
+
+            self.revealer_language.set_reveal_child(True)
+
+            self.print_installed_langs()
+
+    def on_btn_select_language_clicked(self, btn):
+        self.window_languages.hide()
+
+        row = self.lb_languages.get_selected_row()
+
+        item = self.list_languages.get_item(row.get_index())
+        item.is_installed = True
+
+        already_found, pos = self.list_installed_languages.find_with_equal_func(
+            item, lambda a, b: a.lang == b.lang
         )
 
-        self.dialogs_window.show_all()
-        if process.returncode == 0:
-            self.revealer_languages.set_reveal_child(False)
-            self.dialogs_stack.set_visible_child_name("success")
+        if not already_found:
+            self.list_installed_languages.insert_sorted(item, self.sort_langs)
 
-        else:
-            self.dialogs_stack.set_visible_child_name("error")
+            self.revealer_lang_save_changes.set_reveal_child(True)
+
+        self.lb_langs_installed.show_all()
+
+        self.print_installed_langs()
+
+    def on_btn_close_languages_window_clicked(self, btn):
+        self.window_languages.hide()
 
     # Clock
     def on_btn_clock_time_only_clicked(self, btn):
@@ -1119,3 +1227,6 @@ class MainWindow:
             subprocess.Popen(
                 os.path.dirname(os.path.abspath(__file__)) + "/xfce/resetall.sh"
             )
+
+    def on_dialog_close_clicked(self, button):
+        self.dialogs_window.hide()
