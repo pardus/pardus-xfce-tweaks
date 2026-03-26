@@ -1,17 +1,25 @@
-pardus-xfce-tweaks (0.5.0) UNRELEASED; urgency=medium
+pardus-xfce-tweaks (0.5.0) yirmibes; urgency=medium
 
+  [ Emin Fedar ]
   * fix: improved dialogs
   * Merge branch 'master' of git.pardus.net.tr:yirmibes/pardus-xfce-tweaks
   * feat: better language support
   * fix: languages ui
   * fix: remove unused code
+  * update translations
+  * fix: absolute path of icons
+  * feat: added turkish cyprus flag
 
- -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 26 Mar 2026 10:11:58 +0300
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 26 Mar 2026 15:44:40 +0300
 
 pardus-xfce-tweaks (0.4.0) yirmibes; urgency=medium
 
+  * Update changelog for 0.4.0~beta1 release
+  * Fix invalid version on setup.py
+  * Update changelog for 0.4.0~beta2 release
   * Update maintainer
   * Update app icon
+  * Update changelog for 0.4.0 release
 
  -- Fatih Altun <fatih.altun@pardus.org.tr>  Sun, 23 Nov 2025 22:14:52 +0300
 
