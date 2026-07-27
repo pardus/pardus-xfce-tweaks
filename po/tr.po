@@ -423,6 +423,23 @@ msgstr "Fatih Altun <fatih.altun@pardus.org.tr>"
 msgid "About Pardus Xfce Tweaks"
 msgstr "Pardus Xfce İnce Ayarlar Hakkında"
 
+#: ui/MainWindow.glade:846
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: ui/MainWindow.glade:957
+msgid "Icons"
+msgstr "Simgeler"
+
+#: ui/MainWindow.glade:4019
+msgid "Web Browser"
+msgstr "Web Tarayıcı"
+
+#. Sample desktop icon label shown in the icon theme previews.
+#: ui/MainWindow.glade:1069 ui/MainWindow.glade:1206 ui/MainWindow.glade:1343
+msgid "Home"
+msgstr "Ev"
+
 #~ msgid "Browser"
 #~ msgstr "Tarayıcı"
 
