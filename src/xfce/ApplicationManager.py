@@ -100,7 +100,7 @@ def getApplicationListFromCategory(category):
 # -- Default XFCE apps: WebBrowser,FileManager,TerminalEmulator,MailReader
 def getDefaultXFCEApp(category):
     process = subprocess.run(
-        f"xfce4-mime-helper --query={category}", shell=True, capture_output=True
+        ["xfce4-mime-helper", f"--query={category}"], shell=True, capture_output=True
     )
 
     binary_file = process.stdout.decode("utf-8").rstrip()
