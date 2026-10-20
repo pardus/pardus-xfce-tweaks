@@ -73,6 +73,7 @@ data_files = [
         [
             "src/xfce/locale_changer.py",
             "src/xfce/resetall.sh",
+            "src/xfce/screen-blanking-autostart.py",
         ],
     ),
     (f"{APPLICATION_FOLDER}/ui", ["ui/MainWindow.glade"]),
@@ -80,6 +81,7 @@ data_files = [
     ("/usr/bin/", ["pardus-xfce-tweaks"]),
     ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-xfce-tweaks.svg"]),
     ("/usr/share/polkit-1/actions/", ["tr.org.pardus.xfce-tweaks.policy"]),
+    ("/etc/xdg/autostart/", ["pardus-xfce-tweaks-screen-blanking.desktop"]),
 ] + create_mo_files()
 
 setup(

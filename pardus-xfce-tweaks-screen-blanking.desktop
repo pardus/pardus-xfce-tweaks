@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Pardus Screen Blanking
+Comment=Apply the configured X11 screen timeout
+Exec=/usr/bin/python3 /usr/share/pardus/pardus-xfce-tweaks/src/xfce/screen-blanking-autostart.py
+OnlyShowIn=XFCE;
+Terminal=false
+StartupNotify=false
