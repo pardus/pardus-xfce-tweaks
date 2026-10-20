@@ -14,6 +14,6 @@ Depends: ${misc:Depends},
          python3-gi,
          gir1.2-gtk-3.0,
          gir1.2-xfconf-0,
-         pardus-lib-xfce (>=0.3)
+         pardus-lib-xfce (>=0.3.3)
 Description: Tweak Pardus Xfce settings
  Simple Gtk+ and Python based tweaks application for Xfce.
