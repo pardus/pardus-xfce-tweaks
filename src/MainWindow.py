@@ -251,6 +251,7 @@ class MainWindow:
         self.cmb_put_to_sleep_after = UI("cmb_put_to_sleep_after")
         self.cmb_screen_off_after2 = UI("cmb_screen_off_after2")
         self.cmb_put_to_sleep_after2 = UI("cmb_put_to_sleep_after2")
+        self.cmb_xscreen_off_after = UI("cmb_xscreen_off_after")
 
         # Startup Applications
         self.lb_startup_applications = UI("lb_startup_applications")
@@ -612,6 +613,8 @@ class MainWindow:
         self.cmb_put_to_sleep_after2.set_active_id(
             str(PowerManager.get_ac_screen_sleep())
         )
+
+        self.cmb_xscreen_off_after.set_active_id(str(PowerManager.get_blank_screen_timeout()))
 
         pageName = "laptop" if PowerManager.is_laptop() else "pc"
         self.stk_power_management.set_visible_child_name(pageName)
@@ -1013,6 +1016,14 @@ class MainWindow:
             value = int(model[tree_iter][0])
 
             PowerManager.set_ac_screen_sleep(value)
+
+    def on_cmb_xscreen_off_after_changed(self, combobox):
+        tree_iter = combobox.get_active_iter()
+        if tree_iter:
+            model = combobox.get_model()
+            value = int(model[tree_iter][0])
+
+            PowerManager.set_blank_screen_timeout(value)
 
     # Startup Applications
     def on_lb_startup_applications_selected_rows_changed(self, listbox):
