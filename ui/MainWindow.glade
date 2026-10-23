@@ -3590,6 +3590,7 @@ Do you want to continue?</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
@@ -3800,6 +3801,7 @@ Do you want to continue?</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="spacing">15</property>
+                                    <property name="homogeneous">True</property>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
@@ -4246,6 +4248,7 @@ Do you want to continue?</property>
                                 <property name="homogeneous">True</property>
                                 <child>
                                   <object class="GtkComboBox" id="cmb_xscreen_off_after">
+                                    <property name="width-request">200</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="model">lst_xscreen_off_after</property>
