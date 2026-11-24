@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pardus-xfce-tweaks package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2023, 2024, 2025, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-26 12:42+0300\n"
-"PO-Revision-Date: 2024-03-20 17:55+0000\n"
+"PO-Revision-Date: 2026-11-24 15:00+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.10\n"
 
 #: ui/MainWindow.glade:59
 msgid "Generating Languages"
@@ -39,21 +39,22 @@ msgstr ""
 
 #: ui/MainWindow.glade:150 ui/MainWindow.glade:300
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: ui/MainWindow.glade:184
 msgid "Attention"
 msgstr "Atenção"
 
 #: ui/MainWindow.glade:199
-#, fuzzy
 msgid ""
 "All custom configurations will be reverted to defaults.\n"
 "\n"
 "Do you want to continue?"
 msgstr ""
-"Todas as configurações personalizadas serão revertidas para as "
-"predefinições. Deseja continuar?"
+"Todas as configurações personalizadas serão repostas para os valores "
+"predefinidos.\n"
+"\n"
+"Deseja continuar?"
 
 #: ui/MainWindow.glade:216 ui/MainWindow.glade:4741 ui/MainWindow.glade:4908
 msgid "Cancel"
@@ -211,15 +212,15 @@ msgstr "Repor as predefinições"
 
 #: ui/MainWindow.glade:1146
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #: ui/MainWindow.glade:1257
 msgid "Icons"
-msgstr ""
+msgstr "Ícones"
 
 #: ui/MainWindow.glade:1369 ui/MainWindow.glade:1506 ui/MainWindow.glade:1643
 msgid "Home"
-msgstr ""
+msgstr "Pasta pessoal"
 
 #: ui/MainWindow.glade:1747
 msgid "<b>Scaling:</b>"
@@ -266,7 +267,8 @@ msgid ""
 "<span size=\"10000\">You can switch between keyboard layouts with:\n"
 "<b>Super + Space</b></span>"
 msgstr ""
-"<span size=\"10000\">É possível alternar entre disposições de teclado com:\n"
+"<span size=\"10000\">É possível alternar entre disposições de teclado "
+"com:\n"
 "<b>Super + Espaço</b></span>"
 
 #: ui/MainWindow.glade:2292
@@ -287,7 +289,7 @@ msgstr "Selecionar o tipo de letra"
 
 #: ui/MainWindow.glade:2529
 msgid "There are Unsaved Changes."
-msgstr ""
+msgstr "Existem alterações não guardadas."
 
 #: ui/MainWindow.glade:2539
 msgid "Save Changes"
@@ -307,7 +309,7 @@ msgstr "Instalado"
 
 #: ui/MainWindow.glade:2720
 msgid "+ Add New Language"
-msgstr ""
+msgstr "+ Adicionar novo idioma"
 
 #: ui/MainWindow.glade:2762 src/MainWindow.py:472
 msgid "Default System Language"
@@ -390,9 +392,8 @@ msgid "Music"
 msgstr "Música"
 
 #: ui/MainWindow.glade:4383
-#, fuzzy
 msgid "Web Browser"
-msgstr "Navegador"
+msgstr "Navegador da Web"
 
 #: ui/MainWindow.glade:4396
 msgid "Others"
@@ -437,7 +438,7 @@ msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
 #: ui/MainWindow.glade:4863
 msgid "Select Language to Install"
-msgstr ""
+msgstr "Selecione o idioma a instalar"
 
 #: src/MainWindow.py:176
 msgid "About Pardus Xfce Tweaks"
